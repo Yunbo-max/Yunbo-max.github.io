@@ -10,10 +10,10 @@ locale                   : "en-US"
 title                    : "Yunbo Long"
 title_separator          : "-"
 name                     : &name "Yunbo Long"
-description              : &description "PhD Student at UCL"
-url                      : https://ikitcheng.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+description              : &description "PhD Student at University of Cambridge"
+url                      : https://Yunbo-max.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
-repository               : "ikitcheng/ikitcheng.github.io"
+repository               : "Yunbo-max/Yunbo-max.github.ioo"
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
 breadcrumbs              : false # true, false (default)
 words_per_minute         : 160
@@ -82,12 +82,12 @@ analytics:
 author:
   name             : "Yunbo Long"
   avatar           : "profile.png"
-  bio              : "PhD Student at UCL in Data Intensive Science and Space Physics"
-  location         : "London"
+  bio              : "PhD Student at University of Cambridge in Artificial Intelligence"
+  location         : "Cambridge"
   employer         :
   pubmed           : #"https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
   googlescholar    : "https://scholar.google.com/citations?user=Gmiu8zkAAAAJ&hl"
-  email            : "i.cheng.19@ucl.ac.uk"
+  email            : "yl892@cam.ac.uk"
   researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
   uri              :
   bitbucket        :
@@ -96,13 +96,13 @@ author:
   flickr           :
   facebook         :
   foursquare       :
-  github           : "ikitcheng"
+  github           : "Yunbo-max"
   google_plus      :
   keybase          :
   instagram        :
   impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
   lastfm           :
-  linkedin         : "matthew-cheng-472090110"
+  linkedin         : "yunbo-long-ab192a1b7"
   orcid            : "http://orcid.org/0000-0002-3016-3711"
   pinterest        :
   soundcloud       :
