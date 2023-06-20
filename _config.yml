@@ -7,9 +7,9 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Matthew Cheng"
+title                    : "Yunbo Long"
 title_separator          : "-"
-name                     : &name "Matthew Cheng"
+name                     : &name "Yunbo Long"
 description              : &description "PhD Student at UCL"
 url                      : https://ikitcheng.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
@@ -80,7 +80,7 @@ analytics:
 
 # Site Author
 author:
-  name             : "Matthew Cheng"
+  name             : "Yunbo Long"
   avatar           : "profile.png"
   bio              : "PhD Student at UCL in Data Intensive Science and Space Physics"
   location         : "London"
