@@ -82,11 +82,11 @@ analytics:
 author:
   name             : "Yunbo Long"
   avatar           : "WechatIMG27.jpg"
-  bio              : "PhD Student at University of Cambridge in Artificial Intelligence"
+  bio              : "PhD Student at University of Cambridge in Computer Science"
   location         : "Cambridge"
   employer         :
   pubmed           : #"https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
-  googlescholar    : "https://scholar.google.com/citations?user=Gmiu8zkAAAAJ&hl"
+  googlescholar    : #"https://scholar.google.com/citations?user=Gmiu8zkAAAAJ&hl"
   email            : "yl892@cam.ac.uk"
   researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
   uri              :
@@ -103,18 +103,18 @@ author:
   impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
   lastfm           :
   linkedin         : "yunbo-long-ab192a1b7"
-  orcid            : "http://orcid.org/0000-0002-3016-3711"
+  orcid            : #"http://orcid.org/0000-0002-3016-3711"
   pinterest        :
   soundcloud       :
   stackoverflow    : # http://stackoverflow.com/users/123456/username
   steam            :
   tumblr           :
-  twitter          : "@ikitcheng"
+  twitter          : #"@ikitcheng"
   vine             :
   weibo            :
   xing             :
-  youtube          : "chinamatt"
-  wikipedia        :
+  youtube          : "@baldwinlong5277"
+  wikipedia        : 
 
 
 # Reading Files
