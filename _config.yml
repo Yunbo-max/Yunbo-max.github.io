@@ -82,7 +82,7 @@ analytics:
 author:
   name             : "Yunbo Long"
   avatar           : "WechatIMG27.jpg"
-  bio              : "Computer Science PhD Student at University of Cambridge"
+  bio              : "PhD Student at University of Cambridge (Computer Science)"
   location         : "Cambridge"
   employer         :
   pubmed           : #"https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
@@ -113,7 +113,7 @@ author:
   vine             :
   weibo            :
   xing             :
-  youtube          : "@baldwinlong5277"
+  # youtube          : "@baldwinlong5277"
   wikipedia        : 
 
 
