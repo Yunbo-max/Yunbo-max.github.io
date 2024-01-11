@@ -8,6 +8,6 @@ date: 2024-01-01
 location: "Cambridge, UK"
 ---
 
-My role is to teach student from computer science course and make the notes of data structure and algorithm. And the notes for tasks from Leetcode will be updated everyday.
+My role is to teach students from computer science course and make the notes of data structure and algorithm. And the notes for tasks from Leetcode will be updated everyday.
 Rome is not built in a day!!!
 
