@@ -1,5 +1,5 @@
 ---
-title: "Private Tutoring"
+title: "Leetcode"
 collection: teaching
 type: "Private Tutoring"
 permalink: /teaching/private-tutoring
