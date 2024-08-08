@@ -8,6 +8,4 @@ redirect_from:
   - /about.html
 ---
 
-Yunbo Long is a PhD student in the Supply Chain AI Lab under the supervision of Prof. Alexandra Brintrup. Based on the lab's research in knowledge graph extraction and uncertainty representation, his research focuses on synthetic data generation and anomaly detection in graph networks.The research involves the application of methods such as Bayesian classifiers, autoencoders, and deep diffusion generative models, autoencoders, and deep diffusion generative models to create synthetic tables and graph data.
-
-Using the generated synthetic data, Yunbo Long studied fraud detection and identification in supply chain transaction networks. This research marks an important step in the application of trusted AI in supply chain finance, including anti-fraud measures, and credit assessment. Prior to pursuing his PhD, Yunbo received an undergraduate first class honors degree from the University of Birmingham.
+Long Yunbo is a Ph.D. student in the Department of Engineering at the University of Cambridge, focusing on the generation of tabular and graph data. His research encompasses both scaling up and compression of data. Specifically, he investigates the synthesis of heterogeneous and time-series data using autoencoders and deep diffusion generative models to create new datasets. Additionally, his work includes data distillation in hyperbolic space to reduce redundancy in large-scale datasets, optimizing data for specific machine learning tasks.
