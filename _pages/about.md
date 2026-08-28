@@ -29,8 +29,7 @@ News
 Experience
 ---------------
 <div class="experience-container">
-  <div class="experience-card"><img class="experience-logo" src="/images/institutions/cambridge.svg" alt="University of Cambridge crest" loading="lazy" decoding="async"><div class="experience-info"><strong>University of Cambridge · Queens’ College</strong><br>2026 – Present<br>PhD in Engineering</div></div>
-  <div class="experience-card"><img class="experience-logo" src="/images/institutions/cambridge.svg" alt="University of Cambridge crest" loading="lazy" decoding="async"><div class="experience-info"><strong>University of Cambridge</strong><br>2022 – 2023<br>MPhil in Engineering</div></div>
+  <div class="experience-card"><img class="experience-logo" src="/images/institutions/cambridge.svg" alt="University of Cambridge crest" loading="lazy" decoding="async"><div class="experience-info"><strong>University of Cambridge</strong><br>2022 – 2026<br>MPhil &amp; PhD, Department of Engineering</div></div>
   <div class="experience-card"><img class="experience-logo" src="/images/institutions/birmingham.svg" alt="University of Birmingham crest" loading="lazy" decoding="async"><div class="experience-info"><strong>University of Birmingham</strong><br>2020 – 2022<br>B.Eng., First-Class Honours · Research Assistant, Robotics Lab</div></div>
   <div class="experience-card"><img class="experience-logo" src="/images/institutions/whut.webp" alt="Wuhan University of Technology crest" loading="lazy" decoding="async"><div class="experience-info"><strong>Wuhan University of Technology</strong><br>2018 – 2020<br>B.Sc. · GPA: 3.8/4.0 · WUTE Member</div></div>
   <div class="experience-card"><img class="experience-logo" src="/images/institutions/shenzhen-middle-school.webp" alt="Shenzhen Middle School crest" loading="lazy" decoding="async"><div class="experience-info"><strong>Shenzhen Middle School</strong><br>2015 – 2018</div></div>
