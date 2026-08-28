@@ -12,83 +12,21 @@ redirect_from:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Yunbo Long — CV</title>
   <style>
-    :root{--blue:#3779b9;--link:#bd6262;--muted:#666}*{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:#ececec;color:#111;font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:10.5pt;line-height:1.22}
-    .page{position:relative;width:210mm;min-height:297mm;margin:10mm auto;padding:18mm 20mm;background:#fff;box-shadow:0 1mm 4mm rgba(0,0,0,.16)}
-    header{text-align:center;color:var(--muted);margin-bottom:10pt}h1{margin:0 0 5pt;color:var(--blue);font:700 26pt/1.05 Georgia,serif}
-    .contacts{display:flex;justify-content:center;flex-wrap:wrap;gap:4pt 9pt}.contacts a{color:inherit;text-decoration:none}.contacts a:hover{color:var(--link)}
-    section+section{margin-top:14pt}h2{margin:0 0 7pt;padding-bottom:2pt;color:var(--blue);border-bottom:.7pt solid var(--blue);font:700 15pt/1.05 Georgia,serif}
-    .entry{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1pt 12pt;margin-top:7pt}.entry:first-of-type{margin-top:0}.primary,.place{font-weight:700}.place,.date{text-align:right}.secondary,.date{font-style:italic}
-    ul{list-style:none;margin:0;padding:0 0 0 13pt}li{position:relative}li:before{content:"";position:absolute;left:-12pt;top:.42em;width:5pt;height:5pt;border:.8pt solid var(--blue);border-radius:50%}
-    li+li{margin-top:7pt}.paper-title{display:block;font-weight:700}.authors,.description,.links{display:block}.description{margin-top:1pt}.links{margin-top:2pt}.me{font-weight:700;text-decoration:underline;text-underline-offset:2px}.venue{color:var(--blue);font-style:italic}.links a{color:var(--link);text-decoration:none}
-    .awards li+li,.service li+li{margin-top:4pt}.page-number{position:absolute;right:20mm;bottom:10mm;color:#888;font-style:italic}
-    @media(max-width:850px){html,body{background:#fff}.page{width:100%;min-height:0;margin:0;padding:8vw;box-shadow:none}.entry{grid-template-columns:1fr}.place,.date{text-align:left}.contacts{font-size:9.5pt}.page-number{display:none}}
-    @page{size:A4;margin:0}@media print{html,body{background:#fff}.page{margin:0;box-shadow:none;break-after:page}.page:last-child{break-after:auto}}
+    *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;background:#ececec;font-family:Arial,sans-serif}
+    .viewer{display:flex;flex-direction:column;width:100%;height:100%}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 18px;background:#fff;border-bottom:1px solid #ddd}
+    .title{color:#333;font-weight:700}.actions{display:flex;gap:10px}.actions a{padding:7px 12px;color:#fff;background:#3779b9;border-radius:5px;text-decoration:none;font-size:14px}.actions a:hover{background:#28689f}
+    .frame{flex:1;width:100%;border:0}.fallback{margin:auto;padding:24px;text-align:center}@media(max-width:600px){.title{display:none}.toolbar{justify-content:center}}
   </style>
 </head>
 <body>
-<main>
-  <article class="page">
-    <header>
-      <h1>Yunbo Long</h1>
-      <div class="contacts">
-        <a href="mailto:yl892@cam.ac.uk">yl892@cam.ac.uk</a><span>●</span>
-        <a href="https://yunbo-max.github.io/">yunbo-max.github.io</a><span>●</span>
-        <a href="https://scholar.google.com/citations?user=OL_fj-YAAAAJ&amp;hl=en">Google Scholar</a><span>●</span>
-        <a href="https://github.com/Yunbo-max">GitHub</a><span>●</span>
-        <a href="https://www.linkedin.com/in/yunbo-long-ab192a1b7">LinkedIn</a><span>●</span>
-        <a href="/files/Yunbo_Long_CV.pdf" download>Download PDF</a>
-      </div>
-    </header>
-
-    <section>
-      <h2>Education</h2>
-      <div class="entry"><div class="primary">University of Cambridge</div><div class="place">Cambridge, UK</div><div class="secondary">MPhil &amp; PhD, Department of Engineering</div><div class="date">2022–2026</div></div>
-      <div class="entry"><div class="primary">University of Birmingham</div><div class="place">Birmingham, UK</div><div class="secondary">B.Eng., First-Class Honours</div><div class="date">2020–2022</div></div>
-      <div class="entry"><div class="primary">Wuhan University of Technology</div><div class="place">Wuhan, China</div><div class="secondary">B.Sc. · GPA: 3.8/4.0 · WUTE Member</div><div class="date">2018–2020</div></div>
-    </section>
-
-    <section>
-      <h2>Research Experience</h2>
-      <ul>
-        <li><div class="entry"><div class="primary">Supply Chain Artificial Intelligence Lab (SCAIL)</div><div class="place">University of Cambridge</div><div class="secondary">PhD Researcher, supervised by Prof. Alexandra Brintrup</div><div class="date">2023–2026</div></div></li>
-        <li><div class="entry"><div class="primary">Flower Labs &amp; SCAIL</div><div class="place">University of Cambridge</div><div class="secondary">MPhil research in privacy-preserving personalized federated learning</div><div class="date">2022–2023</div></div></li>
-        <li><div class="entry"><div class="primary">Robotics Lab</div><div class="place">University of Birmingham</div><div class="secondary">Research Assistant, supervised by Dr Yongjing Wang</div><div class="date">2020–2022</div></div></li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Selected Publications</h2>
-      <ul>
-        <li><span class="paper-title">EmoDistill: Offline Emotion Skill Distillation for Language Model Agents in Adversarial Negotiation</span><span class="authors"><span class="me">Yunbo Long</span>, Haolang Zhao, Lukas Beckenbauer, Liming Xu, Alexandra Brintrup</span><span class="links"><span class="venue">EMNLP 2026 · LLM Agents Track</span> <a href="https://arxiv.org/abs/2605.26785">[arXiv]</a></span></li>
-        <li><span class="paper-title">VeriTrace: Evolving Mental Models for Deep Research Agents</span><span class="authors">Haolang Zhao*, <span class="me">Yunbo Long*</span>, Lukas Beckenbauer, Alexandra Brintrup</span><span class="links"><span class="venue">EMNLP 2026 · LLM Agents Track · *Equal contribution</span> <a href="https://arxiv.org/abs/2605.26081">[arXiv]</a></span></li>
-        <li><span class="paper-title">EmoMAS: Bayesian Orchestration for Emotion-Aware Edge Negotiation Agents</span><span class="authors"><span class="me">Yunbo Long</span>, Yuhan Liu, Liming Xu</span><span class="links"><span class="venue">ACL 2026 · LLM Agents Track</span> <a href="https://arxiv.org/abs/2604.07003">[arXiv]</a></span></li>
-        <li><span class="paper-title">EmoDebt: Emotion-Aware Strategic Reasoning for Agent-to-Agent Debt Recovery</span><span class="authors"><span class="me">Yunbo Long</span>, Yuhan Liu, Liming Xu, Alexandra Brintrup</span><span class="links"><span class="venue">AAMAS 2026 · Main Track</span> <a href="https://arxiv.org/abs/2503.21080">[arXiv]</a></span></li>
-        <li><span class="paper-title">GFC: One-Shot Private Federated Clustering with Gravitational Potential Fields</span><span class="authors"><span class="me">Yunbo Long*</span>, Jiaquan Zhang*, Xi Chen, Alexandra Brintrup</span><span class="links"><span class="venue">AAAI 2026 · Main Track · *Equal contribution</span> <a href="https://arxiv.org/abs/2512.00849">[arXiv]</a></span></li>
-        <li><span class="paper-title">TabGRAA: Iterative Reward-Guided Post-Training for Tabular Language Models</span><span class="authors"><span class="me">Yunbo Long*</span>, Tejumade Afonja*, Guangya Hao, Alexandra Brintrup, Mario Fritz</span><span class="links"><span class="venue">arXiv 2026 · *Equal contribution</span> <a href="https://arxiv.org/abs/2604.18966">[arXiv]</a></span></li>
-        <li><span class="paper-title">HyDRO+: Efficient Privacy-Preserving Link Prediction through Condensed Graphs</span><span class="authors"><span class="me">Yunbo Long</span>, Liming Xu, Alexandra Brintrup</span><span class="links"><span class="venue">Expert Systems with Applications, 2026</span> <a href="https://arxiv.org/abs/2503.12156">[arXiv]</a></span></li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Awards</h2>
-      <ul class="awards">
-        <li>Queens' College PhD Scholarship, University of Cambridge</li>
-        <li>Conference Scholarship, Department of Engineering, University of Cambridge</li>
-        <li>Frank Wallace Scholarship — 1st in academic performance, Years 2–3, University of Birmingham</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Academic Service</h2>
-      <ul class="service">
-        <li>Conference Reviewer: NeurIPS, AAAI, ICLR</li>
-        <li>Journal Reviewer: IEEE TNNLS, TKDE, TIFS, TDSC, TMC, TSMC, TFS; ACM TKDD</li>
-      </ul>
-    </section>
-
-    <div class="page-number">1/1</div>
-  </article>
-</main>
+  <main class="viewer">
+    <nav class="toolbar" aria-label="CV controls">
+      <span class="title">Yunbo Long — Curriculum Vitae</span>
+      <span class="actions"><a href="/files/Yunbo_Long_CV27.pdf" target="_blank" rel="noopener">Open PDF</a><a href="/files/Yunbo_Long_CV27.pdf" download>Download PDF</a></span>
+    </nav>
+    <object class="frame" data="/files/Yunbo_Long_CV27.pdf#view=FitH" type="application/pdf">
+      <div class="fallback">Your browser cannot display the embedded CV. <a href="/files/Yunbo_Long_CV27.pdf">Open the PDF here.</a></div>
+    </object>
+  </main>
 </body>
 </html>
