@@ -36,4 +36,7 @@ class ReleaseTests(unittest.TestCase):
         self.assertIn('P · Researcher & projects',[t.text for t in svg.findall('s:text',ns)])
         for name in ['mark.svg','social-card.svg']:
             ET.parse(ROOT/'assets/lab'/name)
+        export=ET.parse(ROOT/'assets/lab/research-map.svg').getroot()
+        self.assertEqual(len(export.findall("s:g[@id='nodes']/s:g",ns)),84)
+        self.assertEqual(len(export.findall("s:g[@id='relationships']/s:path",ns)),221)
 if __name__=='__main__':unittest.main()
