@@ -18,7 +18,12 @@ for filename in ['about.md','research-autopilot.html','lab.html','openjudge.html
  for line in front.splitlines():
   m=re.match(r'^([a-z_]+):\s*(.*)$',line)
   if m:fields[m[1]]=m[2]
- body=body.strip().replace('{% include lab-home.html %}',(ROOT/'_includes/lab-home.html').read_text())
+ for include in ['lab-home.html','research-home.html']:
+  body=body.replace('{% include '+include+' %}',(ROOT/'_includes'/include).read_text())
+ if 'redirect_to' in fields:
+  destination=fields['redirect_to']
+  body=f'<meta http-equiv="refresh" content="0;url={destination}"><p><a href="{destination}">Continue to the current page.</a></p>'
+ body=body.strip()
  page=layout.replace('{{ content }}',body)
  for key in ['title','description','permalink']:page=page.replace('{{ page.'+key+' }}',fields.get(key,''))
  if '{%' in page or '{{' in page:raise RuntimeError('Unresolved local template')

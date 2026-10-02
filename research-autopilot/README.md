@@ -23,7 +23,7 @@ Unreproduced arXiv experimental results remain author reports/leads. Publication
 
 ## Project
 
-[Website and interactive map](https://yunbo-max.github.io/research-autopilot/) · [AI Lab](https://yunbo-max.github.io/lab/) · [OpenJudge](https://yunbo-max.github.io/openjudge/) · [Earlier AI-Supervisor architecture paper](https://arxiv.org/abs/2603.24402)
+[Website and interactive map](https://yunbo-max.github.io/research-autopilot/) · [OpenJudge](https://yunbo-max.github.io/openjudge/) · [Earlier AI-Supervisor architecture paper](https://arxiv.org/abs/2603.24402)
 
 AI-Supervisor is an arXiv preprint. Its reported experiments have not been independently reproduced for this release. See `references/capability-source-catalog.md` in the Research Autopilot skill for original design sources and read scope. External tools/documentation retain their own licenses and conditions.
 

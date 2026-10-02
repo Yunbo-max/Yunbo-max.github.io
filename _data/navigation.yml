@@ -1,11 +1,9 @@
 main:
+  - title: "Home"
+    url: /
   - title: "Research Autopilot"
     url: /research-autopilot/
-  - title: "AI Lab"
-    url: /lab/
   - title: "OpenJudge"
     url: /openjudge/
-  - title: "Research"
-    url: /research/
   - title: "CV"
     url: /files/Yunbo_Long_CV27.pdf

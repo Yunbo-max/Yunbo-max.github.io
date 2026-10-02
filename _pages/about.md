@@ -1,10 +1,10 @@
 ---
 layout: lab
-title: A lab for every curious mind
-description: Yunbo Long, founder of Research Autopilot. Human-directed research skills, a personal AI lab and transparent review records.
+title: Research
+description: Publications, projects and research history of Yunbo Long.
 permalink: /
 redirect_from:
   - /about/
   - /about.html
 ---
-{% include lab-home.html %}
+{% include research-home.html %}

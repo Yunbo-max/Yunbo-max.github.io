@@ -3,16 +3,18 @@ import json, unittest
 import xml.etree.ElementTree as ET
 ROOT=Path(__file__).resolve().parents[1]
 class ReleaseTests(unittest.TestCase):
-    def test_founder_home_replaces_education_intro(self):
+    def test_research_home_and_founder_project_routes(self):
         body=(ROOT/'_pages/about.md').read_text()
-        self.assertNotIn('I am a PhD student in the Department',body)
-        self.assertIn('lab-home.html',body)
+        self.assertIn('research-home.html',body)
+        self.assertNotIn('lab-home.html',body)
+        self.assertIn('lab-home.html',(ROOT/'_pages/research-autopilot.html').read_text())
     def test_navigation_exposes_research_and_judge(self):
         p=ROOT/'_layouts/lab.html'
         self.assertTrue(p.is_file(),'The new multi-page lab navigation is absent')
         if p.is_file():
             text=p.read_text()
-            for path in ['/research-autopilot/','/lab/','/openjudge/','/research/']:self.assertIn(path,text)
+            for path in ['href="/"','/research-autopilot/','/openjudge/']:self.assertIn(path,text)
+            self.assertNotIn('href="/lab/"',text)
     def test_map_retains_all_nodes_edges_and_actual_source_identity(self):
         p=ROOT/'assets/lab/research-map.json'
         self.assertTrue(p.is_file(),'Public node map is absent')
