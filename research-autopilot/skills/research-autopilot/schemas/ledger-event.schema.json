@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoresearch/ledger-event/1.0.0",
+  "title": "ledger-event",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "sequence",
+    "transition_id",
+    "event_type",
+    "reason_code",
+    "evidence_refs",
+    "actor",
+    "timestamp",
+    "previous_event_digest",
+    "event_digest",
+    "request_digest",
+    "previous_state_digest",
+    "next_state",
+    "payload"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ledger-event"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "transition_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "event_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reason_code": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "actor": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timestamp": {
+      "type": "string",
+      "minLength": 1
+    },
+    "previous_event_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "event_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "request_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "previous_state_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "next_state": {
+      "type": "object"
+    },
+    "payload": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true
+}

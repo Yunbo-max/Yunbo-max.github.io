@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoresearch/research-state/1.0.0",
+  "title": "research-state",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "project_id",
+    "project_name",
+    "entry_origin",
+    "current_route",
+    "lifecycle_phase",
+    "sequence",
+    "operating_mode",
+    "asset_stage",
+    "evidence_trust",
+    "claim_clarity",
+    "literature_state",
+    "gate_state",
+    "validation_state",
+    "writing_state",
+    "terminal_status",
+    "suspension"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "research-state"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "project_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "entry_origin": {
+      "enum": [
+        "I",
+        "M",
+        "R"
+      ]
+    },
+    "current_route": {
+      "enum": [
+        "explore_problem",
+        "audit_method",
+        "audit_rejection",
+        "repair_evidence",
+        "develop_candidate",
+        "replicate_or_transfer",
+        "execute_gate_a",
+        "full_experiments",
+        "prepare_writing",
+        "retarget",
+        "stopped"
+      ]
+    },
+    "lifecycle_phase": {
+      "enum": [
+        "intake",
+        "landscape",
+        "candidate_generation",
+        "collision_audit",
+        "gate_a_design",
+        "gate_a_execution",
+        "active_research",
+        "evidence_freeze",
+        "writing",
+        "submission_lock",
+        "terminal"
+      ]
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "operating_mode": {
+      "enum": [
+        "audit",
+        "plan",
+        "implement",
+        "run",
+        "full"
+      ]
+    },
+    "asset_stage": {
+      "enum": [
+        "A0_topic",
+        "A1_method",
+        "A2_pilot",
+        "A3_mature"
+      ]
+    },
+    "evidence_trust": {
+      "enum": [
+        "E0_narrative",
+        "E1_tables",
+        "E2_recomputable",
+        "E3_audited"
+      ]
+    },
+    "claim_clarity": {
+      "enum": [
+        "C0_topic",
+        "C1_question",
+        "C2_falsifiable"
+      ]
+    },
+    "literature_state": {
+      "enum": [
+        "L0_unsearched",
+        "L1_mapped",
+        "L2_primary_verified",
+        "L3_current_snapshot",
+        "stale"
+      ]
+    },
+    "gate_state": {
+      "enum": [
+        "not_ready",
+        "gate_a_frozen",
+        "pass",
+        "revise",
+        "kill",
+        "inconclusive"
+      ]
+    },
+    "validation_state": {
+      "enum": [
+        "not_ready",
+        "frozen",
+        "pass",
+        "revise",
+        "kill",
+        "inconclusive"
+      ]
+    },
+    "writing_state": {
+      "enum": [
+        "not_ready",
+        "evidence_frozen",
+        "planning",
+        "drafting",
+        "submission_lock"
+      ]
+    },
+    "terminal_status": {
+      "enum": [
+        "none",
+        "completed",
+        "stopped",
+        "abandoned",
+        "superseded"
+      ]
+    },
+    "suspension": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "required": [
+            "return_route",
+            "return_phase",
+            "blocking_obligation_ids",
+            "suspended_snapshot_digest"
+          ],
+          "properties": {
+            "return_route": {
+              "type": "string",
+              "minLength": 1
+            },
+            "return_phase": {
+              "type": "string",
+              "minLength": 1
+            },
+            "blocking_obligation_ids": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "suspended_snapshot_digest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "entered_at": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      ]
+    }
+  },
+  "additionalProperties": true
+}

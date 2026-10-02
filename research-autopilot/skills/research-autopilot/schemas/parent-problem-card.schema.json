@@ -1,0 +1,200 @@
+{
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "problem_id",
+    "natural_failure",
+    "population_id",
+    "population",
+    "prevalence",
+    "consequence",
+    "strong_simple_alternative",
+    "falsifiable_prediction",
+    "gate_0_thresholds",
+    "benchmark_contract",
+    "simple_alternatives"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "parent-problem-card"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "problem_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "natural_failure": {
+      "type": "string",
+      "minLength": 1
+    },
+    "population_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "population": {
+      "type": "string",
+      "minLength": 1
+    },
+    "prevalence": {
+      "type": "string",
+      "minLength": 1
+    },
+    "consequence": {
+      "type": "object",
+      "required": [
+        "endpoint",
+        "description"
+      ],
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "strong_simple_alternative": {
+      "type": "string",
+      "minLength": 1
+    },
+    "falsifiable_prediction": {
+      "type": "string",
+      "minLength": 1
+    },
+    "previous_parent_problem_ref": {
+      "type": "object",
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "gate_0_thresholds": {
+      "type": "object",
+      "required": [
+        "min_cases",
+        "min_affected",
+        "min_prevalence",
+        "min_mean_loss",
+        "min_unresolved_fraction"
+      ],
+      "properties": {
+        "min_cases": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "min_affected": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "min_prevalence": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        },
+        "min_mean_loss": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "min_unresolved_fraction": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "benchmark_contract": {
+      "type": "object",
+      "required": [
+        "benchmark_id",
+        "version",
+        "task",
+        "primary_metric",
+        "evaluation_split",
+        "resource_constraints",
+        "relevance_to_natural_failure",
+        "source_evidence_refs"
+      ],
+      "properties": {
+        "benchmark_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "task": {
+          "type": "string",
+          "minLength": 1
+        },
+        "primary_metric": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evaluation_split": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resource_constraints": {
+          "type": "object",
+          "minProperties": 1
+        },
+        "relevance_to_natural_failure": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "path",
+              "sha256"
+            ],
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "simple_alternatives": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "additionalProperties": true
+}

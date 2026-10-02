@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoresearch/evidence-unit/1.0.0",
+  "title": "evidence-unit",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "evidence_id",
+    "work_id",
+    "claim",
+    "locators",
+    "scope",
+    "observed_fact"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "evidence-unit"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "evidence_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "work_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claim": {
+      "type": "string",
+      "minLength": 1
+    },
+    "locators": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "minItems": 1
+    },
+    "scope": {
+      "type": "object"
+    },
+    "observed_fact": {
+      "type": "string",
+      "minLength": 1
+    },
+    "judgment": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": true
+}

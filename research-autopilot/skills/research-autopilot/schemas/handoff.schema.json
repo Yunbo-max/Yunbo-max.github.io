@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoresearch/handoff/1.0.0",
+  "title": "handoff",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "handoff_id",
+    "project_version",
+    "method_version",
+    "evidence_snapshot_ref",
+    "allowed_claims",
+    "forbidden_claims",
+    "limitations",
+    "negative_result_refs",
+    "source_refs",
+    "venue",
+    "stage",
+    "unresolved_risks",
+    "provenance"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "handoff"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "handoff_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "project_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "method_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_snapshot_ref": {
+      "type": "object",
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "allowed_claims": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "forbidden_claims": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "negative_result_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "venue": {
+      "type": "object"
+    },
+    "stage": {
+      "type": "string",
+      "minLength": 1
+    },
+    "unresolved_risks": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "provenance": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true
+}

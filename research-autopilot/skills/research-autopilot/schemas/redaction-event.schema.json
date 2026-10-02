@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoresearch/redaction-event/1.0.0",
+  "title": "redaction-event",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "redaction_id",
+    "path",
+    "old_digest",
+    "new_digest",
+    "reason_code",
+    "timestamp"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "redaction-event"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "redaction_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "old_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "new_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "reason_code": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timestamp": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": true
+}

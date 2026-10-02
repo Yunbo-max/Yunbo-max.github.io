@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoresearch/gate-a-decision/1.0.0",
+  "title": "gate-a-decision",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "decision_id",
+    "protocol_id",
+    "protocol_digest",
+    "outcome",
+    "reason_codes",
+    "eligible_run_ids",
+    "run_manifest_refs",
+    "criteria_results"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "gate-a-decision"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "decision_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "protocol_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "protocol_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "outcome": {
+      "enum": [
+        "PASS",
+        "REVISE",
+        "KILL",
+        "INCONCLUSIVE"
+      ]
+    },
+    "reason_codes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "eligible_run_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "run_manifest_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "criteria_results": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "additionalProperties": true
+}

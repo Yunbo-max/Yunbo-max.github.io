@@ -1,0 +1,67 @@
+{
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "census_id",
+    "parent_problem_ref",
+    "observations_ref",
+    "outcome"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "natural-gate-0"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "census_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "parent_problem_ref": {
+      "type": "object",
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "observations_ref": {
+      "type": "object",
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "outcome": {
+      "enum": [
+        "PASS",
+        "KILL",
+        "INCONCLUSIVE"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoresearch/approval-event/1.0.0",
+  "title": "approval-event",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "approval_event_id",
+    "host_identity",
+    "grant_id",
+    "request_digest",
+    "effect_digest",
+    "operation_id",
+    "decision",
+    "timestamp"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "approval-event"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "approval_event_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "host_identity": {
+      "type": "string",
+      "minLength": 1
+    },
+    "grant_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "request_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "effect_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "operation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "decision": {
+      "enum": [
+        "approved",
+        "denied",
+        "revoked"
+      ]
+    },
+    "timestamp": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": true
+}

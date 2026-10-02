@@ -1,0 +1,15 @@
+interface:
+  display_name: Writing Top-Tier Papers
+  short_description: Nature and AI conference paper architect
+  default_prompt: Use $writing-top-tier-papers to build a venue-aware full-paper blueprint
+    or manuscript with claim–evidence mapping, citation placement, per-figure design
+    packs, and an appendix plan.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoresearch/authority-grant/1.0.0",
+  "title": "authority-grant",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "grant_id",
+    "approved_by",
+    "trusted_approval_event_id",
+    "request_digest",
+    "effect_digest",
+    "operation_id",
+    "action",
+    "account_identity",
+    "target",
+    "destination_service",
+    "purpose",
+    "budget",
+    "approved_at",
+    "expires_at",
+    "revision_precondition",
+    "asset_scope",
+    "path_scope",
+    "persistence"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "authority-grant"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "grant_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "approved_by": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trusted_approval_event_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "request_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "effect_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "operation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "action": {
+      "type": "string",
+      "minLength": 1
+    },
+    "account_identity": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target": {
+      "type": "string",
+      "minLength": 1
+    },
+    "destination_service": {
+      "type": "string",
+      "minLength": 1
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 1
+    },
+    "budget": {
+      "type": "object"
+    },
+    "approved_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expires_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revision_precondition": {
+      "type": "string",
+      "minLength": 1
+    },
+    "asset_scope": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "path_scope": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "persistence": {
+      "enum": [
+        "once"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

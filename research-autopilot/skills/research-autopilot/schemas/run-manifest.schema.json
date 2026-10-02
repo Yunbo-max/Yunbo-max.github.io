@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoresearch/run-manifest/1.0.0",
+  "title": "run-manifest",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "run_id",
+    "protocol_id",
+    "protocol_digest",
+    "seed",
+    "group",
+    "status",
+    "baseline_qualified",
+    "positive_control_passed",
+    "result_recorded_at",
+    "evidence_mode",
+    "metrics",
+    "resources",
+    "provenance",
+    "raw_output_refs"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "run-manifest"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "protocol_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "protocol_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "seed": {
+      "type": "integer"
+    },
+    "group": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "completed",
+        "failed",
+        "cancelled",
+        "oom"
+      ]
+    },
+    "baseline_qualified": {
+      "type": "boolean"
+    },
+    "positive_control_passed": {
+      "type": "boolean"
+    },
+    "result_recorded_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_mode": {
+      "enum": [
+        "prospective_confirmatory",
+        "developmental",
+        "retrospective_audit"
+      ]
+    },
+    "metrics": {
+      "type": "object"
+    },
+    "resources": {
+      "type": "object"
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "git_revision",
+        "data_revision",
+        "model_revision",
+        "environment_digest",
+        "command"
+      ],
+      "properties": {
+        "git_revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "data_revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model_revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "environment_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "command": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "raw_output_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "additionalProperties": false
+      },
+      "minItems": 1
+    }
+  },
+  "additionalProperties": true
+}

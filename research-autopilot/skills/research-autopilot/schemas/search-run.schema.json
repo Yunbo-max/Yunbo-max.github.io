@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoresearch/search-run/1.0.0",
+  "title": "search-run",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "search_id",
+    "query_strings",
+    "query_families",
+    "provider",
+    "provider_version",
+    "searched_at",
+    "cutoff",
+    "filters",
+    "pagination",
+    "requested_count",
+    "returned_count",
+    "raw_capture_refs",
+    "parser_version",
+    "canonicalization_version",
+    "deduplication_version",
+    "normalized_output_digest"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "search-run"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "search_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "query_strings": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "query_families": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "provider": {
+      "type": "string",
+      "minLength": 1
+    },
+    "provider_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "searched_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cutoff": {
+      "type": "string",
+      "minLength": 1
+    },
+    "filters": {
+      "type": "object"
+    },
+    "pagination": {
+      "type": "object"
+    },
+    "requested_count": {
+      "type": "integer"
+    },
+    "returned_count": {
+      "type": "integer"
+    },
+    "raw_capture_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "parser_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "canonicalization_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "deduplication_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "normalized_output_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "additionalProperties": true
+}

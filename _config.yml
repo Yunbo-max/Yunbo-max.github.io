@@ -10,7 +10,7 @@ locale                   : "en-US"
 title                    : "Yunbo Long"
 title_separator          : "-"
 name                     : &name "Yunbo Long"
-description              : &description "PhD Student at University of Cambridge"
+description              : &description "Yunbo Long · Founder of Research Autopilot · Human-directed research for every curious mind"
 url                      : https://Yunbo-max.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "Yunbo-max/Yunbo-max.github.io"
@@ -144,6 +144,10 @@ exclude:
   - gulpfile.js
   - log
   - node_modules
+  - scripts
+  - docs
+  - .preview
+  - research-autopilot/skills
   - package.json
   - tmp
   - vendor

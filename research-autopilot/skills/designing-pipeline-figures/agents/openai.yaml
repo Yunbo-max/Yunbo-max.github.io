@@ -1,0 +1,15 @@
+interface:
+  display_name: Scientific Pipeline Figures
+  short_description: Design and render editable scientific pipelines
+  default_prompt: Use $designing-pipeline-figures to turn this paper, sketch, or figure
+    into three evidence-faithful figure designs and, when requested, render the selected
+    design as native draw.io with a vector export and retained prompt.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

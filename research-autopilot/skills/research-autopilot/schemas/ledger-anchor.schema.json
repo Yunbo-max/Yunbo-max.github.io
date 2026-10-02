@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoresearch/ledger-anchor/1.0.0",
+  "title": "ledger-anchor",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "lineage_id",
+    "sequence",
+    "head_digest"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ledger-anchor"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "lineage_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "head_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "additionalProperties": true
+}

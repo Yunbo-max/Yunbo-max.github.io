@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "$id": "autoresearch/commit-journal/1.0.0",
+  "title": "commit-journal",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "previous_head",
+    "files",
+    "deletions",
+    "transaction_digest"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "commit-journal"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "previous_head": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "files": {
+      "type": "object",
+      "minProperties": 3
+    },
+    "deletions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "transaction_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

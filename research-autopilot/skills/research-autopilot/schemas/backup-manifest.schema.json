@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "$id": "autoresearch/backup-manifest/1.0.0",
+  "title": "backup-manifest",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "source_head",
+    "source_sequence",
+    "files"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "backup-manifest"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "source_head": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_sequence": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "files": {
+      "type": "object",
+      "minProperties": 3
+    }
+  }
+}

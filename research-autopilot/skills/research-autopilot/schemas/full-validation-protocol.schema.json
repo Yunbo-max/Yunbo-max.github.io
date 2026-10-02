@@ -1,0 +1,288 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoresearch/full-validation-protocol/1.0.0",
+  "title": "full-validation-protocol",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "protocol_id",
+    "evidence_mode",
+    "evidence_snapshot_ref",
+    "seed_policy",
+    "min_valid_runs",
+    "required_groups",
+    "guardrails",
+    "criteria"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "full-validation-protocol"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "protocol_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]+$"
+    },
+    "parent_protocol_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "evidence_mode": {
+      "enum": [
+        "prospective_confirmatory",
+        "retrospective_audit"
+      ]
+    },
+    "evidence_snapshot_ref": {
+      "type": "object",
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "seed_policy": {
+      "type": "object",
+      "required": [
+        "seeds"
+      ],
+      "properties": {
+        "seeds": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "allow_extra": {
+          "type": "boolean"
+        }
+      }
+    },
+    "min_valid_runs": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "required_groups": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "guardrails": {
+      "type": "object"
+    },
+    "criteria": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "metric",
+          "direction",
+          "min_effect",
+          "inclusive",
+          "indispensable",
+          "min_runs",
+          "uncertainty",
+          "confidence"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "metric": {
+            "type": "string",
+            "minLength": 1
+          },
+          "direction": {
+            "enum": [
+              "maximize",
+              "minimize"
+            ]
+          },
+          "min_effect": {
+            "type": "number"
+          },
+          "inclusive": {
+            "type": "boolean"
+          },
+          "indispensable": {
+            "type": "boolean"
+          },
+          "min_runs": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "uncertainty": {
+            "enum": [
+              "none",
+              "normal"
+            ]
+          },
+          "confidence": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "exclusiveMaximum": 1
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "claim_id": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "prospective_child_hypothesis": {
+      "type": "string",
+      "minLength": 1
+    },
+    "protocol_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "frozen_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "provenance_constraints": {
+      "type": "object"
+    },
+    "design": {
+      "enum": [
+        "paired"
+      ]
+    },
+    "aggregation": {
+      "enum": [
+        "mean"
+      ]
+    },
+    "rounding_policy": {
+      "enum": [
+        "none"
+      ]
+    },
+    "missing_policy": {
+      "enum": [
+        "inconclusive"
+      ]
+    },
+    "claim_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "contrasts": {
+      "type": "object",
+      "required": [
+        "treatment",
+        "baseline",
+        "controls"
+      ],
+      "properties": {
+        "treatment": {
+          "type": "string",
+          "minLength": 1
+        },
+        "baseline": {
+          "type": "string",
+          "minLength": 1
+        },
+        "controls": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "eligibility": {
+      "type": "object"
+    },
+    "claim_set": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "indispensable_claim_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "inventory_run_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "multiple_comparison_policy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "manuscript_ref": {
+      "type": "object",
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+}

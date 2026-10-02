@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoresearch/evidence-snapshot/1.0.0",
+  "title": "evidence-snapshot",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "snapshot_id",
+    "created_at",
+    "cutoff",
+    "artifact_refs",
+    "claim_ids",
+    "negative_result_refs"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "evidence-snapshot"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "snapshot_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cutoff": {
+      "type": "string",
+      "minLength": 1
+    },
+    "artifact_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "claim_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "negative_result_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "closure": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true
+}

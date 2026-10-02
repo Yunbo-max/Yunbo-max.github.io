@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoresearch/collision-decision/1.0.0",
+  "title": "collision-decision",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "decision_id",
+    "candidate_id",
+    "outcome",
+    "evidence_refs",
+    "search_run_refs",
+    "work_refs",
+    "coverage"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "collision-decision"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "decision_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "candidate_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "outcome": {
+      "enum": [
+        "ADVANCE",
+        "REFINE",
+        "REROUTE_EVIDENCE",
+        "REROUTE_MECHANISM",
+        "REROUTE_REPLICATION_OR_TRANSFER",
+        "KILL",
+        "INCONCLUSIVE_EXPAND_SEARCH"
+      ]
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "search_run_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "work_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "required": [
+        "required_families",
+        "completed_families",
+        "no_new_high_risk_batches",
+        "decisive_full_text_verified",
+        "priority_verified"
+      ],
+      "properties": {
+        "required_families": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "completed_families": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "no_new_high_risk_batches": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "decisive_full_text_verified": {
+          "type": "boolean"
+        },
+        "priority_verified": {
+          "type": "boolean"
+        }
+      }
+    },
+    "essential_claim_coverage": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "human_decision_ref": {
+      "type": "object",
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+}
