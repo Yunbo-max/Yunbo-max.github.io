@@ -1,7 +1,7 @@
 main:
+  - title: "CV"
+    url: /files/Yunbo_Long_CV27.pdf
   - title: "Research Autopilot"
     url: /research-autopilot/
   - title: "OpenJudge"
     url: /openjudge/
-  - title: "CV"
-    url: /files/Yunbo_Long_CV27.pdf
