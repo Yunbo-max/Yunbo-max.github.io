@@ -1,9 +1,9 @@
 <section class="navigation-demo" id="map" aria-labelledby="navigation-heading">
   <div class="navigation-heading">
-    <div><p class="eyebrow">THE RESEARCH NAVIGATOR</p><h2 id="navigation-heading">One question. Many possible turns.</h2></div>
+    <div><p class="eyebrow">THE RESEARCH NAVIGATOR</p><h2 id="navigation-heading">A city of research. A route of your own.</h2></div>
     <span class="demo-badge">Interactive concept demo</span>
   </div>
-  <p class="navigation-intro">Watch a project move between tasks. A failed experiment or a new review can change its route.</p>
+  <p class="navigation-intro">Research tasks become places in a city. Follow the streets, take a turn, and find another route when the evidence changes.</p>
   <div class="navigation-toolbar">
     <label for="route-example">Example project <select id="route-example" disabled><option>Loading examples…</option></select></label>
     <div class="navigation-playback" aria-label="Route playback">
@@ -15,13 +15,14 @@
   </div>
   <div class="navigation-body">
     <div class="navigation-map-area">
-      <div class="navigation-canvas" tabindex="0" role="region" aria-label="Scrollable research map">
-        <svg id="research-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 660" role="img" aria-labelledby="map-title map-description">
-          <title id="map-title">Example research navigation map</title>
-          <desc id="map-description">Sixteen colored research regions with connected example tasks. Follow a route using the playback controls or choose a stop in the list below.</desc>
+      <div class="navigation-canvas" tabindex="0" role="region" aria-label="Scrollable research city map">
+        <div class="city-map-hud"><span class="city-direction" aria-hidden="true">↗</span><div><strong id="city-instruction">Planning the example route…</strong><span id="city-road-status">Research city · example navigation</span></div></div>
+        <svg id="research-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 710" role="img" aria-labelledby="map-title map-description">
+          <title id="map-title">Research city navigation map</title>
+          <desc id="map-description">A fictional city with buildings, parks and streets. Research tasks mark intersections. The navigation marker follows connected roads and reroutes around an example closure.</desc>
         </svg>
       </div>
-      <div class="navigation-legend"><span><i class="legend-current"></i>You are here</span><span><i class="legend-path"></i>Example route</span><span class="map-swipe">Swipe to explore the map</span></div>
+      <div class="navigation-legend"><span><i class="legend-current"></i>You are here</span><span><i class="legend-path"></i>Example route</span><span class="city-detour-legend"><i></i>Detour</span><span class="map-swipe">Swipe to explore the map</span></div>
     </div>
     <aside class="navigation-guidance" aria-label="Current research stop">
       <p class="route-kicker" id="route-kicker">YOUR DESTINATION</p>
