@@ -1,5 +1,6 @@
 from pathlib import Path
 import json, unittest
+import xml.etree.ElementTree as ET
 ROOT=Path(__file__).resolve().parents[1]
 class ReleaseTests(unittest.TestCase):
     def test_founder_home_replaces_education_intro(self):
@@ -27,4 +28,12 @@ class ReleaseTests(unittest.TestCase):
     def test_download_package_is_installable(self):
         for name in ['research-autopilot','writing-top-tier-papers','designing-pipeline-figures','designing-experiment-figures']:
             self.assertTrue((ROOT/'research-autopilot/skills'/name/'SKILL.md').is_file(),name)
+    def test_preview_svg_is_valid_and_contains_the_full_map(self):
+        svg=ET.parse(ROOT/'assets/lab/preview-map.svg').getroot()
+        ns={'s':'http://www.w3.org/2000/svg'}
+        self.assertEqual(len(svg.findall('s:circle',ns)),84)
+        self.assertEqual(len(svg.findall('s:path',ns)),221)
+        self.assertIn('P · Researcher & projects',[t.text for t in svg.findall('s:text',ns)])
+        for name in ['mark.svg','social-card.svg']:
+            ET.parse(ROOT/'assets/lab'/name)
 if __name__=='__main__':unittest.main()
