@@ -7,11 +7,9 @@ redirect_from:
 ---
 {% include about-homepage-header.html %}
 
-I am a PhD student in the Department of Engineering at the University of Cambridge, supervised by [Prof. Alexandra Brintrup](https://www.eng.cam.ac.uk/profiles/ab702) at [SCAIL](https://supplychaindatahub.org/).
+I research **agentic AI** at [SCAIL](https://supplychaindatahub.org/), focusing on **multi-agent systems, reinforcement learning and heuristic methods**. I completed my MPhil and am pursuing my PhD in the **Department of Engineering, University of Cambridge**.
 
-I completed my MPhil in Engineering at the University of Cambridge, supported by [Flower Labs](https://flower.ai/) and [SCAIL](https://supplychaindatahub.org/).
-
-I received my First-Class Honours B.Eng. from the University of Birmingham, supervised by [Dr Yongjing Wang](https://www.birmingham.ac.uk/staff/profiles/mechanical/wang-yongjing) at the [Robotics Lab](https://yjwang.net/).
+In **October 2026**, I launched **[Research Autopilot](/research-autopilot/)** to help people navigate the full research process with their own human–AI team—from developing ideas and running experiments to writing, publishing and sharing their work.
 
 News
 ---------------
