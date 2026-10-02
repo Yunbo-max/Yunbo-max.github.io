@@ -5,7 +5,9 @@ ROOT=Path(__file__).resolve().parents[1]
 class ReleaseTests(unittest.TestCase):
     def test_research_home_and_founder_project_routes(self):
         body=(ROOT/'_pages/about.md').read_text()
-        self.assertIn('research-home.html',body)
+        self.assertIn('about-homepage-header.html',body)
+        self.assertIn('author_profile: true',body)
+        self.assertNotIn('layout: lab',body)
         self.assertNotIn('lab-home.html',body)
         self.assertIn('lab-home.html',(ROOT/'_pages/research-autopilot.html').read_text())
     def test_navigation_exposes_research_and_judge(self):
