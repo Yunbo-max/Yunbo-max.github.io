@@ -17,30 +17,23 @@ class ReleaseTests(unittest.TestCase):
             text=p.read_text()
             for path in ['href="/"','/research-autopilot/','/openjudge/']:self.assertIn(path,text)
             self.assertNotIn('href="/lab/"',text)
-    def test_map_retains_all_nodes_edges_and_actual_source_identity(self):
-        p=ROOT/'assets/lab/research-map.json'
-        self.assertTrue(p.is_file(),'Public node map is absent')
-        if p.is_file():
-            d=json.loads(p.read_text());self.assertEqual(len(d['nodes']),84);self.assertEqual(len(d['edges']),221)
-            ids={n['id'] for n in d['nodes']}
-            for n in d['nodes']:self.assertTrue(n['sources']);self.assertIn('runtime_validation',n)
-            for e in d['edges']:self.assertIn(e['from'],ids);self.assertIn(e['to'],ids)
+    def test_public_assets_do_not_include_the_internal_map_or_skill_bundle(self):
+        for name in ['research-autopilot/skills','research-autopilot/manifest.json','assets/lab/research-map.json','assets/lab/research-map.svg','assets/lab/preview-map.svg']:
+            self.assertFalse((ROOT/name).exists(),name+' would expose withdrawn internal material')
     def test_openjudge_links_existing_project_without_new_claims(self):
         p=ROOT/'_pages/openjudge.html'
         self.assertTrue(p.is_file(),'OpenJudge project page is absent')
         if p.is_file():self.assertIn('https://openjudge.longyunbo218.chatgpt.site',p.read_text())
-    def test_download_package_is_installable(self):
-        for name in ['research-autopilot','writing-top-tier-papers','designing-pipeline-figures','designing-experiment-figures']:
-            self.assertTrue((ROOT/'research-autopilot/skills'/name/'SKILL.md').is_file(),name)
-    def test_preview_svg_is_valid_and_contains_the_full_map(self):
-        svg=ET.parse(ROOT/'assets/lab/preview-map.svg').getroot()
-        ns={'s':'http://www.w3.org/2000/svg'}
-        self.assertEqual(len(svg.findall('s:circle',ns)),84)
-        self.assertEqual(len(svg.findall('s:path',ns)),221)
-        self.assertIn('P · Researcher & projects',[t.text for t in svg.findall('s:text',ns)])
+    def test_public_navigation_loads_no_withdrawn_downloads(self):
+        import re,subprocess
+        subprocess.run(['python3',str(ROOT/'scripts/preview-lab.py')],check=True,capture_output=True)
+        html=(ROOT/'.preview-navigation/research-autopilot/index.html').read_text()
+        sources=re.findall(r'(?:href|src)="([^"]+)"',html)
+        for source in sources:
+            self.assertNotRegex(source,r'research-autopilot/(?:skills|manifest)|(?:research|preview)-map\.(?:svg|json)')
+        self.assertNotIn('Get the skills',html)
+        self.assertNotIn('Export SVG',html)
+    def test_brand_assets_are_valid(self):
         for name in ['mark.svg','social-card.svg']:
             ET.parse(ROOT/'assets/lab'/name)
-        export=ET.parse(ROOT/'assets/lab/research-map.svg').getroot()
-        self.assertEqual(len(export.findall("s:g[@id='nodes']/s:g",ns)),84)
-        self.assertEqual(len(export.findall("s:g[@id='relationships']/s:path",ns)),221)
 if __name__=='__main__':unittest.main()

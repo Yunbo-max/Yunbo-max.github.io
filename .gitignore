@@ -1,2 +1,10 @@
 _site/
 
+
+# Keep internal research material out of the public website repository.
+.preview-navigation/
+/research-autopilot/skills/
+/research-autopilot/manifest.json
+/assets/lab/research-map.json
+/assets/lab/research-map.svg
+/assets/lab/preview-map.svg

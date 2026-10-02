@@ -1,71 +1,176 @@
-(()=>{
+(() => {
   'use strict';
-  const qs=(s,r=document)=>r.querySelector(s), qsa=(s,r=document)=>[...r.querySelectorAll(s)];
-  qsa('.site-header nav a').forEach(a=>{if(a.pathname===location.pathname)a.setAttribute('aria-current','page');});
-  const menu=qs('.menu-button'),nav=qs('#main-nav');
-  menu?.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));nav.classList.toggle('open',open);});
-  const make=(tag,text,cl)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(cl)e.className=cl;return e;};
-  async function load(){const response=await fetch('/assets/lab/research-map.json');if(!response.ok)throw Error('Map unavailable');return response.json();}
-  if(!qs('#research-map'))return;
-  load().then(data=>{map(data);questions(data);ideas(data);intake(data);}).catch(()=>{
-    qs('#map-status').textContent='The map could not load. Please reload or open the source map on GitHub.';
+  const qs = selector => document.querySelector(selector);
+  document.querySelectorAll('.site-header nav a').forEach(link => {
+    if (link.pathname === location.pathname) link.setAttribute('aria-current', 'page');
   });
-  function map(data){
-    const svg=qs('#research-map'),status=qs('#map-status'),select=qs('#map-select'),region=qs('#map-region'),search=qs('#map-search');
-    const colors=['#e8edf8','#e9f2ed','#fff2dc','#eee9fa','#f7e8ed','#e4f0f5','#f4ecd9','#e7edfa','#f1e8df','#e5f2f0','#f4e6e9','#e8ecf9','#f5eddc','#e7eff7','#ece9f5','#e5f0e9'];
-    const ns='http://www.w3.org/2000/svg',W=2320,H=1680,positions=new Map(),nodes=new Map(),edges=new Map();
-    let view={x:0,y:0,w:W,h:H},chosen='all',drag=null;
-    const el=(tag,attrs={},text)=>{const e=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));if(text!==undefined)e.textContent=text;return e;};
-    const defs=el('defs'),marker=el('marker',{id:'map-arrow',viewBox:'0 0 10 10',refX:9,refY:5,markerWidth:5,markerHeight:5,orient:'auto-start-reverse'});marker.append(el('path',{d:'M 0 0 L 10 5 L 0 10 z',fill:'#8e9cad'}));defs.append(marker);svg.append(defs);
-    const groups=el('g',{'data-layer':'regions'}),links=el('g',{'data-layer':'relationships'}),points=el('g',{'data-layer':'nodes'});svg.append(groups,links,points);
-    data.groups.forEach((g,i)=>{
-      const col=i%4,row=Math.floor(i/4),x=20+col*575,y=20+row*415;
-      const ge=el('g',{'data-region':g[0]});ge.append(el('rect',{x,y,width:555,height:395,rx:20,fill:colors[i],opacity:.85}),el('text',{x:x+22,y:y+35,class:'region-label'},g[0]+' · '+g[1]),el('text',{x:x+22,y:y+59,class:'region-sub'},g[3].length+' tasks'));groups.append(ge);
-      const opt=make('option',g[0]+' · '+g[1]);opt.value=g[0];region.append(opt);
-      data.nodes.filter(n=>n.id[0]===g[0]).forEach((n,j)=>{
-        positions.set(n.id,{x:x+28+(j%2)*273,y:y+100+Math.floor(j/2)*59});
-        const o=make('option',n.id+' · '+n.name);o.value=n.id;select.append(o);
-      });
+  const menu = qs('.menu-button'), nav = qs('#main-nav');
+  menu?.addEventListener('click', () => {
+    const open = menu.getAttribute('aria-expanded') !== 'true';
+    menu.setAttribute('aria-expanded', String(open)); nav.classList.toggle('open', open);
+  });
+  if (!qs('.navigation-demo')) return;
+  Promise.all([
+    fetch('/assets/lab/navigation-demo.json').then(response => {
+      if (!response.ok) throw new Error('Navigation unavailable');
+      return response.json();
+    }),
+    import('/assets/lab/navigation-model.mjs')
+  ]).then(([data, { createNavigation }]) => navigation(data, createNavigation)).catch(() => {
+    qs('#map-status').textContent = 'The navigation demo could not load. Please reload to try again.';
+  });
+
+  function navigation(data, createNavigation) {
+    const player = createNavigation(data), shell = qs('.navigation-demo'), svg = qs('#research-map');
+    const example = qs('#route-example'), play = qs('#route-play'), previous = qs('#route-previous'), next = qs('#route-next'), reset = qs('#route-reset');
+    const positions = new Map(), taskElements = new Map(), edgeElements = new Map();
+    const tasks = new Map(data.nodes.map(node => [node.id, node]));
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    const ns = 'http://www.w3.org/2000/svg';
+    const element = (tag, attributes = {}, text) => {
+      const node = document.createElementNS(ns, tag);
+      for (const [key, value] of Object.entries(attributes)) node.setAttribute(key, value);
+      if (text !== undefined) node.textContent = text;
+      return node;
+    };
+    const regions = element('g', {'data-layer':'regions'}), edges = element('g', {'data-layer':'connections'}), points = element('g', {'data-layer':'tasks'});
+    svg.append(regions, edges, points);
+    data.regions.forEach(region => {
+      const x = 14 + region.col * 278, y = 12 + region.row * 164;
+      const group = element('g', {'data-region':region.id});
+      group.append(
+        element('rect',{x,y,width:258,height:148,rx:15,fill:region.color}),
+        element('rect',{x:x+14,y:y+13,width:25,height:25,rx:8,class:'navigation-region-key'}),
+        element('text',{x:x+26.5,y:y+31,'text-anchor':'middle',class:'navigation-region-letter'},region.id),
+        element('text',{x:x+49,y:y+31,class:'navigation-region-name'},region.name)
+      );
+      regions.append(group);
+      const regionTasks = data.nodes.filter(task => task.region === region.id);
+      regionTasks.forEach((task, index) => positions.set(task.id,{x:x+(regionTasks.length === 1 ? 129 : 59+index*140),y:y+80}));
     });
-    data.edges.forEach(e=>{const a=positions.get(e.from),b=positions.get(e.to),dx=b.x-a.x,dy=b.y-a.y;
-      const curve=Math.max(18,Math.min(100,Math.abs(dx)*.15+Math.abs(dy)*.08));
-      const path=el('path',{class:'map-edge','data-edge':e.id,'data-from':e.from,'data-to':e.to,'marker-end':'url(#map-arrow)',d:`M ${a.x} ${a.y} Q ${(a.x+b.x)/2+curve} ${(a.y+b.y)/2-curve} ${b.x} ${b.y}`});
-      path.append(el('title',{},`${e.from} → ${e.to} · ${e.type} · ${e.when}`));links.append(path);edges.set(e.id,path);
+    data.edges.forEach(edge => {
+      const a = positions.get(edge.from), b = positions.get(edge.to);
+      const dx = b.x - a.x, dy = b.y - a.y;
+      let path;
+      if (Math.abs(dy) < 1) {
+        const bend = dx < 0 ? -22 : 0;
+        path = `M ${a.x} ${a.y} Q ${(a.x+b.x)/2} ${a.y+bend} ${b.x} ${b.y}`;
+      } else {
+        const bend = Math.abs(dx) > 300 ? -60 : 0;
+        path = `M ${a.x} ${a.y} C ${a.x+bend} ${(a.y+b.y)/2} ${b.x+bend} ${(a.y+b.y)/2} ${b.x} ${b.y}`;
+      }
+      const id = `${edge.from}>${edge.to}`;
+      const line = element('path',{d:path,class:'navigation-edge','data-connection':id});
+      line.append(element('title',{},`${tasks.get(edge.from).label} → ${tasks.get(edge.to).label}`));
+      edges.append(line); edgeElements.set(id,line);
     });
-    data.nodes.forEach(n=>{const p=positions.get(n.id),g=el('g',{class:'map-node','data-node':n.id,role:'button',tabindex:0,'aria-label':n.id+' '+n.name});
-      g.append(el('rect',{x:p.x-12,y:p.y-25,width:259,height:47,rx:6,fill:'transparent'}),el('circle',{cx:p.x,cy:p.y,r:6}),el('text',{x:p.x+16,y:p.y-3,class:'node-label'},n.id+' '+n.name),el('title',{},n.name));
-      const choose=()=>{select.value=n.id;chosen=n.id;highlight();detail(n);};g.addEventListener('click',choose);g.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();choose();}});points.append(g);nodes.set(n.id,g);
+    data.nodes.forEach(task => {
+      const position = positions.get(task.id);
+      const group = element('g',{class:'navigation-task','data-task':task.id,role:'button',tabindex:0,'aria-label':`Explore ${task.label}`});
+      group.append(
+        element('rect',{x:position.x-59,y:position.y-21,width:118,height:61,rx:9,fill:'transparent'}),
+        element('circle',{cx:position.x,cy:position.y,r:7,class:'navigation-task-point'}),
+        element('text',{x:position.x,y:position.y+29,'text-anchor':'middle',class:'navigation-task-label'},task.label)
+      );
+      const choose = () => {
+        const state = player.snapshot();
+        const stops = state.scenario.steps.map((step,index) => step.node === task.id ? index : -1).filter(index => index >= 0);
+        if (!stops.length) return;
+        const destination = stops.find(index => index >= state.index) ?? stops[0];
+        player.seek(destination); render();
+      };
+      group.addEventListener('click',choose);
+      group.addEventListener('keydown',event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choose(); } });
+      points.append(group); taskElements.set(task.id,group);
     });
-    const apply=()=>svg.setAttribute('viewBox',`${view.x} ${view.y} ${view.w} ${view.h}`);apply();
-    function highlight(){
-      const query=search.value.trim().toLowerCase(),group=region.value;
-      const related=new Set(chosen==='all'?[]:data.edges.filter(e=>e.from===chosen||e.to===chosen).flatMap(e=>[e.from,e.to]));
-      let matched=0;
-      data.nodes.forEach(n=>{const relevant=(!query||[n.id,n.name,n.inputs,n.outputs,...(n.aliases||[])].join(' ').toLowerCase().includes(query))&&(group==='all'||n.id[0]===group);if(relevant)matched++;
-        const g=nodes.get(n.id);g.classList.toggle('selected',n.id===chosen);g.classList.toggle('dimmed',!relevant||(chosen!=='all'&&!related.has(n.id)));
-      });
-      data.edges.forEach(e=>{const p=edges.get(e.id),isRelated=chosen!=='all'&&(e.from===chosen||e.to===chosen);p.classList.toggle('related',isRelated);p.classList.toggle('dimmed',chosen!=='all'&&!isRelated);});
-      status.textContent=`84 nodes · 221 connections retained · ${matched} search/region matches`+(chosen!=='all'?` · ${chosen}: ${data.edges.filter(e=>e.from===chosen||e.to===chosen).length} connected relationships`:' · Select a node to inspect its connections.');
-      qsa('[data-catalog-node]').forEach(b=>{const n=data.nodes.find(x=>x.id===b.dataset.catalogNode);b.hidden=!!query&&!([n.id,n.name,...(n.aliases||[])].join(' ').toLowerCase().includes(query));});
-      if(query)qsa('#node-catalog details').forEach(d=>d.open=true);
+    const location = element('g',{class:'navigation-location','aria-hidden':'true'});
+    location.append(element('circle',{r:17,class:'navigation-location-ring'}),element('circle',{r:7,class:'navigation-location-core'}));
+    svg.append(location);
+    for (const scenario of data.scenarios) {
+      const option = document.createElement('option'); option.value = scenario.id; option.textContent = scenario.title; example.append(option);
     }
-    function detail(n){const out=qs('#node-detail');out.replaceChildren();const a=make('div'),b=make('div');a.append(make('p',n.id+' · '+data.groups.find(g=>g[0]===n.id[0])[1],'eyebrow'),make('h3',n.name));
-      [['Input / 输入',n.inputs],['Output / 输出',n.outputs],['Acceptance / 验收',n.acceptance]].forEach(([title,text])=>a.append(make('h4',title),make('p',text)));
-      const sourceTitle=make('h4','Exact skill sources'),ul=make('ul');n.sources.forEach(s=>{const source=data.source_catalog[s.source],li=make('li'),a=make('a',source.skill+' · '+s.heading.replace(/^#+\s*/,''));a.href='https://github.com/Yunbo-max/Yunbo-max.github.io/blob/master/research-autopilot/skills/'+source.skill+'/'+source.path;li.append(a);ul.append(li);});a.append(sourceTitle,ul);
-      const entry=make('a','Read the full node contract ↗');entry.href='https://github.com/Yunbo-max/Yunbo-max.github.io/blob/master/research-autopilot/skills/research-autopilot/'+n.entry;a.append(make('p'),entry);
-      b.append(make('h4','Connected tasks / 点间交接'));const list=make('ul',undefined,'edge-list');data.edges.filter(e=>e.from===n.id||e.to===n.id).forEach(e=>{const li=make('li'),button=make('button',e.from+' → '+e.to+' · '+e.type);button.type='button';const other=e.from===n.id?e.to:e.from;button.addEventListener('click',()=>{select.value=other;chosen=other;highlight();detail(data.nodes.find(n=>n.id===other));});li.append(button,make('small','Condition: '+e.when),make('small','Handoff: '+e.payload));list.append(li);});b.append(list,make('p','Norm source-bound. Actual adapter, operation receipt and scientific support are checked per project.','fine'));out.append(a,b);
+    example.options[0].remove(); example.disabled = false;
+    let previousState = null, animation = 0, timer = 0;
+    function place(point) { location.setAttribute('transform',`translate(${point.x} ${point.y})`); }
+    function move(state) {
+      cancelAnimationFrame(animation);
+      const target = positions.get(state.current.node);
+      if (reducedMotion.matches || !previousState || previousState.scenario.id !== state.scenario.id || state.index !== previousState.index + 1) { place(target); return; }
+      const path = edgeElements.get(`${previousState.current.node}>${state.current.node}`), length = path.getTotalLength(), start = performance.now();
+      const frame = now => {
+        const progress = Math.min(1,(now-start)/900), eased = progress*progress*(3-2*progress);
+        place(path.getPointAtLength(length*eased));
+        if (progress < 1) animation = requestAnimationFrame(frame);
+      };
+      animation = requestAnimationFrame(frame);
     }
-    select.addEventListener('change',()=>{chosen=select.value;highlight();if(chosen!=='all')detail(data.nodes.find(n=>n.id===chosen));else qs('#node-detail').replaceChildren(make('div','Select a task to inspect its contract and source.'),make('div','This graph is a published workflow, not a live all-project scheduler.'));});
-    search.addEventListener('input',highlight);region.addEventListener('change',()=>{chosen='all';select.value='all';highlight();if(region.value!=='all'){const i=data.groups.findIndex(g=>g[0]===region.value);view={x:(i%4)*575,y:Math.floor(i/4)*415,w:595,h:435};apply();}else{view={x:0,y:0,w:W,h:H};apply();}});
-    const zoom=f=>{const nw=Math.max(280,Math.min(W*1.7,view.w*f)),nh=nw*H/W;view={x:view.x+(view.w-nw)/2,y:view.y+(view.h-nh)/2,w:nw,h:nh};apply();};
-    qs('#map-in').addEventListener('click',()=>zoom(.75));qs('#map-out').addEventListener('click',()=>zoom(1.333));qs('#map-reset').addEventListener('click',()=>{view={x:0,y:0,w:W,h:H};region.value='all';apply();highlight();});
-    svg.addEventListener('wheel',e=>{if(e.ctrlKey||e.metaKey){e.preventDefault();zoom(e.deltaY>0?1.1:.9);}},{passive:false});
-    svg.addEventListener('pointerdown',e=>{if(e.target.closest('.map-node'))return;drag={x:e.clientX,y:e.clientY,vx:view.x,vy:view.y};svg.setPointerCapture(e.pointerId);});
-    svg.addEventListener('pointermove',e=>{if(!drag)return;const r=svg.getBoundingClientRect();view.x=drag.vx-(e.clientX-drag.x)*view.w/r.width;view.y=drag.vy-(e.clientY-drag.y)*view.h/r.height;apply();});
-    svg.addEventListener('pointerup',()=>drag=null);svg.addEventListener('pointercancel',()=>drag=null);
-    const catalog=qs('#node-catalog');data.groups.forEach(group=>{const details=make('details'),summary=make('summary',group[0]+' · '+group[1]);details.append(summary);data.nodes.filter(n=>n.id[0]===group[0]).forEach(n=>{const btn=make('button',n.id+' '+n.name);btn.type='button';btn.dataset.catalogNode=n.id;btn.addEventListener('click',()=>{select.value=n.id;chosen=n.id;highlight();detail(n);qs('#node-detail').scrollIntoView({block:'start'});});details.append(btn);});catalog.append(details);});highlight();
+    function buildStops(state) {
+      const list = qs('#route-stops'); list.replaceChildren();
+      state.scenario.steps.forEach((step,index) => {
+        const item = document.createElement('li'), button = document.createElement('button');
+        button.type = 'button'; button.dataset.stop = index;
+        button.textContent = `${String(index+1).padStart(2,'0')} ${tasks.get(step.node).label}`;
+        button.setAttribute('aria-label',`Stop ${index+1}: ${tasks.get(step.node).label}`);
+        button.addEventListener('click',() => { player.seek(index); render(); });
+        item.append(button); list.append(item);
+      });
+    }
+    function render() {
+      const state = player.snapshot(), route = state.scenario.steps;
+      clearInterval(timer);
+      if (state.playing) timer = setInterval(() => { player.tick(); render(); },3800);
+      if (!previousState || previousState.scenario.id !== state.scenario.id) buildStops(state);
+      const routeTasks = new Set(route.map(step => step.node)), visited = new Set(state.visited);
+      const routeEdges = new Set(), pastEdges = new Set();
+      for (let index = 1; index < route.length; index++) {
+        const id = `${route[index-1].node}>${route[index].node}`; routeEdges.add(id);
+        if (index <= state.index) pastEdges.add(id);
+      }
+      taskElements.forEach((group,id) => {
+        const included = routeTasks.has(id);
+        group.classList.toggle('outside-route',!included);
+        group.classList.toggle('visited',visited.has(id));
+        group.classList.toggle('current',id === state.current.node);
+        group.setAttribute('tabindex',included ? '0' : '-1');
+        group.setAttribute('aria-disabled',String(!included));
+      });
+      edgeElements.forEach((line,id) => {
+        line.classList.toggle('on-route',routeEdges.has(id));
+        line.classList.toggle('traveled',pastEdges.has(id));
+        line.classList.toggle('current-handoff',Boolean(state.next && id === `${state.current.node}>${state.next.node}`));
+      });
+      shell.classList.toggle('playing',state.playing);
+      shell.classList.toggle('rerouting',state.current.kind === 'reroute');
+      play.textContent = state.playing ? 'Ⅱ Pause' : state.complete ? '↻ Replay route' : '▶ Play route';
+      play.disabled = false; reset.disabled = false;
+      play.setAttribute('aria-pressed',String(state.playing));
+      previous.disabled = state.index === 0; next.disabled = state.complete;
+      qs('#route-kicker').textContent = 'EXAMPLE RESEARCH QUESTION';
+      qs('#route-question').textContent = state.scenario.question;
+      qs('#route-resources').textContent = state.scenario.resources;
+      qs('#route-kind').textContent = ({human:'Human direction',check:'Evidence check',reroute:'Route updated',result:'Example observation'})[state.current.kind] || 'Research step';
+      qs('#route-progress').textContent = `${String(state.index+1).padStart(2,'0')} / ${route.length}`;
+      qs('#route-current').textContent = tasks.get(state.current.node).label;
+      qs('#route-note').textContent = state.current.note;
+      qs('#route-upcoming').textContent = state.next ? tasks.get(state.next.node).label : 'Example journey complete';
+      qs('#map-status').textContent = 'Illustrative projects and observations · 16 research regions · '+ (state.playing ? 'Playing' : 'Paused') + ' · Choose a stop to explore.';
+      document.querySelectorAll('#route-stops button').forEach(button => {
+        const selected = Number(button.dataset.stop) === state.index;
+        if (selected) button.setAttribute('aria-current','step'); else button.removeAttribute('aria-current');
+        button.classList.toggle('passed',Number(button.dataset.stop) < state.index);
+      });
+      if (previousState && (previousState.index !== state.index || previousState.scenario.id !== state.scenario.id)) {
+        const button = qs('#route-stops [aria-current="step"]'), list = qs('#route-stops');
+        if (button.offsetLeft < list.scrollLeft || button.offsetLeft+button.offsetWidth > list.scrollLeft+list.clientWidth) list.scrollTo({left:Math.max(0,button.offsetLeft-25),behavior:reducedMotion.matches ? 'instant' : 'smooth'});
+      }
+      move(state); previousState = state;
+    }
+    example.addEventListener('change',() => { player.chooseScenario(example.value); render(); });
+    play.addEventListener('click',() => { if (player.snapshot().playing) player.pause(); else player.play(); render(); });
+    previous.addEventListener('click',() => { player.seek(player.snapshot().index-1); render(); });
+    next.addEventListener('click',() => { player.pause(); player.next(); render(); });
+    reset.addEventListener('click',() => { player.reset(); render(); });
+    document.addEventListener('visibilitychange',() => { if (document.hidden) { player.pause(); render(); } });
+    render();
   }
-  function questions(data){const list=qs('#question-list'),filter=qs('#question-region');const stages=[...new Set(data.questions.map(q=>q.node[0]))];stages.forEach(stage=>{const g=data.groups.find(g=>g[0]===stage),o=make('option',stage+' · '+g[1]);o.value=stage;filter.append(o);});const draw=()=>{list.replaceChildren();const rows=data.questions.filter(q=>filter.value==='all'||q.node[0]===filter.value);rows.forEach(q=>{const li=make('li'),strong=make('strong',q.id+' · '+q.node),p=make('p',q.question),small=make('small','Trigger: '+q.trigger);p.style.marginBottom='6px';li.append(strong,p,small);list.append(li);});qs('#question-count').textContent=rows.length+' / 52 questions';};filter.addEventListener('change',draw);draw();}
-  function ideas(data){const tree=qs('#method-tree');data.method_routes.forEach(r=>{const d=make('details'),s=make('summary',r.id+' · '+r.title);d.append(s,make('p',r.question));const ul=make('ul');r.branches.forEach(b=>ul.append(make('li',b)));d.append(ul,make('p','First check: '+r.check));tree.append(d);});}
-  function intake(data){qs('#goal-form').addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.currentTarget),entry=f.get('entry'),priority=f.get('priority'),result=qs('#goal-result');const routes={I:['I01','I02','B01','L01','B02','H01'],M:['I01','P02','L04','B01','G03','V01'],R:['I01','R02','R03','V01','W09']},route=routes[entry].slice();if(priority==='writing')route.push('W02','W03','A04');if(priority==='method')route.push('H03','M01','M02');if(priority==='learning')route.push('P05');result.replaceChildren(make('h3','Your route brief'),make('p',String(f.get('goal'))),make('p','Starting point: '+entry+' · Resources: '+(f.get('resources')||'Not yet specified')),make('p','Suggested task route: '+route.join(' → ')));const ul=make('ul');['Which existing asset or observation is authoritative?','What outcome would change your decision?','Which conditions or resource limits must the next step respect?'].forEach(t=>ul.append(make('li',t)));result.append(make('h4','The next useful conversation'),ul,make('p','This is a local navigation suggestion. Evidence gates, actual resources and human preferences determine the real route.','fine'));result.hidden=false;});}
 })();

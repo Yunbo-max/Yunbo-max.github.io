@@ -1,0 +1,639 @@
+{
+  "kind": "illustrative-navigation",
+  "regions": [
+    {
+      "id": "P",
+      "name": "Projects",
+      "color": "#e6eefb",
+      "col": 0,
+      "row": 0
+    },
+    {
+      "id": "I",
+      "name": "Research goals",
+      "color": "#e7f2ed",
+      "col": 1,
+      "row": 0
+    },
+    {
+      "id": "L",
+      "name": "Literature",
+      "color": "#fff1dc",
+      "col": 2,
+      "row": 0
+    },
+    {
+      "id": "B",
+      "name": "Benchmarks",
+      "color": "#eee9f9",
+      "col": 3,
+      "row": 0
+    },
+    {
+      "id": "H",
+      "name": "Ideas",
+      "color": "#f6e7ed",
+      "col": 3,
+      "row": 1
+    },
+    {
+      "id": "M",
+      "name": "Methods",
+      "color": "#e6f0f6",
+      "col": 2,
+      "row": 1
+    },
+    {
+      "id": "S",
+      "name": "Resources & setup",
+      "color": "#f6efdd",
+      "col": 1,
+      "row": 1
+    },
+    {
+      "id": "G",
+      "name": "Small experiments",
+      "color": "#e8edfc",
+      "col": 0,
+      "row": 1
+    },
+    {
+      "id": "E",
+      "name": "Engineering",
+      "color": "#f3ebe4",
+      "col": 0,
+      "row": 2
+    },
+    {
+      "id": "V",
+      "name": "Validation",
+      "color": "#e4f3ef",
+      "col": 1,
+      "row": 2
+    },
+    {
+      "id": "W",
+      "name": "Writing",
+      "color": "#f7e7eb",
+      "col": 2,
+      "row": 2
+    },
+    {
+      "id": "F",
+      "name": "Figures",
+      "color": "#e8edfa",
+      "col": 3,
+      "row": 2
+    },
+    {
+      "id": "R",
+      "name": "Peer review",
+      "color": "#f7efdd",
+      "col": 3,
+      "row": 3
+    },
+    {
+      "id": "A",
+      "name": "Release",
+      "color": "#e8f0f8",
+      "col": 2,
+      "row": 3
+    },
+    {
+      "id": "C",
+      "name": "Outreach",
+      "color": "#eeeaf8",
+      "col": 1,
+      "row": 3
+    },
+    {
+      "id": "X",
+      "name": "Exploration",
+      "color": "#e6f1e9",
+      "col": 0,
+      "row": 3
+    }
+  ],
+  "nodes": [
+    {
+      "id": "preferences",
+      "region": "P",
+      "label": "Preferences"
+    },
+    {
+      "id": "budget",
+      "region": "P",
+      "label": "Budget"
+    },
+    {
+      "id": "question",
+      "region": "I",
+      "label": "Question"
+    },
+    {
+      "id": "papers",
+      "region": "L",
+      "label": "Find papers"
+    },
+    {
+      "id": "reproduce",
+      "region": "L",
+      "label": "Reproduce"
+    },
+    {
+      "id": "scoring",
+      "region": "B",
+      "label": "Scoring"
+    },
+    {
+      "id": "baseline",
+      "region": "B",
+      "label": "Baseline"
+    },
+    {
+      "id": "idea",
+      "region": "H",
+      "label": "Idea"
+    },
+    {
+      "id": "mechanism",
+      "region": "M",
+      "label": "Mechanism"
+    },
+    {
+      "id": "setup",
+      "region": "S",
+      "label": "Setup"
+    },
+    {
+      "id": "pilot",
+      "region": "G",
+      "label": "Pilot"
+    },
+    {
+      "id": "interpret",
+      "region": "G",
+      "label": "Interpret"
+    },
+    {
+      "id": "debug",
+      "region": "E",
+      "label": "Debug"
+    },
+    {
+      "id": "rerun",
+      "region": "E",
+      "label": "Rerun"
+    },
+    {
+      "id": "validate",
+      "region": "V",
+      "label": "Validate"
+    },
+    {
+      "id": "stress",
+      "region": "V",
+      "label": "Stress test"
+    },
+    {
+      "id": "claim",
+      "region": "W",
+      "label": "Claim"
+    },
+    {
+      "id": "draft",
+      "region": "W",
+      "label": "Draft"
+    },
+    {
+      "id": "figures",
+      "region": "F",
+      "label": "Figures"
+    },
+    {
+      "id": "audit",
+      "region": "F",
+      "label": "Audit"
+    },
+    {
+      "id": "reviews",
+      "region": "R",
+      "label": "Reviews"
+    },
+    {
+      "id": "response",
+      "region": "R",
+      "label": "Response"
+    },
+    {
+      "id": "release",
+      "region": "A",
+      "label": "Release"
+    },
+    {
+      "id": "outreach",
+      "region": "C",
+      "label": "Outreach"
+    },
+    {
+      "id": "explore",
+      "region": "X",
+      "label": "Explore"
+    }
+  ],
+  "edges": [
+    {
+      "from": "preferences",
+      "to": "budget"
+    },
+    {
+      "from": "budget",
+      "to": "question"
+    },
+    {
+      "from": "question",
+      "to": "papers"
+    },
+    {
+      "from": "papers",
+      "to": "reproduce"
+    },
+    {
+      "from": "reproduce",
+      "to": "scoring"
+    },
+    {
+      "from": "scoring",
+      "to": "baseline"
+    },
+    {
+      "from": "baseline",
+      "to": "idea"
+    },
+    {
+      "from": "idea",
+      "to": "mechanism"
+    },
+    {
+      "from": "mechanism",
+      "to": "setup"
+    },
+    {
+      "from": "setup",
+      "to": "debug"
+    },
+    {
+      "from": "debug",
+      "to": "rerun"
+    },
+    {
+      "from": "rerun",
+      "to": "pilot"
+    },
+    {
+      "from": "pilot",
+      "to": "interpret"
+    },
+    {
+      "from": "interpret",
+      "to": "validate"
+    },
+    {
+      "from": "validate",
+      "to": "stress"
+    },
+    {
+      "from": "stress",
+      "to": "claim"
+    },
+    {
+      "from": "claim",
+      "to": "draft"
+    },
+    {
+      "from": "draft",
+      "to": "figures"
+    },
+    {
+      "from": "figures",
+      "to": "audit"
+    },
+    {
+      "from": "audit",
+      "to": "reviews"
+    },
+    {
+      "from": "reviews",
+      "to": "response"
+    },
+    {
+      "from": "response",
+      "to": "release"
+    },
+    {
+      "from": "release",
+      "to": "outreach"
+    },
+    {
+      "from": "outreach",
+      "to": "explore"
+    },
+    {
+      "from": "baseline",
+      "to": "setup"
+    },
+    {
+      "from": "setup",
+      "to": "pilot"
+    },
+    {
+      "from": "interpret",
+      "to": "debug"
+    },
+    {
+      "from": "validate",
+      "to": "claim"
+    },
+    {
+      "from": "reviews",
+      "to": "papers"
+    },
+    {
+      "from": "papers",
+      "to": "scoring"
+    },
+    {
+      "from": "scoring",
+      "to": "stress"
+    },
+    {
+      "from": "draft",
+      "to": "audit"
+    },
+    {
+      "from": "audit",
+      "to": "response"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "new-question",
+      "title": "01 · From a question to a contribution",
+      "question": "Can lightweight coordination help a team of research agents?",
+      "resources": "Example budget · 1 GPU · 2 weeks",
+      "steps": [
+        {
+          "node": "preferences",
+          "kind": "human",
+          "note": "Choose what you want to understand and how much autonomy you want from the team."
+        },
+        {
+          "node": "budget",
+          "kind": "human",
+          "note": "Reserve time for a small test before allocating resources to a larger study."
+        },
+        {
+          "node": "question",
+          "kind": "human",
+          "note": "Turn a broad interest into a research question with a useful comparison."
+        },
+        {
+          "node": "papers",
+          "kind": "check",
+          "note": "Find relevant work and follow the claim back to the version that supports it."
+        },
+        {
+          "node": "reproduce",
+          "kind": "check",
+          "note": "Try a relevant reference implementation under a clearly described setup."
+        },
+        {
+          "node": "scoring",
+          "kind": "check",
+          "note": "Make the sampling and scoring choices comparable before reading the numbers."
+        },
+        {
+          "node": "baseline",
+          "kind": "check",
+          "note": "Establish a strong, simple reference point for the example task."
+        },
+        {
+          "node": "idea",
+          "kind": "human",
+          "note": "Discuss a small coordination change and the alternatives it should beat."
+        },
+        {
+          "node": "mechanism",
+          "kind": "check",
+          "note": "Explain why the change might help and what observation would challenge that explanation."
+        },
+        {
+          "node": "setup",
+          "kind": "human",
+          "note": "Match models, data and run settings to the question and the available budget."
+        },
+        {
+          "node": "debug",
+          "kind": "check",
+          "note": "Check that the implementation and evaluator behave as intended."
+        },
+        {
+          "node": "rerun",
+          "kind": "check",
+          "note": "Repeat the development run after repairing any implementation errors."
+        },
+        {
+          "node": "pilot",
+          "kind": "check",
+          "note": "Run a small, discriminating comparison before expanding the study."
+        },
+        {
+          "node": "interpret",
+          "kind": "result",
+          "note": "Imagine that the pilot is informative enough to justify a broader comparison."
+        },
+        {
+          "node": "validate",
+          "kind": "check",
+          "note": "Compare against stronger alternatives and repeat the relevant conditions."
+        },
+        {
+          "node": "stress",
+          "kind": "check",
+          "note": "Explore where the method fails and how quality changes with cost."
+        },
+        {
+          "node": "claim",
+          "kind": "human",
+          "note": "Choose a claim whose scope matches the example evidence."
+        },
+        {
+          "node": "draft",
+          "kind": "check",
+          "note": "Build the paper around that claim, its support and its limitations."
+        },
+        {
+          "node": "figures",
+          "kind": "check",
+          "note": "Show the actual comparison clearly and keep the figures editable."
+        },
+        {
+          "node": "audit",
+          "kind": "check",
+          "note": "Check consistency across the paper, figures and supporting material."
+        },
+        {
+          "node": "reviews",
+          "kind": "check",
+          "note": "Use a mock review to identify what still needs clarification."
+        },
+        {
+          "node": "response",
+          "kind": "human",
+          "note": "Answer the issues with evidence and revise the paper where needed."
+        },
+        {
+          "node": "release",
+          "kind": "human",
+          "note": "Prepare consistent paper, code and model or dataset pages for release."
+        },
+        {
+          "node": "outreach",
+          "kind": "human",
+          "note": "Share the contribution through a project page, a demo and relevant research communities."
+        },
+        {
+          "node": "explore",
+          "kind": "human",
+          "note": "Use questions and feedback from the community to choose the next direction."
+        }
+      ]
+    },
+    {
+      "id": "pilot-repair",
+      "title": "02 · When a pilot needs a detour",
+      "question": "Does the apparent gain survive a matched evaluator?",
+      "resources": "Example budget · existing code · 1 GPU",
+      "steps": [
+        {
+          "node": "baseline",
+          "kind": "check",
+          "note": "Start from an existing baseline and an apparently promising comparison."
+        },
+        {
+          "node": "setup",
+          "kind": "check",
+          "note": "Use the same model, dataset split and resource budget for both methods."
+        },
+        {
+          "node": "pilot",
+          "kind": "result",
+          "note": "In this example, the first run appears to improve the score."
+        },
+        {
+          "node": "interpret",
+          "kind": "reroute",
+          "note": "A check reveals different answer normalization. The score cannot yet support the claim. Detour to debugging."
+        },
+        {
+          "node": "debug",
+          "kind": "check",
+          "note": "Repair the scoring mismatch and inspect a few concrete outputs."
+        },
+        {
+          "node": "rerun",
+          "kind": "check",
+          "note": "Rerun both methods with the same evaluator and record the repaired setup."
+        },
+        {
+          "node": "pilot",
+          "kind": "check",
+          "note": "Return to the pilot. A second visit uses the corrected comparison."
+        },
+        {
+          "node": "interpret",
+          "kind": "result",
+          "note": "Imagine that the corrected gain is smaller. The route continues with a narrower question."
+        },
+        {
+          "node": "validate",
+          "kind": "check",
+          "note": "Test whether the remaining effect repeats under the conditions it actually describes."
+        },
+        {
+          "node": "claim",
+          "kind": "human",
+          "note": "Reduce the scope of the claim to match the corrected evidence."
+        },
+        {
+          "node": "draft",
+          "kind": "check",
+          "note": "Rewrite the motivation and results around the supported comparison."
+        },
+        {
+          "node": "figures",
+          "kind": "check",
+          "note": "Replace the earlier chart so the visual tells the same story as the revised paper."
+        }
+      ]
+    },
+    {
+      "id": "review-repair",
+      "title": "03 · After a peer review",
+      "question": "How should a missing comparison change the paper?",
+      "resources": "Example budget · reviewed draft · 5 days",
+      "steps": [
+        {
+          "node": "reviews",
+          "kind": "human",
+          "note": "A mock reviewer identifies a missing comparison and a claim that may be too broad."
+        },
+        {
+          "node": "papers",
+          "kind": "check",
+          "note": "Check the referenced work and determine whether it addresses the same question."
+        },
+        {
+          "node": "scoring",
+          "kind": "reroute",
+          "note": "The existing comparison uses a different evaluation setup. Revisit the evaluator before adding a new number."
+        },
+        {
+          "node": "stress",
+          "kind": "check",
+          "note": "Run the relevant comparison and inspect the conditions where the explanation breaks."
+        },
+        {
+          "node": "claim",
+          "kind": "result",
+          "note": "Imagine that the new evidence supports a smaller claim. Update its scope before editing the prose."
+        },
+        {
+          "node": "draft",
+          "kind": "check",
+          "note": "Revise the abstract, motivation and discussion around the changed claim."
+        },
+        {
+          "node": "audit",
+          "kind": "check",
+          "note": "Check that tables, captions and supporting material use the same revised result."
+        },
+        {
+          "node": "response",
+          "kind": "human",
+          "note": "Draft an issue-by-issue response that points to the evidence and the changes."
+        },
+        {
+          "node": "release",
+          "kind": "human",
+          "note": "Prepare the revised paper and associated artifacts when the release is ready."
+        },
+        {
+          "node": "outreach",
+          "kind": "human",
+          "note": "Update the project page and public explanation to match the revised contribution."
+        }
+      ]
+    }
+  ]
+}

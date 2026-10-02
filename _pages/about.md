@@ -7,7 +7,7 @@ redirect_from:
 ---
 {% include about-homepage-header.html %}
 
-I research **agentic AI** at [SCAIL](https://supplychaindatahub.org/), focusing on **multi-agent systems, reinforcement learning and heuristic methods**. I completed my MPhil and am pursuing my PhD in the **Department of Engineering, University of Cambridge**.
+I research **agentic AI** in the **Department of Engineering, University of Cambridge**, focusing on **multi-agent systems, reinforcement learning and heuristic methods**. I completed my MPhil research at [SCAIL](https://supplychaindatahub.org/) and am now pursuing my PhD, supervised by [Prof. Alexandra Brintrup](https://uk.linkedin.com/in/alexandra-brintrup-1684171).
 
 In **October 2026**, I launched **[Research Autopilot](/research-autopilot/)** to help people navigate the full research process with their own human–AI team—from developing ideas and running experiments to writing, publishing and sharing their work.
 

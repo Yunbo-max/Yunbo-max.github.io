@@ -148,6 +148,11 @@ exclude:
   - docs
   - .preview
   - research-autopilot/skills
+  - research-autopilot/manifest.json
+  - assets/lab/research-map.json
+  - assets/lab/research-map.svg
+  - assets/lab/preview-map.svg
+  - .preview-navigation
   - package.json
   - tmp
   - vendor
