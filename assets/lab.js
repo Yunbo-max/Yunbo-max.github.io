@@ -146,6 +146,7 @@
         line.classList.toggle('traveled',pastEdges.has(id));
         line.classList.toggle('current-handoff',Boolean(state.next && id === `${state.current.node}>${state.next.node}`));
       });
+      if (state.next) edges.append(edgeElements.get(`${state.current.node}>${state.next.node}`));
       shell.classList.toggle('playing',state.playing);
       shell.classList.toggle('rerouting',state.current.kind === 'reroute');
       play.textContent = state.playing ? 'Ⅱ Pause' : state.complete ? '↻ Replay route' : '▶ Play route';
