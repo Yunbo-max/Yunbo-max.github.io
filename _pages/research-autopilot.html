@@ -1,10 +1,195 @@
 ---
-layout: lab
+layout: project
 title: Research Autopilot
-description: A human-directed research navigator. Explore interactive example journeys from a question to experiments, writing, review and public communication. Founded by Yunbo Long.
+description: Explore 84 research tasks across 16 connected modules, from literature and real benchmarks to experiments, debugging, papers and release. Private beta by invitation.
 permalink: /research-autopilot/
+project_class: research-page
+symbol: ◎
+social_card: research-atlas-card.svg
 ---
-{% include lab-home.html %}
-<section class="section soft" id="human"><div class="wrap"><p class="eyebrow">HUMAN–AI SUPERVISION</p><h2>Your destination.<br>Your decisions.</h2><div class="feature-row"><article><h3>Start where you are.</h3><p>A new question, working code, a surprising result or a reviewed manuscript can each be a starting point.</p></article><article><h3>Set the constraints together.</h3><p>Your interests, available time, resources and priorities shape the next useful action and the questions worth asking.</p></article><article><h3>Revisit the route.</h3><p>New evidence can change the method, the claim or the project’s priority. Researcher and supervisor discuss the alternatives.</p></article></div></div></section>
-<section class="section wrap" id="evidence"><p class="eyebrow">FOLLOW THE EVIDENCE</p><h2>A route that can<br>change its mind.</h2><div class="split"><div><p class="large-copy">Reading, reproducing and observing a result are different steps. The navigation keeps those distinctions visible as the project develops.</p><p>A useful pilot can expose a broken evaluator or a failed assumption. Repairing the experiment comes before deciding what its result means.</p></div><div><h3>Watch the change happen.</h3><p>In the pilot example, a scoring mismatch sends the project back to debugging. In the review example, a missing comparison sends it back to evaluation. The new evidence then changes the writing.</p><a class="text-link" href="#map">Try the example routes ↑</a></div></div></section>
-<section class="section soft" id="routes"><div class="wrap"><p class="eyebrow">THE WHOLE RESEARCH JOURNEY</p><h2>A contribution.<br>And a community around it.</h2><div class="feature-row"><article><h3>Question → experiment</h3><p>Goals, literature, benchmarks, ideas, methods and resources connect to small tests, engineering and broader validation.</p></article><article><h3>Evidence → paper</h3><p>Results shape the claims, motivation, writing and figures. Review and rebuttal can return a project to an earlier task.</p></article><article><h3>Release → conversation</h3><p>Reproducible code, model and dataset pages, preprints, project websites, videos and academic communication help the work reach people. Feedback informs the next question.</p></article></div></div></section>
+<div class="page-width">
+  <section class="atlas-intro" aria-labelledby="atlas-title">
+    <div><p class="eyebrow">RESEARCH AUTOPILOT <span aria-hidden="true">/</span> PRIVATE BETA</p><h1 id="atlas-title">Your research.<br><em>A whole world.</em></h1></div>
+    <div class="atlas-intro-copy"><p>A connected map of the work behind a paper: reading, ideas, methods, experiments, debugging, writing, review and release.</p><div class="atlas-counts" aria-label="Map size"><div><strong>16</strong><span>modules</span></div><div><strong>84</strong><span>research tasks</span></div><div><strong>221</strong><span>connections</span></div></div></div>
+  </section>
+  <section id="map" aria-label="Interactive research module globe">
+    <div class="atlas-shell" id="research-atlas" data-ready="false">
+      <div class="globe-stage">
+        <p class="globe-overline">THE RESEARCH ATLAS<span>Each continent is a module. Each point is a task.</span></p>
+        <span class="globe-help" aria-hidden="true">Drag to turn · click to explore</span>
+        <canvas id="research-globe" width="800" height="550" tabindex="0" role="img" aria-label="Research globe with 16 module continents and 84 research tasks" aria-describedby="globe-instructions">Explore all 16 modules and 84 tasks in the directory below.</canvas>
+        <p id="atlas-error" class="atlas-error" hidden>The interactive globe could not load. <a href="#modules">Browse all 84 tasks in the module directory ↓</a></p>
+        <noscript><p class="atlas-error">The rotating globe needs JavaScript. <a href="#modules">Read the complete module directory ↓</a></p></noscript>
+        <div class="globe-controls"><button id="globe-pause" type="button" disabled>Pause rotation</button><button id="globe-left" type="button" aria-label="Rotate globe left" disabled>←</button><button id="globe-right" type="button" aria-label="Rotate globe right" disabled>→</button><label><input id="globe-connections" type="checkbox" checked>Task connections</label></div>
+      </div>
+      <aside class="atlas-detail" aria-label="Selected module and tasks">
+        <label for="module-select">Explore a continent</label>
+        <select id="module-select" disabled>
+          <option value="P">P · Projects &amp; resources</option><option value="I">I · Research entry &amp; direction</option><option value="L" selected>L · Literature &amp; implementation</option><option value="B">B · Tasks, benchmarks &amp; failures</option><option value="H">H · Ideas &amp; critical review</option><option value="M">M · Methods &amp; mathematics</option><option value="S">S · Models, data &amp; setup</option><option value="G">G · Decisive experiment design</option><option value="E">E · Engineering &amp; debugging</option><option value="V">V · Validation &amp; boundaries</option><option value="W">W · Writing &amp; result-driven revision</option><option value="F">F · Figures &amp; manuscript checks</option><option value="R">R · Submission, review &amp; rebuttal</option><option value="A">A · Reproducibility &amp; release</option><option value="C">C · Websites &amp; communication</option><option value="X">X · Exploration &amp; map maintenance</option>
+        </select>
+        <div class="module-context"><span class="module-code"><i id="module-swatch" style="background:#91bfa7" aria-hidden="true"></i><span id="module-code">L / 5 TASKS</span></span><h2 id="module-name">Literature &amp;<br>implementation</h2><p id="module-description">Keep reading papers alongside actual code, supplementary material and benchmark protocols. Update the literature map when new results change the question.</p></div>
+        <div class="task-picker" id="task-picker" aria-label="Tasks in the selected module"><button type="button" data-node="L01" aria-pressed="true"><code>L01</code><span>Problem &amp; mechanism search</span></button><button type="button" data-node="L02" aria-pressed="false"><code>L02</code><span>Topic map &amp; citation expansion</span></button><button type="button" data-node="L03" aria-pressed="false"><code>L03</code><span>Critical paper reading</span></button><button type="button" data-node="L04" aria-pressed="false"><code>L04</code><span>Code, supplements &amp; reproduction</span></button><button type="button" data-node="L05" aria-pressed="false"><code>L05</code><span>Coverage &amp; new evidence</span></button></div>
+        <div class="task-connections"><p class="eyebrow">Connected research tasks</p><h3 id="connection-title">Choose a task to see its links</h3><ul class="connection-list" id="connection-list" aria-label="Connections for the selected task"></ul></div>
+      </aside>
+    </div>
+    <div class="atlas-caption"><p id="globe-instructions">Drag or use the arrow keys to rotate; use Space to pause. Choose a module or point to inspect its tasks. The complete directory is available below.</p><p>The continents are an illustrated module map. The next task depends on your question, evidence and resources.</p></div>
+    <p id="atlas-status" role="status" class="visually-hidden">Loading the interactive research atlas.</p>
+  </section>
+  <section id="modules" class="catalog-section" aria-labelledby="modules-title">
+    <div class="catalog-heading"><div><p class="eyebrow">INSIDE THE MAP</p><h2 id="modules-title">16 modules.<br>From question to contribution.</h2></div><p>Open any module to see the research tasks it contains. Literature, implementation, benchmarks and experiment design stay connected as results arrive.</p></div>
+    <div class="module-directory">
+<!-- MODULE DIRECTORY START -->
+<details class="module-entry" id="module-P" style="--module-color:#9eb388">
+<summary><code>P</code><h3>Projects &amp; resources</h3><span class="directory-count">5 tasks</span><span class="expand" aria-hidden="true">+</span></summary>
+<div class="module-body"><p>Set research goals, inventory project assets, choose priorities, and plan time, GPU capacity and collaboration.</p><ol><li id="node-P01"><a href="#node-P01" data-node="P01"><code>P01</code>Research goals &amp; portfolio</a></li>
+<li id="node-P02"><a href="#node-P02" data-node="P02"><code>P02</code>Project assets &amp; position</a></li>
+<li id="node-P03"><a href="#node-P03" data-node="P03"><code>P03</code>Priorities &amp; active projects</a></li>
+<li id="node-P04"><a href="#node-P04" data-node="P04"><code>P04</code>Time, compute &amp; collaborators</a></li>
+<li id="node-P05"><a href="#node-P05" data-node="P05"><code>P05</code>Learning &amp; retrospectives</a></li>
+</ol><button class="locate-module" type="button" data-module="P">Locate on the globe ↑</button></div>
+</details>
+<details class="module-entry" id="module-I" style="--module-color:#dfb66d">
+<summary><code>I</code><h3>Research entry &amp; direction</h3><span class="directory-count">4 tasks</span><span class="expand" aria-hidden="true">+</span></summary>
+<div class="module-body"><p>Start from a question, working method, results or reviews. Identify the current decision, contribution type, venue and stopping criteria.</p><ol><li id="node-I01"><a href="#node-I01" data-node="I01"><code>I01</code>Entry point &amp; current decision</a></li>
+<li id="node-I02"><a href="#node-I02" data-node="I02"><code>I02</code>Contribution type</a></li>
+<li id="node-I03"><a href="#node-I03" data-node="I03"><code>I03</code>Venue &amp; submission stage</a></li>
+<li id="node-I04"><a href="#node-I04" data-node="I04"><code>I04</code>Finish, pause or stop criteria</a></li>
+</ol><button class="locate-module" type="button" data-module="I">Locate on the globe ↑</button></div>
+</details>
+<details class="module-entry" id="module-L" style="--module-color:#91bfa7">
+<summary><code>L</code><h3>Literature &amp; implementation</h3><span class="directory-count">5 tasks</span><span class="expand" aria-hidden="true">+</span></summary>
+<div class="module-body"><p>Keep reading papers alongside actual code, supplementary material and benchmark protocols. Update the literature map when new results change the question.</p><ol><li id="node-L01"><a href="#node-L01" data-node="L01"><code>L01</code>Problem &amp; mechanism search</a></li>
+<li id="node-L02"><a href="#node-L02" data-node="L02"><code>L02</code>Topic map &amp; citation expansion</a></li>
+<li id="node-L03"><a href="#node-L03" data-node="L03"><code>L03</code>Critical paper reading</a></li>
+<li id="node-L04"><a href="#node-L04" data-node="L04"><code>L04</code>Code, supplements &amp; reproduction</a></li>
+<li id="node-L05"><a href="#node-L05" data-node="L05"><code>L05</code>Coverage &amp; new evidence</a></li>
+</ol><button class="locate-module" type="button" data-module="L">Locate on the globe ↑</button></div>
+</details>
+<details class="module-entry" id="module-B" style="--module-color:#d4a78b">
+<summary><code>B</code><h3>Tasks, benchmarks &amp; failures</h3><span class="directory-count">5 tasks</span><span class="expand" aria-hidden="true">+</span></summary>
+<div class="module-body"><p>Define the task and native scoring, qualify strong simple baselines, and establish their genuine remaining failures before proposing a method.</p><ol><li id="node-B01"><a href="#node-B01" data-node="B01"><code>B01</code>Task &amp; metric contract</a></li>
+<li id="node-B02"><a href="#node-B02" data-node="B02"><code>B02</code>Natural failure census</a></li>
+<li id="node-B03"><a href="#node-B03" data-node="B03"><code>B03</code>Strong simple baseline qualification</a></li>
+<li id="node-B04"><a href="#node-B04" data-node="B04"><code>B04</code>Freeze the parent problem</a></li>
+<li id="node-B05"><a href="#node-B05" data-node="B05"><code>B05</code>Natural Gate 0</a></li>
+</ol><button class="locate-module" type="button" data-module="B">Locate on the globe ↑</button></div>
+</details>
+<details class="module-entry" id="module-H" style="--module-color:#c7bb84">
+<summary><code>H</code><h3>Ideas &amp; critical review</h3><span class="directory-count">5 tasks</span><span class="expand" aria-hidden="true">+</span></summary>
+<div class="module-body"><p>Turn remaining failures into competing explanations, falsifiable claims and decisive predictions. Check necessity, novelty and nearby work.</p><ol><li id="node-H01"><a href="#node-H01" data-node="H01"><code>H01</code>Failure explanations &amp; assumptions</a></li>
+<li id="node-H02"><a href="#node-H02" data-node="H02"><code>H02</code>Necessity &amp; strongest objections</a></li>
+<li id="node-H03"><a href="#node-H03" data-node="H03"><code>H03</code>Atomic claims &amp; decisive predictions</a></li>
+<li id="node-H04"><a href="#node-H04" data-node="H04"><code>H04</code>Functional collision review</a></li>
+<li id="node-H05"><a href="#node-H05" data-node="H05"><code>H05</code>Importance-preserving candidate selection</a></li>
+</ol><button class="locate-module" type="button" data-module="H">Locate on the globe ↑</button></div>
+</details>
+<details class="module-entry" id="module-M" style="--module-color:#92afb9">
+<summary><code>M</code><h3>Methods &amp; mathematics</h3><span class="directory-count">5 tasks</span><span class="expand" aria-hidden="true">+</span></summary>
+<div class="module-body"><p>Connect an intervention to its expected mechanism. Make the mathematics computable, define the algorithm, and examine complexity and assumptions.</p><ol><li id="node-M01"><a href="#node-M01" data-node="M01"><code>M01</code>Causal chain &amp; intervention</a></li>
+<li id="node-M02"><a href="#node-M02" data-node="M02"><code>M02</code>Mathematics &amp; computability</a></li>
+<li id="node-M03"><a href="#node-M03" data-node="M03"><code>M03</code>Minimal algorithm &amp; interfaces</a></li>
+<li id="node-M04"><a href="#node-M04" data-node="M04"><code>M04</code>Complexity &amp; scope</a></li>
+<li id="node-M05"><a href="#node-M05" data-node="M05"><code>M05</code>Components &amp; theoretical obligations</a></li>
+</ol><button class="locate-module" type="button" data-module="M">Locate on the globe ↑</button></div>
+</details>
+<details class="module-entry" id="module-S" style="--module-color:#b8aa9a">
+<summary><code>S</code><h3>Models, data &amp; setup</h3><span class="directory-count">5 tasks</span><span class="expand" aria-hidden="true">+</span></summary>
+<div class="module-body"><p>Choose existing benchmarks, inspect data and splits, select models, and freeze fair comparisons and complete run configurations.</p><ol><li id="node-S01"><a href="#node-S01" data-node="S01"><code>S01</code>Benchmark selection matrix</a></li>
+<li id="node-S02"><a href="#node-S02" data-node="S02"><code>S02</code>Data &amp; split audit</a></li>
+<li id="node-S03"><a href="#node-S03" data-node="S03"><code>S03</code>Model &amp; API selection</a></li>
+<li id="node-S04"><a href="#node-S04" data-node="S04"><code>S04</code>Baselines &amp; fair comparison</a></li>
+<li id="node-S05"><a href="#node-S05" data-node="S05"><code>S05</code>Complete run configuration</a></li>
+</ol><button class="locate-module" type="button" data-module="S">Locate on the globe ↑</button></div>
+</details>
+<details class="module-entry" id="module-G" style="--module-color:#d1bb7b">
+<summary><code>G</code><h3>Decisive experiment design</h3><span class="directory-count">5 tasks</span><span class="expand" aria-hidden="true">+</span></summary>
+<div class="module-body"><p>Design the experiment that can distinguish the candidate explanation from its alternatives. Freeze controls, scoring, precision, budget and decision rules.</p><ol><li id="node-G01"><a href="#node-G01" data-node="G01"><code>G01</code>Decisive experiment design</a></li>
+<li id="node-G02"><a href="#node-G02" data-node="G02"><code>G02</code>Frozen protocol &amp; decision rules</a></li>
+<li id="node-G03"><a href="#node-G03" data-node="G03"><code>G03</code>Implementation &amp; baseline checks</a></li>
+<li id="node-G04"><a href="#node-G04" data-node="G04"><code>G04</code>Prompt, inference or training execution</a></li>
+<li id="node-G05"><a href="#node-G05" data-node="G05"><code>G05</code>Gate A assessment &amp; route choice</a></li>
+</ol><button class="locate-module" type="button" data-module="G">Locate on the globe ↑</button></div>
+</details>
+<details class="module-entry" id="module-E" style="--module-color:#c49783">
+<summary><code>E</code><h3>Engineering &amp; debugging</h3><span class="directory-count">5 tasks</span><span class="expand" aria-hidden="true">+</span></summary>
+<div class="module-body"><p>Fix environments and dependencies, check implementation semantics, manage execution, and diagnose bugs or parameter sensitivity while retaining failed runs.</p><ol><li id="node-E01"><a href="#node-E01" data-node="E01"><code>E01</code>Environment &amp; dependencies</a></li>
+<li id="node-E02"><a href="#node-E02" data-node="E02"><code>E02</code>Semantics, unit checks &amp; canaries</a></li>
+<li id="node-E03"><a href="#node-E03" data-node="E03"><code>E03</code>Task queue &amp; resource monitoring</a></li>
+<li id="node-E04"><a href="#node-E04" data-node="E04"><code>E04</code>Root-cause diagnosis &amp; protocol branches</a></li>
+<li id="node-E05"><a href="#node-E05" data-node="E05"><code>E05</code>Raw evidence &amp; recoverable checkpoints</a></li>
+</ol><button class="locate-module" type="button" data-module="E">Locate on the globe ↑</button></div>
+</details>
+<details class="module-entry" id="module-V" style="--module-color:#a8bba2">
+<summary><code>V</code><h3>Validation &amp; boundaries</h3><span class="directory-count">6 tasks</span><span class="expand" aria-hidden="true">+</span></summary>
+<div class="module-body"><p>Connect every claim to evidence: repeated comparisons, mechanism checks, ablations, generalization, cost, failures and statistical uncertainty.</p><ol><li id="node-V01"><a href="#node-V01" data-node="V01"><code>V01</code>Claims-to-experiments matrix</a></li>
+<li id="node-V02"><a href="#node-V02" data-node="V02"><code>V02</code>Strong baselines &amp; repeated validation</a></li>
+<li id="node-V03"><a href="#node-V03" data-node="V03"><code>V03</code>Mechanisms, ablations &amp; replacements</a></li>
+<li id="node-V04"><a href="#node-V04" data-node="V04"><code>V04</code>Generalization, robustness &amp; scope</a></li>
+<li id="node-V05"><a href="#node-V05" data-node="V05"><code>V05</code>Quality, cost &amp; failures</a></li>
+<li id="node-V06"><a href="#node-V06" data-node="V06"><code>V06</code>Statistical checks &amp; evidence freeze</a></li>
+</ol><button class="locate-module" type="button" data-module="V">Locate on the globe ↑</button></div>
+</details>
+<details class="module-entry" id="module-W" style="--module-color:#b9b0cd">
+<summary><code>W</code><h3>Writing &amp; result-driven revision</h3><span class="directory-count">9 tasks</span><span class="expand" aria-hidden="true">+</span></summary>
+<div class="module-body"><p>Build the paper around supported claims. Develop the narrative, sections and sentences, and propagate new findings through the manuscript.</p><ol><li id="node-W01"><a href="#node-W01" data-node="W01"><code>W01</code>Venue template &amp; length</a></li>
+<li id="node-W02"><a href="#node-W02" data-node="W02"><code>W02</code>Central claim &amp; narrative</a></li>
+<li id="node-W03"><a href="#node-W03" data-node="W03"><code>W03</code>Main paper &amp; appendix</a></li>
+<li id="node-W04"><a href="#node-W04" data-node="W04"><code>W04</code>Section blueprint</a></li>
+<li id="node-W05"><a href="#node-W05" data-node="W05"><code>W05</code>Paragraphs &amp; sentences</a></li>
+<li id="node-W06"><a href="#node-W06" data-node="W06"><code>W06</code>Introduction, motivation &amp; related work</a></li>
+<li id="node-W07"><a href="#node-W07" data-node="W07"><code>W07</code>Method, results &amp; discussion</a></li>
+<li id="node-W08"><a href="#node-W08" data-node="W08"><code>W08</code>Title, abstract &amp; conclusion</a></li>
+<li id="node-W09"><a href="#node-W09" data-node="W09"><code>W09</code>Propagating new results</a></li>
+</ol><button class="locate-module" type="button" data-module="W">Locate on the globe ↑</button></div>
+</details>
+<details class="module-entry" id="module-F" style="--module-color:#d0b696">
+<summary><code>F</code><h3>Figures &amp; manuscript checks</h3><span class="directory-count">4 tasks</span><span class="expand" aria-hidden="true">+</span></summary>
+<div class="module-body"><p>Create method figures and editable result plots from identified evidence. Check captions, references, readability and consistency in the compiled manuscript.</p><ol><li id="node-F01"><a href="#node-F01" data-node="F01"><code>F01</code>Method &amp; motivation figures</a></li>
+<li id="node-F02"><a href="#node-F02" data-node="F02"><code>F02</code>Result plots &amp; editable tables</a></li>
+<li id="node-F03"><a href="#node-F03" data-node="F03"><code>F03</code>Captions, references &amp; readability</a></li>
+<li id="node-F04"><a href="#node-F04" data-node="F04"><code>F04</code>Compilation &amp; manuscript consistency</a></li>
+</ol><button class="locate-module" type="button" data-module="F">Locate on the globe ↑</button></div>
+</details>
+<details class="module-entry" id="module-R" style="--module-color:#b0c4bc">
+<summary><code>R</code><h3>Submission, review &amp; rebuttal</h3><span class="directory-count">5 tasks</span><span class="expand" aria-hidden="true">+</span></summary>
+<div class="module-body"><p>Prepare the submission, track reviewer questions, prioritize justified follow-up experiments, write responses and manage final decisions or resubmission.</p><ol><li id="node-R01"><a href="#node-R01" data-node="R01"><code>R01</code>Submission lock &amp; anonymous materials</a></li>
+<li id="node-R02"><a href="#node-R02" data-node="R02"><code>R02</code>Reviewer issue ledger</a></li>
+<li id="node-R03"><a href="#node-R03" data-node="R03"><code>R03</code>Response strategy &amp; follow-up priorities</a></li>
+<li id="node-R04"><a href="#node-R04" data-node="R04"><code>R04</code>Point-by-point response &amp; revision</a></li>
+<li id="node-R05"><a href="#node-R05" data-node="R05"><code>R05</code>Decision, resubmission &amp; final manuscript</a></li>
+</ol><button class="locate-module" type="button" data-module="R">Locate on the globe ↑</button></div>
+</details>
+<details class="module-entry" id="module-A" style="--module-color:#93abb4">
+<summary><code>A</code><h3>Reproducibility &amp; release</h3><span class="directory-count">5 tasks</span><span class="expand" aria-hidden="true">+</span></summary>
+<div class="module-body"><p>Prepare reproducible GitHub releases, Hugging Face assets and demos, arXiv versions and a shared release manifest. Follow reproduction feedback.</p><ol><li id="node-A01"><a href="#node-A01" data-node="A01"><code>A01</code>GitHub reproduction &amp; versions</a></li>
+<li id="node-A02"><a href="#node-A02" data-node="A02"><code>A02</code>Hugging Face models, data &amp; demos</a></li>
+<li id="node-A03"><a href="#node-A03" data-node="A03"><code>A03</code>arXiv versions &amp; metadata</a></li>
+<li id="node-A04"><a href="#node-A04" data-node="A04"><code>A04</code>Shared release manifest</a></li>
+<li id="node-A05"><a href="#node-A05" data-node="A05"><code>A05</code>User feedback, reproduction &amp; revision</a></li>
+</ol><button class="locate-module" type="button" data-module="A">Locate on the globe ↑</button></div>
+</details>
+<details class="module-entry" id="module-C" style="--module-color:#ceb09d">
+<summary><code>C</code><h3>Websites &amp; communication</h3><span class="directory-count">5 tasks</span><span class="expand" aria-hidden="true">+</span></summary>
+<div class="module-body"><p>Develop project pages, posters, talks, videos, public communication and academic outreach, alongside a personal research homepage and knowledge base.</p><ol><li id="node-C01"><a href="#node-C01" data-node="C01"><code>C01</code>Project page &amp; interactive demo</a></li>
+<li id="node-C02"><a href="#node-C02" data-node="C02"><code>C02</code>Poster, talk &amp; demonstration video</a></li>
+<li id="node-C03"><a href="#node-C03" data-node="C03"><code>C03</code>X, LinkedIn &amp; Xiaohongshu</a></li>
+<li id="node-C04"><a href="#node-C04" data-node="C04"><code>C04</code>Recipient discovery &amp; email drafts</a></li>
+<li id="node-C05"><a href="#node-C05" data-node="C05"><code>C05</code>Homepage, CV &amp; research knowledge base</a></li>
+</ol><button class="locate-module" type="button" data-module="C">Locate on the globe ↑</button></div>
+</details>
+<details class="module-entry" id="module-X" style="--module-color:#a2b29a">
+<summary><code>X</code><h3>Exploration &amp; map maintenance</h3><span class="directory-count">6 tasks</span><span class="expand" aria-hidden="true">+</span></summary>
+<div class="module-body"><p>Navigate across modules, inspect visual and code evidence, explore counter-explanations within the agreed scope, and maintain the map as capabilities change.</p><ol><li id="node-X01"><a href="#node-X01" data-node="X01"><code>X01</code>Visual position &amp; route exploration</a></li>
+<li id="node-X02"><a href="#node-X02" data-node="X02"><code>X02</code>PDF figures, diagrams &amp; appendices</a></li>
+<li id="node-X03"><a href="#node-X03" data-node="X03"><code>X03</code>Code, log &amp; website evidence</a></li>
+<li id="node-X04"><a href="#node-X04" data-node="X04"><code>X04</code>Bounded exploration &amp; counter-evidence</a></li>
+<li id="node-X05"><a href="#node-X05" data-node="X05"><code>X05</code>Registering &amp; checking new routes</a></li>
+<li id="node-X06"><a href="#node-X06" data-node="X06"><code>X06</code>Map quality &amp; capability registry</a></li>
+</ol><button class="locate-module" type="button" data-module="X">Locate on the globe ↑</button></div>
+</details>
+<!-- MODULE DIRECTORY END -->
+    </div>
+  </section>
+  <section class="beta-section" id="beta" aria-labelledby="beta-title"><div><p class="eyebrow">PRIVATE BETA</p><h2 id="beta-title">Bring your own question.</h2><p>Interested in trying Research Autopilot with your project?<br>Contact Yunbo Long to join the private beta.</p></div><a class="solid-link" href="mailto:longyunbo218@gmail.com?subject=Research%20Autopilot%20private%20beta">Get in touch <span aria-hidden="true">↗</span></a></section>
+</div>
+<script type="module" src="/assets/lab/research-globe.mjs?v={{ site.time | date: '%s' }}"></script>

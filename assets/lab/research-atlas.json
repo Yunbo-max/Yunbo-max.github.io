@@ -1,0 +1,1906 @@
+{
+  "kind": "public_module_directory",
+  "schema_version": 1,
+  "updated": "2026-10-04",
+  "registry_sha256": "ece8994c117a3c19ec7270dc84de62f95610e4a4fca67fdb6d19488325ea6903",
+  "total_modules": 16,
+  "total_nodes": 84,
+  "total_connections": 221,
+  "geography": "Illustrative module continents, with no geographic or execution-order meaning.",
+  "modules": [
+    {
+      "id": "P",
+      "label": "Projects & resources",
+      "short": "Projects",
+      "color": "#9eb388",
+      "description": "Set research goals, inventory project assets, choose priorities, and plan time, GPU capacity and collaboration.",
+      "lat": 1.2153751251046732,
+      "lon": 0.0
+    },
+    {
+      "id": "I",
+      "label": "Research entry & direction",
+      "short": "Direction",
+      "color": "#dfb66d",
+      "description": "Start from a question, working method, results or reviews. Identify the current decision, contribution type, venue and stopping criteria.",
+      "lat": 0.948427838239876,
+      "lon": 2.3999632297286535
+    },
+    {
+      "id": "L",
+      "label": "Literature & implementation",
+      "short": "Literature",
+      "color": "#91bfa7",
+      "description": "Keep reading papers alongside actual code, supplementary material and benchmark protocols. Update the literature map when new results change the question.",
+      "lat": 0.758040765426236,
+      "lon": -1.4832588477222801
+    },
+    {
+      "id": "B",
+      "label": "Tasks, benchmarks & failures",
+      "short": "Benchmarks",
+      "color": "#d4a78b",
+      "description": "Define the task and native scoring, qualify strong simple baselines, and establish their genuine remaining failures before proposing a method.",
+      "lat": 0.5974064166453502,
+      "lon": 0.9167043820063725
+    },
+    {
+      "id": "H",
+      "label": "Ideas & critical review",
+      "short": "Ideas",
+      "color": "#c7bb84",
+      "description": "Turn remaining failures into competing explanations, falsifiable claims and decisive predictions. Check necessity, novelty and nearby work.",
+      "lat": 0.4528165947449256,
+      "lon": -2.9665176954445602
+    },
+    {
+      "id": "M",
+      "label": "Methods & mathematics",
+      "short": "Methods",
+      "color": "#92afb9",
+      "description": "Connect an intervention to its expected mechanism. Make the mathematics computable, define the algorithm, and examine complexity and assumptions.",
+      "lat": 0.31782370392788073,
+      "lon": -0.5665544657159085
+    },
+    {
+      "id": "S",
+      "label": "Models, data & setup",
+      "short": "Setup",
+      "color": "#b8aa9a",
+      "description": "Choose existing benchmarks, inspect data and splits, select models, and freeze fair comparisons and complete run configurations.",
+      "lat": 0.1886163861754041,
+      "lon": 1.833408764012745
+    },
+    {
+      "id": "G",
+      "label": "Decisive experiment design",
+      "short": "Experiments",
+      "color": "#d1bb7b",
+      "description": "Design the experiment that can distinguish the candidate explanation from its alternatives. Freeze controls, scoring, precision, budget and decision rules.",
+      "lat": 0.06254076179649139,
+      "lon": -2.0498133134381895
+    },
+    {
+      "id": "E",
+      "label": "Engineering & debugging",
+      "short": "Engineering",
+      "color": "#c49783",
+      "description": "Fix environments and dependencies, check implementation semantics, manage execution, and diagnose bugs or parameter sensitivity while retaining failed runs.",
+      "lat": -0.06254076179649139,
+      "lon": 0.35014991629046577
+    },
+    {
+      "id": "V",
+      "label": "Validation & boundaries",
+      "short": "Validation",
+      "color": "#a8bba2",
+      "description": "Connect every claim to evidence: repeated comparisons, mechanism checks, ablations, generalization, cost, failures and statistical uncertainty.",
+      "lat": -0.1886163861754041,
+      "lon": 2.7501131460191175
+    },
+    {
+      "id": "W",
+      "label": "Writing & result-driven revision",
+      "short": "Writing",
+      "color": "#b9b0cd",
+      "description": "Build the paper around supported claims. Develop the narrative, sections and sentences, and propagate new findings through the manuscript.",
+      "lat": -0.31782370392788073,
+      "lon": -1.133108931431817
+    },
+    {
+      "id": "F",
+      "label": "Figures & manuscript checks",
+      "short": "Figures",
+      "color": "#d0b696",
+      "description": "Create method figures and editable result plots from identified evidence. Check captions, references, readability and consistency in the compiled manuscript.",
+      "lat": -0.4528165947449256,
+      "lon": 1.2668542982968347
+    },
+    {
+      "id": "R",
+      "label": "Submission, review & rebuttal",
+      "short": "Review",
+      "color": "#b0c4bc",
+      "description": "Prepare the submission, track reviewer questions, prioritize justified follow-up experiments, write responses and manage final decisions or resubmission.",
+      "lat": -0.5974064166453502,
+      "lon": -2.6163677791540962
+    },
+    {
+      "id": "A",
+      "label": "Reproducibility & release",
+      "short": "Release",
+      "color": "#93abb4",
+      "description": "Prepare reproducible GitHub releases, Hugging Face assets and demos, arXiv versions and a shared release manifest. Follow reproduction feedback.",
+      "lat": -0.758040765426236,
+      "lon": -0.2164045494254374
+    },
+    {
+      "id": "C",
+      "label": "Websites & communication",
+      "short": "Community",
+      "color": "#ceb09d",
+      "description": "Develop project pages, posters, talks, videos, public communication and academic outreach, alongside a personal research homepage and knowledge base.",
+      "lat": -0.948427838239876,
+      "lon": 2.1835586803032037
+    },
+    {
+      "id": "X",
+      "label": "Exploration & map maintenance",
+      "short": "Exploration",
+      "color": "#a2b29a",
+      "description": "Navigate across modules, inspect visual and code evidence, explore counter-explanations within the agreed scope, and maintain the map as capabilities change.",
+      "lat": -1.2153751251046732,
+      "lon": -1.6996633971477273
+    }
+  ],
+  "nodes": [
+    {
+      "id": "P01",
+      "module": "P",
+      "label": "Research goals & portfolio"
+    },
+    {
+      "id": "P02",
+      "module": "P",
+      "label": "Project assets & position"
+    },
+    {
+      "id": "P03",
+      "module": "P",
+      "label": "Priorities & active projects"
+    },
+    {
+      "id": "P04",
+      "module": "P",
+      "label": "Time, compute & collaborators"
+    },
+    {
+      "id": "P05",
+      "module": "P",
+      "label": "Learning & retrospectives"
+    },
+    {
+      "id": "I01",
+      "module": "I",
+      "label": "Entry point & current decision"
+    },
+    {
+      "id": "I02",
+      "module": "I",
+      "label": "Contribution type"
+    },
+    {
+      "id": "I03",
+      "module": "I",
+      "label": "Venue & submission stage"
+    },
+    {
+      "id": "I04",
+      "module": "I",
+      "label": "Finish, pause or stop criteria"
+    },
+    {
+      "id": "L01",
+      "module": "L",
+      "label": "Problem & mechanism search"
+    },
+    {
+      "id": "L02",
+      "module": "L",
+      "label": "Topic map & citation expansion"
+    },
+    {
+      "id": "L03",
+      "module": "L",
+      "label": "Critical paper reading"
+    },
+    {
+      "id": "L04",
+      "module": "L",
+      "label": "Code, supplements & reproduction"
+    },
+    {
+      "id": "L05",
+      "module": "L",
+      "label": "Coverage & new evidence"
+    },
+    {
+      "id": "B01",
+      "module": "B",
+      "label": "Task & metric contract"
+    },
+    {
+      "id": "B02",
+      "module": "B",
+      "label": "Natural failure census"
+    },
+    {
+      "id": "B03",
+      "module": "B",
+      "label": "Strong simple baseline qualification"
+    },
+    {
+      "id": "B04",
+      "module": "B",
+      "label": "Freeze the parent problem"
+    },
+    {
+      "id": "B05",
+      "module": "B",
+      "label": "Natural Gate 0"
+    },
+    {
+      "id": "H01",
+      "module": "H",
+      "label": "Failure explanations & assumptions"
+    },
+    {
+      "id": "H02",
+      "module": "H",
+      "label": "Necessity & strongest objections"
+    },
+    {
+      "id": "H03",
+      "module": "H",
+      "label": "Atomic claims & decisive predictions"
+    },
+    {
+      "id": "H04",
+      "module": "H",
+      "label": "Functional collision review"
+    },
+    {
+      "id": "H05",
+      "module": "H",
+      "label": "Importance-preserving candidate selection"
+    },
+    {
+      "id": "M01",
+      "module": "M",
+      "label": "Causal chain & intervention"
+    },
+    {
+      "id": "M02",
+      "module": "M",
+      "label": "Mathematics & computability"
+    },
+    {
+      "id": "M03",
+      "module": "M",
+      "label": "Minimal algorithm & interfaces"
+    },
+    {
+      "id": "M04",
+      "module": "M",
+      "label": "Complexity & scope"
+    },
+    {
+      "id": "M05",
+      "module": "M",
+      "label": "Components & theoretical obligations"
+    },
+    {
+      "id": "S01",
+      "module": "S",
+      "label": "Benchmark selection matrix"
+    },
+    {
+      "id": "S02",
+      "module": "S",
+      "label": "Data & split audit"
+    },
+    {
+      "id": "S03",
+      "module": "S",
+      "label": "Model & API selection"
+    },
+    {
+      "id": "S04",
+      "module": "S",
+      "label": "Baselines & fair comparison"
+    },
+    {
+      "id": "S05",
+      "module": "S",
+      "label": "Complete run configuration"
+    },
+    {
+      "id": "G01",
+      "module": "G",
+      "label": "Decisive experiment design"
+    },
+    {
+      "id": "G02",
+      "module": "G",
+      "label": "Frozen protocol & decision rules"
+    },
+    {
+      "id": "G03",
+      "module": "G",
+      "label": "Implementation & baseline checks"
+    },
+    {
+      "id": "G04",
+      "module": "G",
+      "label": "Prompt, inference or training execution"
+    },
+    {
+      "id": "G05",
+      "module": "G",
+      "label": "Gate A assessment & route choice"
+    },
+    {
+      "id": "E01",
+      "module": "E",
+      "label": "Environment & dependencies"
+    },
+    {
+      "id": "E02",
+      "module": "E",
+      "label": "Semantics, unit checks & canaries"
+    },
+    {
+      "id": "E03",
+      "module": "E",
+      "label": "Task queue & resource monitoring"
+    },
+    {
+      "id": "E04",
+      "module": "E",
+      "label": "Root-cause diagnosis & protocol branches"
+    },
+    {
+      "id": "E05",
+      "module": "E",
+      "label": "Raw evidence & recoverable checkpoints"
+    },
+    {
+      "id": "V01",
+      "module": "V",
+      "label": "Claims-to-experiments matrix"
+    },
+    {
+      "id": "V02",
+      "module": "V",
+      "label": "Strong baselines & repeated validation"
+    },
+    {
+      "id": "V03",
+      "module": "V",
+      "label": "Mechanisms, ablations & replacements"
+    },
+    {
+      "id": "V04",
+      "module": "V",
+      "label": "Generalization, robustness & scope"
+    },
+    {
+      "id": "V05",
+      "module": "V",
+      "label": "Quality, cost & failures"
+    },
+    {
+      "id": "V06",
+      "module": "V",
+      "label": "Statistical checks & evidence freeze"
+    },
+    {
+      "id": "W01",
+      "module": "W",
+      "label": "Venue template & length"
+    },
+    {
+      "id": "W02",
+      "module": "W",
+      "label": "Central claim & narrative"
+    },
+    {
+      "id": "W03",
+      "module": "W",
+      "label": "Main paper & appendix"
+    },
+    {
+      "id": "W04",
+      "module": "W",
+      "label": "Section blueprint"
+    },
+    {
+      "id": "W05",
+      "module": "W",
+      "label": "Paragraphs & sentences"
+    },
+    {
+      "id": "W06",
+      "module": "W",
+      "label": "Introduction, motivation & related work"
+    },
+    {
+      "id": "W07",
+      "module": "W",
+      "label": "Method, results & discussion"
+    },
+    {
+      "id": "W08",
+      "module": "W",
+      "label": "Title, abstract & conclusion"
+    },
+    {
+      "id": "W09",
+      "module": "W",
+      "label": "Propagating new results"
+    },
+    {
+      "id": "F01",
+      "module": "F",
+      "label": "Method & motivation figures"
+    },
+    {
+      "id": "F02",
+      "module": "F",
+      "label": "Result plots & editable tables"
+    },
+    {
+      "id": "F03",
+      "module": "F",
+      "label": "Captions, references & readability"
+    },
+    {
+      "id": "F04",
+      "module": "F",
+      "label": "Compilation & manuscript consistency"
+    },
+    {
+      "id": "R01",
+      "module": "R",
+      "label": "Submission lock & anonymous materials"
+    },
+    {
+      "id": "R02",
+      "module": "R",
+      "label": "Reviewer issue ledger"
+    },
+    {
+      "id": "R03",
+      "module": "R",
+      "label": "Response strategy & follow-up priorities"
+    },
+    {
+      "id": "R04",
+      "module": "R",
+      "label": "Point-by-point response & revision"
+    },
+    {
+      "id": "R05",
+      "module": "R",
+      "label": "Decision, resubmission & final manuscript"
+    },
+    {
+      "id": "A01",
+      "module": "A",
+      "label": "GitHub reproduction & versions"
+    },
+    {
+      "id": "A02",
+      "module": "A",
+      "label": "Hugging Face models, data & demos"
+    },
+    {
+      "id": "A03",
+      "module": "A",
+      "label": "arXiv versions & metadata"
+    },
+    {
+      "id": "A04",
+      "module": "A",
+      "label": "Shared release manifest"
+    },
+    {
+      "id": "A05",
+      "module": "A",
+      "label": "User feedback, reproduction & revision"
+    },
+    {
+      "id": "C01",
+      "module": "C",
+      "label": "Project page & interactive demo"
+    },
+    {
+      "id": "C02",
+      "module": "C",
+      "label": "Poster, talk & demonstration video"
+    },
+    {
+      "id": "C03",
+      "module": "C",
+      "label": "X, LinkedIn & Xiaohongshu"
+    },
+    {
+      "id": "C04",
+      "module": "C",
+      "label": "Recipient discovery & email drafts"
+    },
+    {
+      "id": "C05",
+      "module": "C",
+      "label": "Homepage, CV & research knowledge base"
+    },
+    {
+      "id": "X01",
+      "module": "X",
+      "label": "Visual position & route exploration"
+    },
+    {
+      "id": "X02",
+      "module": "X",
+      "label": "PDF figures, diagrams & appendices"
+    },
+    {
+      "id": "X03",
+      "module": "X",
+      "label": "Code, log & website evidence"
+    },
+    {
+      "id": "X04",
+      "module": "X",
+      "label": "Bounded exploration & counter-evidence"
+    },
+    {
+      "id": "X05",
+      "module": "X",
+      "label": "Registering & checking new routes"
+    },
+    {
+      "id": "X06",
+      "module": "X",
+      "label": "Map quality & capability registry"
+    }
+  ],
+  "edges": [
+    {
+      "id": "link-001",
+      "from": "P01",
+      "to": "P02",
+      "type": "input"
+    },
+    {
+      "id": "link-002",
+      "from": "P02",
+      "to": "I01",
+      "type": "locate"
+    },
+    {
+      "id": "link-003",
+      "from": "P02",
+      "to": "P03",
+      "type": "record"
+    },
+    {
+      "id": "link-004",
+      "from": "P03",
+      "to": "P04",
+      "type": "schedule"
+    },
+    {
+      "id": "link-005",
+      "from": "P04",
+      "to": "E03",
+      "type": "schedule"
+    },
+    {
+      "id": "link-006",
+      "from": "P02",
+      "to": "P05",
+      "type": "record"
+    },
+    {
+      "id": "link-007",
+      "from": "P05",
+      "to": "P01",
+      "type": "revision"
+    },
+    {
+      "id": "link-008",
+      "from": "P02",
+      "to": "X01",
+      "type": "record"
+    },
+    {
+      "id": "link-009",
+      "from": "I01",
+      "to": "I02",
+      "type": "input"
+    },
+    {
+      "id": "link-010",
+      "from": "I01",
+      "to": "L01",
+      "type": "branch"
+    },
+    {
+      "id": "link-011",
+      "from": "I01",
+      "to": "B01",
+      "type": "branch"
+    },
+    {
+      "id": "link-012",
+      "from": "I01",
+      "to": "H02",
+      "type": "branch"
+    },
+    {
+      "id": "link-013",
+      "from": "I01",
+      "to": "V06",
+      "type": "branch"
+    },
+    {
+      "id": "link-014",
+      "from": "I01",
+      "to": "W02",
+      "type": "branch"
+    },
+    {
+      "id": "link-015",
+      "from": "I01",
+      "to": "R02",
+      "type": "branch"
+    },
+    {
+      "id": "link-016",
+      "from": "I01",
+      "to": "A04",
+      "type": "branch"
+    },
+    {
+      "id": "link-017",
+      "from": "I02",
+      "to": "I03",
+      "type": "input"
+    },
+    {
+      "id": "link-018",
+      "from": "I02",
+      "to": "I04",
+      "type": "input"
+    },
+    {
+      "id": "link-019",
+      "from": "I02",
+      "to": "V01",
+      "type": "branch"
+    },
+    {
+      "id": "link-020",
+      "from": "I03",
+      "to": "W01",
+      "type": "input"
+    },
+    {
+      "id": "link-021",
+      "from": "I03",
+      "to": "R01",
+      "type": "input"
+    },
+    {
+      "id": "link-022",
+      "from": "I03",
+      "to": "A03",
+      "type": "input"
+    },
+    {
+      "id": "link-023",
+      "from": "I04",
+      "to": "G02",
+      "type": "input"
+    },
+    {
+      "id": "link-024",
+      "from": "I04",
+      "to": "X04",
+      "type": "input"
+    },
+    {
+      "id": "link-025",
+      "from": "L01",
+      "to": "L02",
+      "type": "input"
+    },
+    {
+      "id": "link-026",
+      "from": "L02",
+      "to": "L03",
+      "type": "input"
+    },
+    {
+      "id": "link-027",
+      "from": "L02",
+      "to": "L05",
+      "type": "input"
+    },
+    {
+      "id": "link-028",
+      "from": "L03",
+      "to": "L04",
+      "type": "branch"
+    },
+    {
+      "id": "link-029",
+      "from": "L03",
+      "to": "H01",
+      "type": "input"
+    },
+    {
+      "id": "link-030",
+      "from": "L03",
+      "to": "H04",
+      "type": "input"
+    },
+    {
+      "id": "link-031",
+      "from": "L03",
+      "to": "M02",
+      "type": "input"
+    },
+    {
+      "id": "link-032",
+      "from": "L04",
+      "to": "B03",
+      "type": "input"
+    },
+    {
+      "id": "link-033",
+      "from": "L04",
+      "to": "S04",
+      "type": "input"
+    },
+    {
+      "id": "link-034",
+      "from": "L04",
+      "to": "H04",
+      "type": "input"
+    },
+    {
+      "id": "link-035",
+      "from": "L05",
+      "to": "L01",
+      "type": "revision"
+    },
+    {
+      "id": "link-036",
+      "from": "L05",
+      "to": "H04",
+      "type": "branch"
+    },
+    {
+      "id": "link-037",
+      "from": "L05",
+      "to": "W06",
+      "type": "branch"
+    },
+    {
+      "id": "link-038",
+      "from": "L05",
+      "to": "B01",
+      "type": "branch"
+    },
+    {
+      "id": "link-039",
+      "from": "B01",
+      "to": "S01",
+      "type": "input"
+    },
+    {
+      "id": "link-040",
+      "from": "B01",
+      "to": "B03",
+      "type": "input"
+    },
+    {
+      "id": "link-041",
+      "from": "B01",
+      "to": "B02",
+      "type": "input"
+    },
+    {
+      "id": "link-042",
+      "from": "B03",
+      "to": "B02",
+      "type": "input"
+    },
+    {
+      "id": "link-043",
+      "from": "B02",
+      "to": "B04",
+      "type": "input"
+    },
+    {
+      "id": "link-044",
+      "from": "B03",
+      "to": "B04",
+      "type": "input"
+    },
+    {
+      "id": "link-045",
+      "from": "B04",
+      "to": "B05",
+      "type": "input"
+    },
+    {
+      "id": "link-046",
+      "from": "B05",
+      "to": "H01",
+      "type": "branch"
+    },
+    {
+      "id": "link-047",
+      "from": "B05",
+      "to": "B02",
+      "type": "revision"
+    },
+    {
+      "id": "link-048",
+      "from": "B05",
+      "to": "B03",
+      "type": "revision"
+    },
+    {
+      "id": "link-049",
+      "from": "B05",
+      "to": "I04",
+      "type": "branch"
+    },
+    {
+      "id": "link-050",
+      "from": "H01",
+      "to": "H02",
+      "type": "input"
+    },
+    {
+      "id": "link-051",
+      "from": "H02",
+      "to": "H03",
+      "type": "input"
+    },
+    {
+      "id": "link-052",
+      "from": "H03",
+      "to": "H04",
+      "type": "input"
+    },
+    {
+      "id": "link-053",
+      "from": "H04",
+      "to": "H05",
+      "type": "input"
+    },
+    {
+      "id": "link-054",
+      "from": "H05",
+      "to": "M01",
+      "type": "branch"
+    },
+    {
+      "id": "link-055",
+      "from": "H05",
+      "to": "V01",
+      "type": "branch"
+    },
+    {
+      "id": "link-056",
+      "from": "H05",
+      "to": "H01",
+      "type": "revision"
+    },
+    {
+      "id": "link-057",
+      "from": "H05",
+      "to": "B01",
+      "type": "branch"
+    },
+    {
+      "id": "link-058",
+      "from": "H05",
+      "to": "I04",
+      "type": "branch"
+    },
+    {
+      "id": "link-059",
+      "from": "H05",
+      "to": "X04",
+      "type": "explore"
+    },
+    {
+      "id": "link-060",
+      "from": "M01",
+      "to": "M02",
+      "type": "input"
+    },
+    {
+      "id": "link-061",
+      "from": "M02",
+      "to": "M03",
+      "type": "input"
+    },
+    {
+      "id": "link-062",
+      "from": "M02",
+      "to": "H03",
+      "type": "revision"
+    },
+    {
+      "id": "link-063",
+      "from": "M03",
+      "to": "M04",
+      "type": "input"
+    },
+    {
+      "id": "link-064",
+      "from": "M03",
+      "to": "M05",
+      "type": "input"
+    },
+    {
+      "id": "link-065",
+      "from": "M03",
+      "to": "S03",
+      "type": "input"
+    },
+    {
+      "id": "link-066",
+      "from": "M04",
+      "to": "S03",
+      "type": "input"
+    },
+    {
+      "id": "link-067",
+      "from": "M04",
+      "to": "V05",
+      "type": "input"
+    },
+    {
+      "id": "link-068",
+      "from": "M05",
+      "to": "G01",
+      "type": "input"
+    },
+    {
+      "id": "link-069",
+      "from": "H03",
+      "to": "G01",
+      "type": "input"
+    },
+    {
+      "id": "link-070",
+      "from": "B03",
+      "to": "G01",
+      "type": "input"
+    },
+    {
+      "id": "link-071",
+      "from": "S01",
+      "to": "S02",
+      "type": "input"
+    },
+    {
+      "id": "link-072",
+      "from": "S01",
+      "to": "S03",
+      "type": "input"
+    },
+    {
+      "id": "link-073",
+      "from": "S02",
+      "to": "S04",
+      "type": "input"
+    },
+    {
+      "id": "link-074",
+      "from": "S03",
+      "to": "S04",
+      "type": "input"
+    },
+    {
+      "id": "link-075",
+      "from": "S04",
+      "to": "S05",
+      "type": "input"
+    },
+    {
+      "id": "link-076",
+      "from": "S05",
+      "to": "G02",
+      "type": "input"
+    },
+    {
+      "id": "link-077",
+      "from": "S05",
+      "to": "E01",
+      "type": "input"
+    },
+    {
+      "id": "link-078",
+      "from": "S05",
+      "to": "V01",
+      "type": "input"
+    },
+    {
+      "id": "link-079",
+      "from": "S02",
+      "to": "E04",
+      "type": "revision"
+    },
+    {
+      "id": "link-080",
+      "from": "S02",
+      "to": "V06",
+      "type": "invalidate"
+    },
+    {
+      "id": "link-081",
+      "from": "S04",
+      "to": "B03",
+      "type": "revision"
+    },
+    {
+      "id": "link-082",
+      "from": "G01",
+      "to": "G02",
+      "type": "input"
+    },
+    {
+      "id": "link-083",
+      "from": "G02",
+      "to": "E01",
+      "type": "input"
+    },
+    {
+      "id": "link-084",
+      "from": "G02",
+      "to": "G03",
+      "type": "input"
+    },
+    {
+      "id": "link-085",
+      "from": "E02",
+      "to": "G03",
+      "type": "return"
+    },
+    {
+      "id": "link-086",
+      "from": "G03",
+      "to": "G04",
+      "type": "input"
+    },
+    {
+      "id": "link-087",
+      "from": "G02",
+      "to": "G04",
+      "type": "input"
+    },
+    {
+      "id": "link-088",
+      "from": "G04",
+      "to": "E03",
+      "type": "input"
+    },
+    {
+      "id": "link-089",
+      "from": "G02",
+      "to": "G05",
+      "type": "input"
+    },
+    {
+      "id": "link-090",
+      "from": "G03",
+      "to": "G05",
+      "type": "input"
+    },
+    {
+      "id": "link-091",
+      "from": "E05",
+      "to": "G05",
+      "type": "return"
+    },
+    {
+      "id": "link-092",
+      "from": "G05",
+      "to": "V01",
+      "type": "branch"
+    },
+    {
+      "id": "link-093",
+      "from": "G05",
+      "to": "H03",
+      "type": "revision"
+    },
+    {
+      "id": "link-094",
+      "from": "G05",
+      "to": "I04",
+      "type": "branch"
+    },
+    {
+      "id": "link-095",
+      "from": "G05",
+      "to": "E04",
+      "type": "revision"
+    },
+    {
+      "id": "link-096",
+      "from": "G05",
+      "to": "G01",
+      "type": "revision"
+    },
+    {
+      "id": "link-097",
+      "from": "G05",
+      "to": "B01",
+      "type": "branch"
+    },
+    {
+      "id": "link-098",
+      "from": "E01",
+      "to": "E02",
+      "type": "input"
+    },
+    {
+      "id": "link-099",
+      "from": "M03",
+      "to": "E02",
+      "type": "input"
+    },
+    {
+      "id": "link-100",
+      "from": "E02",
+      "to": "E03",
+      "type": "input"
+    },
+    {
+      "id": "link-101",
+      "from": "E03",
+      "to": "E05",
+      "type": "input"
+    },
+    {
+      "id": "link-102",
+      "from": "E03",
+      "to": "E04",
+      "type": "revision"
+    },
+    {
+      "id": "link-103",
+      "from": "E04",
+      "to": "E01",
+      "type": "revision"
+    },
+    {
+      "id": "link-104",
+      "from": "E04",
+      "to": "E02",
+      "type": "revision"
+    },
+    {
+      "id": "link-105",
+      "from": "E04",
+      "to": "S02",
+      "type": "revision"
+    },
+    {
+      "id": "link-106",
+      "from": "E04",
+      "to": "G02",
+      "type": "revision"
+    },
+    {
+      "id": "link-107",
+      "from": "E04",
+      "to": "V01",
+      "type": "revision"
+    },
+    {
+      "id": "link-108",
+      "from": "E05",
+      "to": "V02",
+      "type": "return"
+    },
+    {
+      "id": "link-109",
+      "from": "E05",
+      "to": "V03",
+      "type": "return"
+    },
+    {
+      "id": "link-110",
+      "from": "E05",
+      "to": "V04",
+      "type": "return"
+    },
+    {
+      "id": "link-111",
+      "from": "E05",
+      "to": "V05",
+      "type": "return"
+    },
+    {
+      "id": "link-112",
+      "from": "V01",
+      "to": "V02",
+      "type": "input"
+    },
+    {
+      "id": "link-113",
+      "from": "V01",
+      "to": "V03",
+      "type": "input"
+    },
+    {
+      "id": "link-114",
+      "from": "V01",
+      "to": "V04",
+      "type": "input"
+    },
+    {
+      "id": "link-115",
+      "from": "V01",
+      "to": "V05",
+      "type": "input"
+    },
+    {
+      "id": "link-116",
+      "from": "V01",
+      "to": "V06",
+      "type": "input"
+    },
+    {
+      "id": "link-117",
+      "from": "V02",
+      "to": "E03",
+      "type": "input"
+    },
+    {
+      "id": "link-118",
+      "from": "V03",
+      "to": "E03",
+      "type": "input"
+    },
+    {
+      "id": "link-119",
+      "from": "V04",
+      "to": "E03",
+      "type": "input"
+    },
+    {
+      "id": "link-120",
+      "from": "V05",
+      "to": "E03",
+      "type": "input"
+    },
+    {
+      "id": "link-121",
+      "from": "V02",
+      "to": "V06",
+      "type": "input"
+    },
+    {
+      "id": "link-122",
+      "from": "V03",
+      "to": "V06",
+      "type": "input"
+    },
+    {
+      "id": "link-123",
+      "from": "V04",
+      "to": "V06",
+      "type": "input"
+    },
+    {
+      "id": "link-124",
+      "from": "V05",
+      "to": "V06",
+      "type": "input"
+    },
+    {
+      "id": "link-125",
+      "from": "V06",
+      "to": "W02",
+      "type": "branch"
+    },
+    {
+      "id": "link-126",
+      "from": "V06",
+      "to": "W09",
+      "type": "invalidate"
+    },
+    {
+      "id": "link-127",
+      "from": "V06",
+      "to": "F02",
+      "type": "input"
+    },
+    {
+      "id": "link-128",
+      "from": "V06",
+      "to": "A04",
+      "type": "input"
+    },
+    {
+      "id": "link-129",
+      "from": "V06",
+      "to": "V01",
+      "type": "revision"
+    },
+    {
+      "id": "link-130",
+      "from": "V06",
+      "to": "H03",
+      "type": "revision"
+    },
+    {
+      "id": "link-131",
+      "from": "V06",
+      "to": "E04",
+      "type": "revision"
+    },
+    {
+      "id": "link-132",
+      "from": "W01",
+      "to": "W03",
+      "type": "input"
+    },
+    {
+      "id": "link-133",
+      "from": "W02",
+      "to": "W03",
+      "type": "input"
+    },
+    {
+      "id": "link-134",
+      "from": "W02",
+      "to": "W04",
+      "type": "input"
+    },
+    {
+      "id": "link-135",
+      "from": "W03",
+      "to": "W04",
+      "type": "input"
+    },
+    {
+      "id": "link-136",
+      "from": "W04",
+      "to": "W05",
+      "type": "input"
+    },
+    {
+      "id": "link-137",
+      "from": "W05",
+      "to": "W06",
+      "type": "input"
+    },
+    {
+      "id": "link-138",
+      "from": "W05",
+      "to": "W07",
+      "type": "input"
+    },
+    {
+      "id": "link-139",
+      "from": "W06",
+      "to": "W08",
+      "type": "input"
+    },
+    {
+      "id": "link-140",
+      "from": "W07",
+      "to": "W08",
+      "type": "input"
+    },
+    {
+      "id": "link-141",
+      "from": "W02",
+      "to": "F01",
+      "type": "input"
+    },
+    {
+      "id": "link-142",
+      "from": "M03",
+      "to": "F01",
+      "type": "input"
+    },
+    {
+      "id": "link-143",
+      "from": "F01",
+      "to": "F03",
+      "type": "input"
+    },
+    {
+      "id": "link-144",
+      "from": "F02",
+      "to": "F03",
+      "type": "input"
+    },
+    {
+      "id": "link-145",
+      "from": "F03",
+      "to": "F04",
+      "type": "input"
+    },
+    {
+      "id": "link-146",
+      "from": "W08",
+      "to": "F04",
+      "type": "input"
+    },
+    {
+      "id": "link-147",
+      "from": "W09",
+      "to": "W02",
+      "type": "revision"
+    },
+    {
+      "id": "link-148",
+      "from": "W09",
+      "to": "W03",
+      "type": "revision"
+    },
+    {
+      "id": "link-149",
+      "from": "W09",
+      "to": "W04",
+      "type": "revision"
+    },
+    {
+      "id": "link-150",
+      "from": "W09",
+      "to": "W06",
+      "type": "revision"
+    },
+    {
+      "id": "link-151",
+      "from": "W09",
+      "to": "W07",
+      "type": "revision"
+    },
+    {
+      "id": "link-152",
+      "from": "W09",
+      "to": "W08",
+      "type": "revision"
+    },
+    {
+      "id": "link-153",
+      "from": "W09",
+      "to": "F01",
+      "type": "invalidate"
+    },
+    {
+      "id": "link-154",
+      "from": "W09",
+      "to": "F02",
+      "type": "invalidate"
+    },
+    {
+      "id": "link-155",
+      "from": "W09",
+      "to": "A04",
+      "type": "invalidate"
+    },
+    {
+      "id": "link-156",
+      "from": "F04",
+      "to": "R01",
+      "type": "input"
+    },
+    {
+      "id": "link-157",
+      "from": "F04",
+      "to": "A03",
+      "type": "input"
+    },
+    {
+      "id": "link-158",
+      "from": "R01",
+      "to": "R02",
+      "type": "branch"
+    },
+    {
+      "id": "link-159",
+      "from": "R02",
+      "to": "R03",
+      "type": "input"
+    },
+    {
+      "id": "link-160",
+      "from": "R03",
+      "to": "G01",
+      "type": "branch"
+    },
+    {
+      "id": "link-161",
+      "from": "R03",
+      "to": "V02",
+      "type": "branch"
+    },
+    {
+      "id": "link-162",
+      "from": "R03",
+      "to": "V03",
+      "type": "branch"
+    },
+    {
+      "id": "link-163",
+      "from": "R03",
+      "to": "V04",
+      "type": "branch"
+    },
+    {
+      "id": "link-164",
+      "from": "R03",
+      "to": "L03",
+      "type": "branch"
+    },
+    {
+      "id": "link-165",
+      "from": "R03",
+      "to": "W05",
+      "type": "branch"
+    },
+    {
+      "id": "link-166",
+      "from": "R03",
+      "to": "R04",
+      "type": "input"
+    },
+    {
+      "id": "link-167",
+      "from": "V06",
+      "to": "R04",
+      "type": "input"
+    },
+    {
+      "id": "link-168",
+      "from": "W05",
+      "to": "R04",
+      "type": "input"
+    },
+    {
+      "id": "link-169",
+      "from": "R04",
+      "to": "R05",
+      "type": "branch"
+    },
+    {
+      "id": "link-170",
+      "from": "R05",
+      "to": "I03",
+      "type": "branch"
+    },
+    {
+      "id": "link-171",
+      "from": "R05",
+      "to": "W01",
+      "type": "branch"
+    },
+    {
+      "id": "link-172",
+      "from": "R05",
+      "to": "A04",
+      "type": "branch"
+    },
+    {
+      "id": "link-173",
+      "from": "E05",
+      "to": "A01",
+      "type": "input"
+    },
+    {
+      "id": "link-174",
+      "from": "E05",
+      "to": "A02",
+      "type": "input"
+    },
+    {
+      "id": "link-175",
+      "from": "A01",
+      "to": "A04",
+      "type": "input"
+    },
+    {
+      "id": "link-176",
+      "from": "A02",
+      "to": "A04",
+      "type": "input"
+    },
+    {
+      "id": "link-177",
+      "from": "A03",
+      "to": "A04",
+      "type": "input"
+    },
+    {
+      "id": "link-178",
+      "from": "A04",
+      "to": "A01",
+      "type": "revision"
+    },
+    {
+      "id": "link-179",
+      "from": "A04",
+      "to": "A02",
+      "type": "revision"
+    },
+    {
+      "id": "link-180",
+      "from": "A04",
+      "to": "A03",
+      "type": "revision"
+    },
+    {
+      "id": "link-181",
+      "from": "A04",
+      "to": "C01",
+      "type": "input"
+    },
+    {
+      "id": "link-182",
+      "from": "A04",
+      "to": "C02",
+      "type": "input"
+    },
+    {
+      "id": "link-183",
+      "from": "A04",
+      "to": "C03",
+      "type": "input"
+    },
+    {
+      "id": "link-184",
+      "from": "A04",
+      "to": "C04",
+      "type": "input"
+    },
+    {
+      "id": "link-185",
+      "from": "A04",
+      "to": "C05",
+      "type": "input"
+    },
+    {
+      "id": "link-186",
+      "from": "F01",
+      "to": "C01",
+      "type": "input"
+    },
+    {
+      "id": "link-187",
+      "from": "F02",
+      "to": "C01",
+      "type": "input"
+    },
+    {
+      "id": "link-188",
+      "from": "F01",
+      "to": "C02",
+      "type": "input"
+    },
+    {
+      "id": "link-189",
+      "from": "F02",
+      "to": "C02",
+      "type": "input"
+    },
+    {
+      "id": "link-190",
+      "from": "C01",
+      "to": "C03",
+      "type": "input"
+    },
+    {
+      "id": "link-191",
+      "from": "C02",
+      "to": "C03",
+      "type": "input"
+    },
+    {
+      "id": "link-192",
+      "from": "L02",
+      "to": "C04",
+      "type": "input"
+    },
+    {
+      "id": "link-193",
+      "from": "P01",
+      "to": "C05",
+      "type": "input"
+    },
+    {
+      "id": "link-194",
+      "from": "C05",
+      "to": "P05",
+      "type": "record"
+    },
+    {
+      "id": "link-195",
+      "from": "C01",
+      "to": "A05",
+      "type": "branch"
+    },
+    {
+      "id": "link-196",
+      "from": "C03",
+      "to": "A05",
+      "type": "branch"
+    },
+    {
+      "id": "link-197",
+      "from": "C04",
+      "to": "A05",
+      "type": "branch"
+    },
+    {
+      "id": "link-198",
+      "from": "A01",
+      "to": "A05",
+      "type": "branch"
+    },
+    {
+      "id": "link-199",
+      "from": "A02",
+      "to": "A05",
+      "type": "branch"
+    },
+    {
+      "id": "link-200",
+      "from": "A03",
+      "to": "A05",
+      "type": "branch"
+    },
+    {
+      "id": "link-201",
+      "from": "A05",
+      "to": "E04",
+      "type": "revision"
+    },
+    {
+      "id": "link-202",
+      "from": "A05",
+      "to": "W09",
+      "type": "invalidate"
+    },
+    {
+      "id": "link-203",
+      "from": "A05",
+      "to": "H04",
+      "type": "explore"
+    },
+    {
+      "id": "link-204",
+      "from": "A05",
+      "to": "L05",
+      "type": "explore"
+    },
+    {
+      "id": "link-205",
+      "from": "X01",
+      "to": "X04",
+      "type": "explore"
+    },
+    {
+      "id": "link-206",
+      "from": "X04",
+      "to": "L01",
+      "type": "explore"
+    },
+    {
+      "id": "link-207",
+      "from": "X04",
+      "to": "X02",
+      "type": "explore"
+    },
+    {
+      "id": "link-208",
+      "from": "X04",
+      "to": "X03",
+      "type": "explore"
+    },
+    {
+      "id": "link-209",
+      "from": "L03",
+      "to": "X02",
+      "type": "explore"
+    },
+    {
+      "id": "link-210",
+      "from": "L04",
+      "to": "X03",
+      "type": "explore"
+    },
+    {
+      "id": "link-211",
+      "from": "E04",
+      "to": "X03",
+      "type": "explore"
+    },
+    {
+      "id": "link-212",
+      "from": "X02",
+      "to": "L03",
+      "type": "return"
+    },
+    {
+      "id": "link-213",
+      "from": "X02",
+      "to": "F03",
+      "type": "return"
+    },
+    {
+      "id": "link-214",
+      "from": "X03",
+      "to": "L04",
+      "type": "return"
+    },
+    {
+      "id": "link-215",
+      "from": "X03",
+      "to": "E04",
+      "type": "return"
+    },
+    {
+      "id": "link-216",
+      "from": "X02",
+      "to": "X05",
+      "type": "explore"
+    },
+    {
+      "id": "link-217",
+      "from": "X03",
+      "to": "X05",
+      "type": "explore"
+    },
+    {
+      "id": "link-218",
+      "from": "X05",
+      "to": "B01",
+      "type": "branch"
+    },
+    {
+      "id": "link-219",
+      "from": "X05",
+      "to": "H04",
+      "type": "branch"
+    },
+    {
+      "id": "link-220",
+      "from": "X05",
+      "to": "X06",
+      "type": "input"
+    },
+    {
+      "id": "link-221",
+      "from": "X06",
+      "to": "X01",
+      "type": "record"
+    }
+  ]
+}

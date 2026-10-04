@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ page.title }} · Yunbo Long</title>
+  <meta name="description" content="{{ page.description }}">
+  <meta name="theme-color" content="#f8f7f2">
+  <meta property="og:title" content="{{ page.title }}">
+  <meta property="og:description" content="{{ page.description }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yunbo-max.github.io{{ page.permalink }}">
+  <meta property="og:image" content="https://yunbo-max.github.io/assets/lab/{{ page.social_card }}">
+  <link rel="icon" href="/assets/lab/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/projects.css?v={{ site.time | date: '%s' }}">
+</head>
+<body class="project-page {{ page.project_class }}">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="project-header">
+    <a class="project-wordmark" href="{{ page.permalink }}"><span class="wordmark-symbol" aria-hidden="true">{{ page.symbol }}</span>{{ page.title }}</a>
+    <nav aria-label="Project navigation"><a href="/research-autopilot/">Research Autopilot</a><a href="/openjudge/">OpenJudge</a><a class="homepage-link" href="/">Yunbo Long ↗</a></nav>
+  </header>
+  <main id="main">{{ content }}</main>
+  <footer class="project-footer"><span>© 2026 Yunbo Long</span><a href="mailto:longyunbo218@gmail.com">longyunbo218@gmail.com ↗</a><a href="/">Research homepage ↗</a></footer>
+</body>
+</html>

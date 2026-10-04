@@ -9,7 +9,10 @@ class ReleaseTests(unittest.TestCase):
         self.assertIn('author_profile: true',body)
         self.assertNotIn('layout: lab',body)
         self.assertNotIn('lab-home.html',body)
-        self.assertIn('lab-home.html',(ROOT/'_pages/research-autopilot.html').read_text())
+        research=(ROOT/'_pages/research-autopilot.html').read_text()
+        self.assertIn('layout: project', research)
+        self.assertIn('research-globe.mjs', research)
+        self.assertNotIn('lab-home.html', research)
     def test_navigation_exposes_research_and_judge(self):
         p=ROOT/'_layouts/lab.html'
         self.assertTrue(p.is_file(),'The new multi-page lab navigation is absent')
