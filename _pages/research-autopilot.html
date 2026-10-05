@@ -13,24 +13,32 @@ social_card: research-atlas-card.svg
     <div class="atlas-intro-copy"><p>A connected map of the work behind a paper: reading, ideas, methods, experiments, debugging, writing, review and release.</p><div class="atlas-counts" aria-label="Map size"><div><strong>16</strong><span>modules</span></div><div><strong>84</strong><span>research tasks</span></div><div><strong>221</strong><span>connections</span></div></div></div>
   </section>
   <link rel="stylesheet" href="/assets/lab/research-journey.css?v={{ site.time | date: '%s' }}">
-  <section id="map" class="journey-section" aria-label="Interactive three-dimensional travel globe">
+  <section id="map" class="journey-section" aria-label="Interactive 4D research example routes">
+    <div class="research-example-heading"><p class="eyebrow">A 4D GENERATION PAPER <span aria-hidden="true">/</span> EXAMPLE ROUTES</p><p id="research-example-premise">Change a character’s body. Preserve the intended motion and scene. Follow the research decisions, then try a different outcome.</p></div>
+    <div id="research-route-choices" class="research-route-choices" role="group" aria-label="Choose a 4D research example"></div>
     <div class="atlas-shell journey-atlas" id="research-atlas" data-ready="false">
       <div class="globe-stage">
-        <p class="globe-overline">THE RESEARCH JOURNEY<span>A whole world to explore.</span></p>
-        <div class="journey-picker"><label class="visually-hidden" for="journey-select">Choose a landscape</label><select id="journey-select" disabled aria-label="Choose a landscape"></select></div>
-        <canvas id="research-globe" width="1200" height="660" tabindex="0" role="img" aria-label="A three-dimensional travel globe with snow mountains, forests, deserts, rivers, sailing boats, cars and trains" aria-describedby="globe-instructions">Explore all 16 modules and 84 tasks in the directory below.</canvas>
+        <p class="globe-overline">THE RESEARCH JOURNEY<span id="journey-route-label">A complete research route.</span></p>
+        <div class="journey-picker"><label class="visually-hidden" for="journey-select">Go to a research step</label><select id="journey-select" disabled aria-label="Go to a research step"></select></div>
+        <canvas id="research-globe" width="1200" height="660" tabindex="0" role="img" aria-label="An animated research route for an illustrative 4D generation paper" aria-describedby="globe-instructions">Explore all 16 modules and 84 tasks in the directory below.</canvas>
         <p id="atlas-error" class="atlas-error" hidden>The globe could not load. <a href="#modules">Explore the module directory ↓</a></p>
         <noscript><p class="atlas-error">The travel animation needs JavaScript. <a href="#modules">Explore all 84 research tasks below ↓</a></p></noscript>
-        <div class="journey-info" aria-hidden="true"><span id="journey-number">01 / 16</span><h2 id="journey-place">The Alpine railway</h2><span class="journey-transport" id="journey-transport">BY TRAIN</span><div class="journey-progress"><i id="journey-progress"></i></div></div>
+        <div class="journey-info" aria-hidden="true"><span id="journey-number">01 / 19</span><h2 id="journey-place">Set the destination</h2><span class="journey-transport" id="journey-transport">EXPLORE · SAILBOAT</span><div class="journey-progress"><i id="journey-progress"></i></div></div>
         <div class="globe-controls">
-          <button id="globe-pause" type="button" disabled>Pause journey</button>
-          <div class="journey-buttons"><button id="globe-left" type="button" aria-label="Previous landscape" title="Previous landscape" disabled>←</button><button id="globe-right" type="button" aria-label="Next landscape" title="Next landscape" disabled>→</button><span class="control-divider" aria-hidden="true"></span><button id="globe-zoom-out" type="button" aria-label="Zoom out" title="Zoom out" disabled>−</button><button id="globe-zoom-in" type="button" aria-label="Zoom in" title="Zoom in" disabled>+</button><button id="globe-follow" type="button" aria-label="Follow the traveler" aria-pressed="true" title="Follow the traveler" disabled>⊙</button></div>
+          <button id="globe-pause" type="button" disabled>Pause route</button>
+          <div class="journey-buttons"><button id="globe-left" type="button" aria-label="Previous research step" title="Previous research step" disabled>←</button><button id="globe-right" type="button" aria-label="Next research step" title="Next research step" disabled>→</button><span class="control-divider" aria-hidden="true"></span><button id="globe-zoom-out" type="button" aria-label="Zoom out" title="Zoom out" disabled>−</button><button id="globe-zoom-in" type="button" aria-label="Zoom in" title="Zoom in" disabled>+</button><button id="globe-follow" type="button" aria-label="Follow the research route" aria-pressed="true" title="Follow the research route" disabled>⊙</button></div>
         </div>
         <span class="journey-drag" aria-hidden="true">DRAG TO EXPLORE</span>
       </div>
     </div>
-    <div class="atlas-caption"><p id="globe-instructions">Drag or use arrow keys to turn the globe. Use + / − to zoom and Space to pause. Choose a landscape to travel there.</p><a href="#modules">Explore the research modules ↓</a></div>
-    <p id="atlas-status" role="status" class="visually-hidden">Loading the travel globe.</p>
+    <div class="atlas-caption"><p id="globe-instructions">Drag or use arrow keys to turn the globe. Use + / − to zoom and Space to pause. Switch examples or choose a research step.</p><a href="#modules">Explore the research modules ↓</a></div>
+    <div class="research-route-trail" id="research-route-trail" role="group" aria-label="Steps in the selected example"></div>
+    <div class="research-step-card" aria-labelledby="research-step-title">
+      <div><p class="research-step-module" id="research-step-module">P · Projects &amp; resources</p><h3 id="research-step-title">Set the destination</h3><p id="research-step-body">Confirm the goal, destinations, current resources and next review time.</p><div id="research-step-nodes" class="research-step-nodes" aria-label="Mapped research tasks"></div></div>
+      <div class="research-next"><span id="research-next-label">NEXT DECISION</span><p id="research-step-next">Use actual resources to plan the work.</p><a id="research-module-link" href="#module-P">Open this module’s tasks →</a></div>
+    </div>
+    <p class="research-example-note">Illustrative workflow, not reported experimental results. Each route follows its stated conditions; the full map contains 84 tasks and 221 conditional connections.</p>
+    <p id="atlas-status" role="status" class="visually-hidden">Loading the research example routes.</p>
   </section>
   <section id="modules" class="catalog-section" aria-labelledby="modules-title">
     <div class="catalog-heading"><div><p class="eyebrow">INSIDE THE MAP</p><h2 id="modules-title">16 modules.<br>From question to contribution.</h2></div><p>Open any module to see the research tasks it contains. Literature, implementation, benchmarks and experiment design stay connected as results arrive.</p></div>

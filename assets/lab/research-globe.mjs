@@ -1,6 +1,7 @@
 import { project, clipFront, pickNode } from './globe-geometry.mjs?v=20261005';
-import { TOUR, makeWorld, journeyAt, pointOnPath, stageStart, normalize, cross, dot } from './journey-world.mjs?v=20261005';
-import { makeVehicle } from './journey-vehicles.mjs?v=20261005';
+import { TOUR, makeWorld, journeyAt, pointOnPath, stageStart, normalize, cross, dot } from './journey-world.mjs?v=20261005-routes';
+import { drawVehicleIcon } from './journey-vehicles.mjs?v=20261005-routes';
+import { SCENARIOS, getScenario, routeDuration, researchStepStart, researchStepPath, researchStateAt, vehicleIconWidth, transportLabel } from './research-routes.mjs?v=20261005-routes';
 
 const $ = selector => document.querySelector(selector);
 const shell = $('#research-atlas');
@@ -14,16 +15,19 @@ if (shell) start().catch(error => {
 async function start() {
   const canvas=$('#research-globe'),ctx=canvas.getContext('2d');
   if(!ctx)throw new Error('Canvas unavailable');
+  const response=await fetch('/assets/lab/research-atlas.json');
+  if(!response.ok)throw new Error('Research task directory unavailable');
+  const atlas=await response.json();
   const world=makeWorld(),preference=matchMedia('(prefers-reduced-motion: reduce)');
   const pause=$('#globe-pause'),select=$('#journey-select'),followButton=$('#globe-follow');
   let width=0,height=0,radius=0,cx=0,cy=0,zoom=1,yaw=-.18,pitch=.48;
-  let travelTime=3,running=!preference.matches,following=true,inView=true,frameId=0,previousTime=0,lastPaint=0,pointer=null;
+  let scenarioId='paper',travelTime=3,running=!preference.matches,following=true,inView=true,frameId=0,previousTime=0,lastPaint=0,pointer=null;
   let yawCos=1,yawSin=0,pitchCos=1,pitchSin=0,lastStage=-1,visibleStops=[];
   const rgbCache=new Map(),light=normalize([-.65,.85,1]);
   const terrain=world.faces.filter(f=>f.layer==='surface').map(prepare);
   const relief=world.faces.filter(f=>f.layer!=='surface').map(prepare);
-  const midpoints=TOUR.map((leg,i)=>({id:String(i),point:pointOnPath(leg.path,.42)}));
   const orbitClouds=Array.from({length:17},(_,i)=>({lat:-.6+(i%6)*.24,lon:i*2.399,scale:.018+(i%3)*.006}));
+  const state=()=>researchStateAt(scenarioId,travelTime);
 
   function rgb(color){if(!rgbCache.has(color))rgbCache.set(color,[1,3,5].map(i=>parseInt(color.slice(i,i+2),16)));return rgbCache.get(color);}
   function prepare(face) {
@@ -74,18 +78,11 @@ async function start() {
     surface.forEach(paintFace);
     world.roads.forEach(drawRoad);
     for(const river of world.rivers){paintLine(river.points,'#2d6e79',Math.max(1.3,radius*.007*river.width));paintLine(river.points,'#7fc2c0',Math.max(.6,radius*.003*river.width));}
-    const current=journeyAt(travelTime),vehicles=[makeVehicle(current,travelTime,.025)];
-    // Smaller independent travelers make the landscape alive during free exploration.
-    for(const index of [1,2,5,6,13])if(index!==current.index){
-      const seconds=stageStart(index)+((travelTime*.37+TOUR[index].duration*.31)%TOUR[index].duration);
-      vehicles.push(makeVehicle(journeyAt(seconds),travelTime,index===5?.015:.018));
-    }
-    for(const vehicle of vehicles)for(const line of vehicle.lines)paintLine(line.points,line.color,line.width*radius/270);
-    const objects=[...relief,...vehicles.flatMap(v=>v.faces.map(prepare))].filter(f=>camera(f.center)[2]>.008).sort((a,b)=>camera(a.center)[2]-camera(b.center)[2]);
+    const current=state();
+    const routeLine=Array.from({length:37},(_,i)=>pointOnPath(current.path,i/36).map(v=>v*1.035));
+    paintLine(routeLine,'#edddb994',1.5,true);
+    const objects=relief.filter(f=>camera(f.center)[2]>.008).sort((a,b)=>camera(a.center)[2]-camera(b.center)[2]);
     objects.forEach(paintFace);
-    for(const vehicle of vehicles)for(const puff of vehicle.smoke){
-      const p=screen(puff.point);if(!p.visible)continue;ctx.globalAlpha=puff.alpha*p.depth;ctx.fillStyle='#eff1dd';ctx.beginPath();ctx.arc(p.x,p.y,puff.radius*radius,0,Math.PI*2);ctx.fill();
-    }
     for(const cloud of orbitClouds){
       const p=screen([Math.cos(cloud.lat)*Math.sin(cloud.lon+travelTime*.0015)*1.065,Math.sin(cloud.lat)*1.065,Math.cos(cloud.lat)*Math.cos(cloud.lon+travelTime*.0015)*1.065]);
       if(p.depth<.28)continue;
@@ -94,18 +91,46 @@ async function start() {
     }
     ctx.globalAlpha=1;
     ctx.beginPath();ctx.arc(cx,cy,radius*1.008,0,Math.PI*2);ctx.strokeStyle='#a3ccc132';ctx.lineWidth=.8;ctx.stroke();
-    // The scene uses actual radial geometry; surface objects are depth-sorted before projection.
-    visibleStops=midpoints.map(m=>({...screen(m.point),id:m.id}));
+    const primary=screen(current.position.map(v=>v*1.034)),occupied=[primary];
+    const iconWidth=vehicleIconWidth(width);
+    for(const index of [1,2,5,6,13]){
+      const seconds=stageStart(index)+((travelTime*.37+TOUR[index].duration*.31)%TOUR[index].duration);
+      const traveler=journeyAt(seconds),p=screen(traveler.position.map(v=>v*1.036));
+      if(p.depth<.18||occupied.some(q=>Math.hypot(p.x-q.x,p.y-q.y)<iconWidth*1.12))continue;
+      occupied.push(p);drawVehicleIcon(ctx,{type:traveler.leg.vehicle,x:p.x,y:p.y-12,width:vehicleIconWidth(width,false),time:travelTime});
+      if(occupied.length>=4)break;
+    }
+    if(primary.visible){
+      ctx.fillStyle='#08293352';ctx.beginPath();ctx.ellipse(primary.x,primary.y+12,iconWidth*.36,iconWidth*.08,0,0,Math.PI*2);ctx.fill();
+      const direction=screen(current.position.map((v,k)=>v+current.tangent[k]*.025));
+      drawVehicleIcon(ctx,{type:current.step.vehicle,x:primary.x,y:primary.y-16,width:iconWidth,time:travelTime,primary:true,heading:direction.x>=primary.x?1:-1});
+    }
+    visibleStops=current.scenario.steps.map((step,i)=>({id:String(i),...screen(pointOnPath(researchStepPath(scenarioId,i),0))}));
     canvas.dataset.orientation=`${yaw.toFixed(4)},${pitch.toFixed(4)}`;
-    canvas.dataset.vehicle=current.leg.vehicle;canvas.dataset.journeyIndex=String(current.index);canvas.dataset.travelTime=travelTime.toFixed(3);canvas.dataset.zoom=zoom.toFixed(2);
+    canvas.dataset.vehicle=current.step.vehicle;canvas.dataset.journeyIndex=String(current.index);canvas.dataset.travelTime=travelTime.toFixed(3);canvas.dataset.zoom=zoom.toFixed(2);canvas.dataset.scenario=scenarioId;canvas.dataset.module=current.step.module;canvas.dataset.iconWidth=iconWidth.toFixed(1);
     $('#journey-progress').style.width=`${current.progress*100}%`;
     if(lastStage!==current.index){
-      lastStage=current.index;select.value=String(current.index);$('#journey-place').textContent=current.leg.name;
-      $('#journey-number').textContent=`${String(current.index+1).padStart(2,'0')} / 16`;
-      $('#journey-transport').textContent=current.leg.vehicle==='boat'?(current.leg.terrain==='river'?'BY RIVER BOAT':'UNDER SAIL'):`BY ${current.leg.vehicle.toUpperCase()}`;
-      canvas.setAttribute('aria-label',`Travel globe: ${current.leg.name}, by ${current.leg.vehicle}. Snow mountains, forests, deserts and rivers. Drag or use arrow keys to rotate.`);
-      $('#atlas-status').textContent=`${current.leg.name}. Traveling by ${current.leg.vehicle}.`;
+      lastStage=current.index;select.value=String(current.index);$('#journey-place').textContent=current.step.title;
+      $('#journey-number').textContent=`${String(current.index+1).padStart(2,'0')} / ${current.scenario.steps.length}`;
+      $('#journey-transport').textContent=transportLabel(current.step.vehicle);
+      canvas.setAttribute('aria-label',`${current.scenario.label}: ${current.step.title}. Animated ${current.step.vehicle}. Drag or use arrow keys to rotate.`);
+      $('#atlas-status').textContent=`${current.scenario.label}. Step ${current.index+1}: ${current.step.title}. ${current.step.next}`;
+      updateDetails(current);
     }
+  }
+  function updateDetails(current){
+    const step=current.step,module=atlas.modules.find(m=>m.id===step.module);
+    $('#research-step-module').textContent=`${step.module} · ${module.label}`;
+    $('#research-step-title').textContent=step.title;$('#research-step-body').textContent=step.body;$('#research-step-next').textContent=step.next;
+    $('#research-next-label').textContent=step.kind==='batch-review'?'HUMAN DECISION AT BATCH END':'NEXT DECISION';
+    $('#research-module-link').href=`#module-${step.module}`;
+    const links=$('#research-step-nodes');links.replaceChildren();
+    for(const id of step.nodes){const node=atlas.nodes.find(n=>n.id===id),link=document.createElement('a');if(!node)throw new Error(`Unknown task ${id}`);link.href=`#node-${id}`;link.textContent=id;link.title=node.label;links.append(link);}
+    for(const button of $('#research-route-trail').querySelectorAll('button')){
+      if(Number(button.dataset.step)===current.index)button.setAttribute('aria-current','step');else button.removeAttribute('aria-current');
+    }
+    const active=$('#research-route-trail').querySelector('[aria-current=step]');
+    if(active)$('#research-route-trail').scrollTo({left:Math.max(0,active.offsetLeft-$('#research-route-trail').clientWidth*.35),behavior:preference.matches?'auto':'smooth'});
   }
   function aim(state,instant=false){
     const targetYaw=-state.lon,targetPitch=Math.max(-1.02,Math.min(1.02,state.lat*.84));
@@ -113,14 +138,15 @@ async function start() {
     yaw+=delta*(instant?1:.035);pitch+=(targetPitch-pitch)*(instant?1:.035);
   }
   function frame(now){
-    const elapsed=previousTime?Math.min((now-previousTime)/1000,.08):0;previousTime=now;travelTime+=elapsed;
-    if(following)aim(journeyAt(travelTime));
+    const elapsed=previousTime?Math.min((now-previousTime)/1000,.25):0;previousTime=now;travelTime=Math.min(routeDuration(scenarioId),travelTime+elapsed);
+    if(following)aim(state());
+    if(state().ended){running=false;syncAnimation();draw();return;}
     if(now-lastPaint>32){draw();lastPaint=now;}
     frameId=requestAnimationFrame(frame);
   }
   function syncAnimation(){
     cancelAnimationFrame(frameId);frameId=0;previousTime=0;lastPaint=0;
-    pause.textContent=running?'Pause journey':'Play journey';pause.setAttribute('aria-pressed',String(!running));
+    pause.textContent=running?'Pause route':state().ended?'Replay route':'Play route';pause.setAttribute('aria-pressed',String(!running));
     followButton.setAttribute('aria-pressed',String(following));canvas.dataset.rotating=String(running&&inView&&!document.hidden);
     if(running&&inView&&!document.hidden)frameId=requestAnimationFrame(frame);
   }
@@ -131,19 +157,36 @@ async function start() {
     radius=Math.min(width*.43,height*(compact?.33:.385))*zoom;cx=width/2;cy=height*(compact?.375:.46);draw();
   }
   function chooseStage(index){
-    index=((index%TOUR.length)+TOUR.length)%TOUR.length;travelTime=stageStart(index)+TOUR[index].duration*.30;following=true;
-    aim(journeyAt(travelTime),true);syncAnimation();draw();
+    const scenario=getScenario(scenarioId);index=((index%scenario.steps.length)+scenario.steps.length)%scenario.steps.length;travelTime=researchStepStart(scenarioId,index)+scenario.steps[index].duration*.15;following=true;
+    aim(state(),true);syncAnimation();draw();
+  }
+  function chooseScenario(id){
+    const scenario=getScenario(id);scenarioId=id;travelTime=0;lastStage=-1;following=true;
+    select.replaceChildren();$('#research-route-trail').replaceChildren();
+    scenario.steps.forEach((step,index)=>{
+      const option=document.createElement('option');option.value=String(index);option.textContent=`${String(index+1).padStart(2,'0')} · ${step.title}`;select.append(option);
+      const button=document.createElement('button'),code=document.createElement('span');button.type='button';button.dataset.step=String(index);button.dataset.human=String(step.kind==='batch-review'||step.kind==='human');code.textContent=step.module;button.append(code,document.createTextNode(step.title));button.addEventListener('click',()=>chooseStage(index));$('#research-route-trail').append(button);
+    });
+    $('#journey-route-label').textContent=scenario.short;
+    $('#research-example-premise').textContent=scenario.premise;
+    for(const button of $('#research-route-choices').querySelectorAll('button'))button.setAttribute('aria-pressed',String(button.dataset.scenario===id));
+    aim(state(),true);syncAnimation();draw();
+  }
+  function togglePlayback(){
+    if(state().ended){travelTime=0;lastStage=-1;following=true;aim(state(),true);}
+    running=!running;syncAnimation();draw();
   }
   function changeZoom(amount){zoom=Math.max(.80,Math.min(1.32,zoom+amount));resize();}
   function freeView(){following=false;followButton.setAttribute('aria-pressed','false');}
-  TOUR.forEach((leg,index)=>{const option=document.createElement('option');option.value=String(index);option.textContent=leg.name;select.append(option);});
+  SCENARIOS.forEach(scenario=>{const button=document.createElement('button');button.type='button';button.dataset.scenario=scenario.id;button.textContent=scenario.label;button.title=scenario.premise;button.setAttribute('aria-pressed',String(scenario.id===scenarioId));button.addEventListener('click',()=>chooseScenario(scenario.id));$('#research-route-choices').append(button);});
+  chooseScenario(scenarioId);
   shell.querySelectorAll('button:disabled,select:disabled').forEach(el=>{el.disabled=false;});shell.dataset.ready='true';
   select.addEventListener('change',()=>chooseStage(Number(select.value)));
-  pause.addEventListener('click',()=>{running=!running;syncAnimation();draw();});
-  $('#globe-left').addEventListener('click',()=>chooseStage(journeyAt(travelTime).index-1));
-  $('#globe-right').addEventListener('click',()=>chooseStage(journeyAt(travelTime).index+1));
+  pause.addEventListener('click',togglePlayback);
+  $('#globe-left').addEventListener('click',()=>chooseStage(state().index-1));
+  $('#globe-right').addEventListener('click',()=>chooseStage(state().index+1));
   $('#globe-zoom-in').addEventListener('click',()=>changeZoom(.1));$('#globe-zoom-out').addEventListener('click',()=>changeZoom(-.1));
-  followButton.addEventListener('click',()=>{following=!following;if(following)aim(journeyAt(travelTime),true);syncAnimation();draw();});
+  followButton.addEventListener('click',()=>{following=!following;if(following)aim(state(),true);syncAnimation();draw();});
   canvas.addEventListener('pointerdown',event=>{pointer={id:event.pointerId,x:event.clientX,y:event.clientY,startX:event.clientX,startY:event.clientY,moved:false};canvas.setPointerCapture(event.pointerId);});
   canvas.addEventListener('pointermove',event=>{
     if(!pointer||pointer.id!==event.pointerId)return;
@@ -160,15 +203,15 @@ async function start() {
   canvas.addEventListener('pointercancel',()=>{pointer=null;});
   canvas.addEventListener('keydown',event=>{
     if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown',' ','+','=','-','Home'].includes(event.key))return;event.preventDefault();
-    if(event.key===' '){running=!running;syncAnimation();}
+    if(event.key===' ')togglePlayback();
     else if(event.key==='+'||event.key==='=')changeZoom(.1);
     else if(event.key==='-')changeZoom(-.1);
     else if(event.key==='Home')chooseStage(0);
     else{freeView();if(event.key==='ArrowLeft')yaw-=.15;if(event.key==='ArrowRight')yaw+=.15;if(event.key==='ArrowUp')pitch=Math.min(1.15,pitch+.15);if(event.key==='ArrowDown')pitch=Math.max(-1.15,pitch-.15);}
     draw();
   });
-  document.addEventListener('click',event=>{const button=event.target.closest('[data-module]');if(!button)return;const index=TOUR.findIndex(leg=>leg.module===button.dataset.module);if(index>=0){chooseStage(index);$('#map').scrollIntoView({block:'start',behavior:preference.matches?'auto':'smooth'});}});
-  function revealHash(){if(location.hash.startsWith('#node-')){const target=document.getElementById(location.hash.slice(1));if(target){const detail=target.closest('details');if(detail)detail.open=true;}}}
+  document.addEventListener('click',event=>{const button=event.target.closest('[data-module]');if(!button)return;let index=getScenario(scenarioId).steps.findIndex(step=>step.module===button.dataset.module);if(index<0){chooseScenario('paper');index=getScenario(scenarioId).steps.findIndex(step=>step.module===button.dataset.module);}if(index>=0){chooseStage(index);$('#map').scrollIntoView({block:'start',behavior:preference.matches?'auto':'smooth'});}});
+  function revealHash(){if(/^#(?:node|module)-/.test(location.hash)){const target=document.getElementById(location.hash.slice(1));if(target){const detail=target.closest('details');if(detail)detail.open=true;if(location.hash.startsWith('#node-'))target.scrollIntoView({block:'start',behavior:preference.matches?'auto':'smooth'});}}}
   revealHash();window.addEventListener('hashchange',revealHash);
   preference.addEventListener('change',()=>{if(preference.matches){running=false;syncAnimation();draw();}});
   document.addEventListener('visibilitychange',syncAnimation);

@@ -1,4 +1,4 @@
-import { normalize, cross } from './journey-world.mjs?v=20261005';
+import { normalize, cross } from './journey-world.mjs?v=20261005-routes';
 
 export function makeVehicle(state, time, size = .024) {
   const up=state.position, forward=state.tangent, side=normalize(cross(forward,up));
@@ -60,4 +60,50 @@ export function makeVehicle(state, time, size = .024) {
     for(const sign of [-1,1])line([p(-1.15,.02,sign*.32),p(-1.9,.02,sign*.48),p(-2.7,.02,sign*.72)],'#bddfd0',1);
   }
   return {faces,lines,smoke};
+}
+
+// Large screen-facing symbols remain readable while the globe rotates.
+export function drawVehicleIcon(ctx,{type,x,y,width=80,time=0,primary=false,heading=1}){
+  ctx.save();ctx.translate(x,y);ctx.scale(width/100,width/100);
+  ctx.translate(0,Math.sin(time*3.2)*(type==='boat'?2.2:.5));
+  if(type==='boat')ctx.rotate(Math.sin(time*2.4)*.04);
+  if(heading<0)ctx.scale(-1,1);
+  ctx.lineJoin='round';ctx.lineCap='round';ctx.lineWidth=2.4;
+  ctx.strokeStyle='#172e35';ctx.shadowColor='#071d2b88';ctx.shadowBlur=primary?10:6;ctx.shadowOffsetY=3;
+  function shape(points,fill){ctx.beginPath();points.forEach(([a,b],i)=>i?ctx.lineTo(a,b):ctx.moveTo(a,b));ctx.closePath();ctx.fillStyle=fill;ctx.fill();ctx.stroke();}
+  function box(a,b,w,h,fill){shape([[a,b],[a+w,b],[a+w,b+h],[a,b+h]],fill);}
+  function line(points,color='#172e35',weight=2.4){ctx.strokeStyle=color;ctx.lineWidth=weight;ctx.beginPath();points.forEach(([a,b],i)=>i?ctx.lineTo(a,b):ctx.moveTo(a,b));ctx.stroke();ctx.strokeStyle='#172e35';ctx.lineWidth=2.4;}
+  function wheel(a,b,r){ctx.beginPath();ctx.arc(a,b,r,0,Math.PI*2);ctx.fillStyle='#263942';ctx.fill();ctx.stroke();ctx.shadowBlur=0;ctx.beginPath();ctx.arc(a,b,r*.43,0,Math.PI*2);ctx.fillStyle='#eddbc1';ctx.fill();const t=time*7;line([[a-Math.cos(t)*r*.64,b-Math.sin(t)*r*.64],[a+Math.cos(t)*r*.64,b+Math.sin(t)*r*.64]],'#fcf4de',1.8);}
+  if(type==='car'){
+    shape([[-46,1],[-32,-5],[-18,-24],[17,-24],[33,-7],[46,-3],[49,16],[-48,16]],'#ef8551');
+    shape([[-28,-6],[-14,-19],[-2,-19],[-2,-6]],'#b7e0df');
+    shape([[4,-19],[14,-19],[27,-6],[4,-6]],'#87bcc6');
+    line([[-41,4],[39,4]],'#ffb675',2);
+    box(39,0,8,7,'#fff0b7');box(-49,11,8,6,'#e5d4b7');
+    wheel(-29,17,10);wheel(29,17,10);
+  }else if(type==='train'){
+    line([[-63,26],[61,26]],'#cfdfd0',3);
+    box(-57,-11,38,31,'#c95849');box(-60,-16,44,6,'#f0ddab');
+    box(-49,-5,10,11,'#a6d4d5');box(-35,-5,10,11,'#a6d4d5');
+    line([[-19,15],[-11,15]],'#e7d7a9',4);
+    box(-10,-3,55,22,'#e5a63e');box(-10,-26,23,34,'#edb958');box(-13,-30,29,6,'#f6df9d');
+    box(-5,-21,13,14,'#9acbd0');box(28,-22,12,23,'#344952');box(25,-27,18,6,'#627575');
+    shape([[44,6],[57,21],[44,21]],'#8e5e43');
+    wheel(-47,22,7);wheel(-28,22,7);wheel(0,22,10);wheel(25,22,10);wheel(43,22,7);
+    line([[0,22],[25,22]],'#f7e7c4',3);
+    ctx.shadowBlur=0;
+    for(let i=0;i<3;i++){const age=(time*.65+i*.31)%1;ctx.globalAlpha=(1-age)*.68;ctx.fillStyle='#f7f2df';ctx.beginPath();ctx.arc(34-age*32,-33-age*20,4+age*7,0,Math.PI*2);ctx.fill();}
+  }else{
+    ctx.shadowBlur=0;
+    line([[-43,27],[-15,27]],'#d2f0e5',2);line([[0,31],[29,31],[39,28]],'#a9dad5',2);
+    ctx.shadowBlur=primary?10:6;
+    shape([[-47,9],[48,9],[29,29],[-30,29]],'#d9774f');
+    box(-30,0,27,9,'#f9e7ba');
+    line([[1,7],[1,-56]],'#ebd1a0',3.2);
+    const flap=Math.sin(time*3.4)*3;
+    shape([[6,-50],[6,2],[44+flap,2]],'#fff6d7');
+    shape([[-4,-40],[-4,2],[-36-flap,2]],'#c9e7e3');
+    shape([[2,-56],[2,-67],[-19,-60+flap*.4]],'#f08b5a');
+  }
+  ctx.restore();
 }
