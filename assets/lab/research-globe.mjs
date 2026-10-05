@@ -127,7 +127,8 @@ async function start() {
   function resize(){
     const rect=canvas.getBoundingClientRect(),ratio=Math.min(devicePixelRatio||1,2);
     width=rect.width;height=rect.height;canvas.width=Math.round(width*ratio);canvas.height=Math.round(height*ratio);ctx.setTransform(ratio,0,0,ratio,0,0);
-    radius=Math.min(width*.43,height*.385)*zoom;cx=width/2;cy=height*.46;draw();
+    const compact=width<=720;
+    radius=Math.min(width*.43,height*(compact?.33:.385))*zoom;cx=width/2;cy=height*(compact?.375:.46);draw();
   }
   function chooseStage(index){
     index=((index%TOUR.length)+TOUR.length)%TOUR.length;travelTime=stageStart(index)+TOUR[index].duration*.30;following=true;

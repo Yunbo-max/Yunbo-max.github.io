@@ -33,8 +33,8 @@
  .journey-atlas .globe-overline span{font-size:14px;margin-top:6px}
  .journey-picker{top:19px;right:16px}
  .journey-picker select{max-width:137px;padding:7px 7px;font-size:9px}
- .journey-info{bottom:87px;left:20px;max-width:210px}
- .journey-info h2{font-size:21px;max-width:200px;margin-top:5px}
+ .journey-info{bottom:76px;left:20px;max-width:calc(100% - 40px)}
+ .journey-info h2{font-size:20px;max-width:none;margin-top:5px}
  .journey-info>span:first-child{font-size:8px}
  .journey-transport{margin-top:9px;font-size:7px}
  .journey-progress{margin-top:8px;width:57px}
