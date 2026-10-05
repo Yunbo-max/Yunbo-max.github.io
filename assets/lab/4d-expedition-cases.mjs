@@ -93,7 +93,7 @@ const gaussianSteps=[
 
 const b=(id,label,prediction,comparison,status,hazard,hazardAt,endAt,destination=null,repairAt=null)=>({id,label,prediction,comparison,status,hazard,hazardAt,endAt,destination,repairAt});
 export const CASES=[
- {id:'mesh',letter:'A',title:'Animated mesh generation',subtitle:'ActionMesh · video → 4D mesh',color:'#eed08a',benchmarks:aBench,steps:actionSteps,
+ {id:'mesh',letter:'A',title:'Consistent 4D Mesh Generation',subtitle:'ActionMesh · video → 4D mesh',color:'#eed08a',benchmarks:aBench,steps:actionSteps,
   sources:['actionPaper','actionCode','actionMeshCode','actionBench','actionScore','actionAlign'],
   candidates:[
    b(1,'Reference-shape conditioning','A better qualified reference changes motion error beyond per-frame geometry alone.','Same video + shared inference budget; released mesh-input control.','arrived',null,null,null,'Validated method'),
@@ -107,7 +107,7 @@ export const CASES=[
    b(9,'More samples','Repeated sampling may replace the proposed complexity.','Same total sampling budget and frozen sample-selection rule.','stopped','storm',15,17),
    b(10,'Mesh correspondence assumption','A geometry improvement may fail to preserve meaningful motion correspondences.','Native geometry and motion scores with unchanged alignment convention.','stopped','quake',16,17)
   ],followups:['Reference control','Reference repeat','Default comparison','Budget replacement','Guidance sensitivity','Temporal control','Shared-stage check','Efficiency repeat','Independent confirmation','Native-score reconciliation']},
- {id:'gaussian',letter:'B',title:'Dynamic scene reconstruction',subtitle:'4D-GS · video → time-aware scene',color:'#89d7da',benchmarks:gBench,steps:gaussianSteps,
+ {id:'gaussian',letter:'B',title:'Efficient 4D Scene Reconstruction',subtitle:'4D-GS · video → time-aware scene',color:'#89d7da',benchmarks:gBench,steps:gaussianSteps,
   sources:['gaussianPaper','gaussianCode','gaussianData','gaussianScore','gaussianConfig','dynerfConfig','dnerf','hypernerf','neu3d'],
   candidates:[
    b(1,'Initialization','Initialization rather than the proposed method may determine convergence.','Released warm-up / initialization control at matched conditions.','stopped','storm',14,17),
