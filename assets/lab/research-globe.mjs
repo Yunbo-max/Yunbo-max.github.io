@@ -1,7 +1,7 @@
 import {makeWorld} from './journey-world.mjs?v=20261005-routes';
-import {CASES,SOURCES} from './4d-expedition-cases.mjs?v=20261005-fleet3';
-import {TOTAL_SECONDS,STEP_SECONDS,expeditionAt,fleetAt,makeTerrainSampler,candidateState,destinationTotals,transportText,HAZARDS} from './research-expeditions.mjs?v=20261005-fleet3';
-import {createGlobe,prepareWorld} from './expedition-globe.mjs?v=20261005-fleet3';
+import {CASES,SOURCES} from './4d-expedition-cases.mjs?v=20261005-studies';
+import {TOTAL_SECONDS,STEP_SECONDS,expeditionAt,fleetAt,makeTerrainSampler,candidateState,destinationTotals,transportText,HAZARDS} from './research-expeditions.mjs?v=20261005-studies';
+import {createGlobe,prepareWorld} from './expedition-globe.mjs?v=20261005-studies';
 
 const $=s=>document.querySelector(s),shell=$('#research-atlas');
 if(shell)start().catch(error=>{shell.dataset.ready='false';$('#atlas-error').hidden=false;$('#atlas-status').textContent='The animation could not load. All 84 tasks remain in the module directory.';console.error('Research fleets:',error.message);});

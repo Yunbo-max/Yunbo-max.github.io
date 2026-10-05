@@ -1,8 +1,8 @@
 import {project,clipFront} from './globe-geometry.mjs?v=20261005';
 import {normalize,cross,dot,pointOnPath} from './journey-world.mjs?v=20261005-routes';
 import {drawVehicleIcon} from './journey-vehicles.mjs?v=20261005-routes';
-import {drawHazard,drawHarbor} from './expedition-symbols.mjs?v=20261005-fleet3';
-import {expeditionAt,fleetAt,transportFor,onRail,iconWidth,HAZARDS} from './research-expeditions.mjs?v=20261005-fleet3';
+import {drawHazard,drawHarbor} from './expedition-symbols.mjs?v=20261005-studies';
+import {expeditionAt,fleetAt,transportFor,onRail,iconWidth,HAZARDS} from './research-expeditions.mjs?v=20261005-studies';
 
 export function prepareWorld(world){
  const prepare=face=>{
