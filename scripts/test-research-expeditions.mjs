@@ -39,6 +39,14 @@ test('a repaired branch resumes; faults alone do not become scientific rejection
  const carried=CASES[0].candidates[5];assert.equal(candidateState(carried,12).status,'waiting');assert.equal(candidateState(carried,17).status,'carryover');
  assert.ok(!CASES[0].candidates.some(b=>candidateState(b,16).status==='stopped'));
 });
+test('validation jobs retain their own design and status, linked only to surviving candidates',()=>{
+ for(const c of CASES){const units=fleetAt(c.id,42).members;
+  assert.ok(units.every(u=>u.status==='running'&&u.hazard===null));
+  for(const u of units){assert.ok(u.design.comparison.length>80);assert.ok(u.design.parents.length);for(const n of u.design.parents)assert.equal(c.candidates[n-1].status,'arrived');}
+  assert.equal(fleetAt(c.id,44.7).members.filter(u=>u.hazard!==null).length,1);
+  assert.ok(fleetAt(c.id,46.7).members.every(u=>u.hazard===null));
+ }
+});
 test('human reviews precede convergence and independent confirmation in both cases',()=>{
  for(const c of CASES){assert.equal(c.steps[17].kind,'batch-review');assert.equal(c.steps[24].kind,'batch-review');assert.equal(c.steps[22].kind,'validation');
  assert.equal(c.steps[20].kind,'fanout');assert.match(c.steps[20].body,/not ten new/i);

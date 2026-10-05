@@ -122,5 +122,34 @@ export const CASES=[
    b(10,'Cross-scene generalization','A broader claim needs eligible held-out scenes and a complete comparison.','Native benchmark scope with no camera-information advantage.','carryover','snow',13,17)
   ],followups:['Representation control','Representation repeat','Default comparison','Budget replacement','Regularizer sensitivity','Capacity control','Timing receipt','Memory receipt','Independent confirmation','Native-score reconciliation']}
 ];
-for(const c of CASES)for(const step of c.steps){step.benchmarks=c.benchmarks;step.sourceKeys??=c.sources;}
+const VALIDATION_DESIGNS={
+ mesh:[
+  [[1],'Reference conditioning control: hold video, seed and budget fixed; compare the declared reference-mesh intervention with the released mesh-input baseline.'],
+  [[1],'Repeat the complete reference comparison independently with frozen settings and native ActionBench scoring.'],
+  [[1,4,8],'Reproduce the unchanged released ActionMesh baseline for the same eligible UID cohort and output coverage.'],
+  [[4,8],'Compare the retained temporal or efficiency change with the simplest matched-total-compute replacement.'],
+  [[4],'Give the temporal variant and baseline comparable guidance selection on the development scope; freeze before confirmation.'],
+  [[4],'Hold the reference and image-to-3D stage fixed while comparing the declared temporal-inference intervention.'],
+  [[1,4],'Check that cached upstream reference artifacts are truly identical across downstream comparison arms and retain their hashes.'],
+  [[8],'Repeat the frozen efficiency comparison, including inference, native scoring and export time rather than denoising alone.'],
+  [[1,4,8],'Confirm retained claims on the untouched eligible scope using frozen inputs, settings and complete matched comparisons.'],
+  [[1,4,8],'Reconcile ActionBench UIDs, frame counts, predictions and native alignment before interpreting the claim-specific metrics.']
+ ],
+ gaussian:[
+  [[2],'Compare the retained time-conditioned representation against qualified 4D-GS with the same input views and declared resource budget.'],
+  [[2],'Independently repeat the entire representation comparison with the frozen scene and held-out-view manifest.'],
+  [[2,7],'Reproduce the released scene-specific 4D-GS configurations as the unchanged baseline for both retained claims.'],
+  [[2,7],'Compare the retained change with a simple matched-training-time alternative while holding camera access and scoring fixed.'],
+  [[2],'Balance development-only regularizer selection between methods, then freeze the choice before independent held-out scoring.'],
+  [[2],'Test the strongest simple capacity replacement with its own measured runtime and peak-memory envelope.'],
+  [[7],'Measure comparable training, rendering, scoring and saving boundaries with documented warm-up and timing conventions.'],
+  [[7],'Record measured peak VRAM, input resolution, Gaussian count and configuration for the retained quality–memory tradeoff.'],
+  [[2,7],'Confirm the frozen claim on the eligible independent scene scope with complete native held-out comparisons and repeats.'],
+  [[2,7],'Reconcile held-out image names, view counts, PSNR / SSIM and the declared LPIPS network before aggregating results.']
+ ]
+};
+for(const c of CASES){
+ c.followupDesigns=VALIDATION_DESIGNS[c.id].map(([parents,comparison])=>({parents,comparison}));
+ for(const step of c.steps){step.benchmarks=c.benchmarks;step.sourceKeys??=c.sources;}
+}
 export const getCase=id=>{const found=CASES.find(c=>c.id===id);if(!found)throw new Error(`Unknown research case ${id}`);return found;};

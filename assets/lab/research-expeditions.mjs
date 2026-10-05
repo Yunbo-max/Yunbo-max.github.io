@@ -1,4 +1,4 @@
-import {CASES,getCase,STEP_SECONDS} from './4d-expedition-cases.mjs?v=20261005-fleet2';
+import {CASES,getCase,STEP_SECONDS} from './4d-expedition-cases.mjs?v=20261005-fleet3';
 import {earthPoint,pointOnPath,normalize,cross,dot} from './journey-world.mjs?v=20261005-routes';
 
 export {CASES,getCase,STEP_SECONDS};
@@ -87,7 +87,7 @@ export function fleetAt(id,seconds){
      if(i===9&&index===22){status='pending';hazard='tsunami';progress=Math.min(progress,.47);}
    }
    const path=cachedPath(id,i,wave);
-   return {id:i+1,label:wave===1?b.label:c.followups[i],status,hazard,position:pointFromVectors(path,progress),path,progress,meta:b};
+   return {id:i+1,label:wave===1?b.label:c.followups[i],status,hazard,position:pointFromVectors(path,progress),path,progress,meta:b,design:wave===2?c.followupDesigns[i]:null};
  })};
 }
 export function destinationTotals(id){const c=getCase(id);return {arrived:c.candidates.filter(b=>b.status==='arrived').length,carryover:c.candidates.filter(b=>b.status==='carryover').length,stopped:c.candidates.filter(b=>b.status==='stopped').length};}

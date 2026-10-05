@@ -1,7 +1,7 @@
 import {makeWorld} from './journey-world.mjs?v=20261005-routes';
-import {CASES,SOURCES} from './4d-expedition-cases.mjs?v=20261005-fleet2';
-import {TOTAL_SECONDS,STEP_SECONDS,expeditionAt,fleetAt,makeTerrainSampler,candidateState,destinationTotals,transportText,HAZARDS} from './research-expeditions.mjs?v=20261005-fleet2';
-import {createGlobe,prepareWorld} from './expedition-globe.mjs?v=20261005-fleet2';
+import {CASES,SOURCES} from './4d-expedition-cases.mjs?v=20261005-fleet3';
+import {TOTAL_SECONDS,STEP_SECONDS,expeditionAt,fleetAt,makeTerrainSampler,candidateState,destinationTotals,transportText,HAZARDS} from './research-expeditions.mjs?v=20261005-fleet3';
+import {createGlobe,prepareWorld} from './expedition-globe.mjs?v=20261005-fleet3';
 
 const $=s=>document.querySelector(s),shell=$('#research-atlas');
 if(shell)start().catch(error=>{shell.dataset.ready='false';$('#atlas-error').hidden=false;$('#atlas-status').textContent='The animation could not load. All 84 tasks remain in the module directory.';console.error('Research fleets:',error.message);});
@@ -45,9 +45,9 @@ async function start(){
   for(const button of panel.querySelectorAll('.fleet-branch')){
    const id=Number(button.dataset.branch),b=c.candidates[id-1],state=candidateState(b,index);
    const follow=fleet.wave===2?fleet.members.find(m=>m.id===id):null;
-   button.dataset.state=follow?.status??state.status;button.dataset.hazard=follow?.hazard??state.hazard??'';
+   button.dataset.state=follow?follow.status:state.status;button.dataset.hazard=(follow?follow.hazard:state.hazard)??'';
    button.querySelector('.branch-name').textContent=follow?.label??b.label;
-   const status=follow?.status??state.status,hazard=follow?.hazard??state.hazard;
+   const status=follow?follow.status:state.status,hazard=follow?follow.hazard:state.hazard;
    const word={queued:'Queued',running:'Running',pending:'Check needed',waiting:'Waiting',repaired:'Repaired → continue',stopped:'Stopped',carryover:'Next window',arrived:time>=TOTAL_SECONDS?'Arrived':index>=29?'Approaching port':'Retained',verified:'Verified unit'}[status];
    button.querySelector('.branch-state').textContent=(hazard?HAZARDS[hazard].symbol+' ':'')+word;
    button.title=`${follow?.label??b.label}: ${word}${hazard?'. '+HAZARDS[hazard].meaning:''}`;
@@ -55,16 +55,16 @@ async function start(){
   }
   panel.querySelector('.fleet-summary').textContent=index<17?'10 candidates · outcomes pending':`${totals.arrived} ${time>=TOTAL_SECONDS?'arrive':index>=29?'approach port':'retained'} · ${totals.stopped} stopped · ${totals.carryover} carry over`;
   const destinations=panel.querySelector('.destination-ledger');destinations.hidden=index<24;destinations.replaceChildren();
-  if(index>=24){const heading=el('p',index>=29?'DISTINCT DESTINATIONS':'DESTINATIONS CHOSEN BY THE HUMAN','destination-heading');destinations.append(heading);for(const b of c.candidates.filter(b=>b.status==='arrived'))destinations.append(el('span',`Route ${b.id} → ${b.destination}`));destinations.append(el('p',`${totals.carryover} unfinished candidate${totals.carryover>1?'s':''} remain in the next approved window.`,'destination-carry'));}
+  if(index>=24){const heading=el('p',index>=29?'DISTINCT DESTINATIONS':'DESTINATIONS CHOSEN BY THE HUMAN','destination-heading');destinations.append(heading);for(const b of c.candidates.filter(b=>b.status==='arrived'))destinations.append(el('span',`Route ${b.id} → ${b.destination}`));destinations.append(el('p',`${totals.carryover} unfinished candidate${totals.carryover>1?'s remain':' remains'} in the next approved window.`,'destination-carry'));}
   panel.dataset.step=String(index);panel.dataset.wave=String(fleet.wave);panel.querySelector('[data-follow]').setAttribute('aria-pressed',String(views.get(c.id).following));
   if(selectedBranches.has(c.id))showBranch(c.id,selectedBranches.get(c.id));
  }
  function showBranch(id,branch){
   const c=CASES.find(c=>c.id===id),b=c.candidates[branch-1],panel=panels.get(id),box=panel.querySelector('.branch-detail'),fleet=fleetAt(id,time),follow=fleet.wave===2?fleet.members.find(m=>m.id===branch):null;
   box.hidden=false;box.querySelector('h4').textContent=`${c.letter}${String(branch).padStart(2,'0')} · ${follow?.label??b.label}`;
-  box.querySelector('.branch-prediction').textContent=follow?`Validation run unit for a retained direction: ${follow.label}. Its result rejoins the same scientific comparison; this is not a new idea.`:b.prediction;
-  box.querySelector('.branch-comparison').textContent=b.comparison;
-  const state=candidateState(b,expeditionAt(id,time).index);box.querySelector('.branch-diagnosis').textContent=follow?.hazard?HAZARDS[follow.hazard].meaning:state.hazard?HAZARDS[state.hazard].meaning:state.repaired?'The scripted fault was repaired under the frozen protocol; the branch can continue.':'Interpret only verified native comparisons at the human’s batch review.';
+  box.querySelector('.branch-prediction').textContent=follow?`Validation run unit: ${follow.label}. Parent candidate${follow.design.parents.length>1?'s':''}: ${follow.design.parents.map(n=>`${n} · ${c.candidates[n-1].label}`).join('; ')}. This is not a new idea.`:b.prediction;
+  box.querySelector('.branch-comparison').textContent=follow?follow.design.comparison:b.comparison;
+  const state=candidateState(b,expeditionAt(id,time).index);box.querySelector('.branch-diagnosis').textContent=follow?(follow.hazard?HAZARDS[follow.hazard].meaning:'This validation unit keeps its own status and rejoins the retained claim at batch review.'):(state.hazard?HAZARDS[state.hazard].meaning:state.repaired?'The scripted fault was repaired under the frozen protocol; the branch can continue.':'Interpret only verified native comparisons at the human’s batch review.');
  }
  function pickBranch(id,branch){selectedBranches.set(id,branch);running=false;sync();updatePanel(CASES.find(c=>c.id===id),expeditionAt(id,time).index);showBranch(id,branch);draw(true);}
  function draw(instant=false){
