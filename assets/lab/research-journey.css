@@ -1,83 +1,104 @@
-.journey-atlas{display:block;border:0;border-radius:8px;background:#0c252e;box-shadow:0 22px 55px #183b2e12}
-.journey-atlas .globe-stage{height:660px;min-height:0;display:block;background:radial-gradient(ellipse at 50% 42%,#24494c 0,#17363d 40%,#102b33 69%,#0b222a 100%)}
-.journey-atlas .globe-stage:before{display:none}
-.journey-atlas #research-globe{height:100%;width:100%;position:absolute;inset:0;touch-action:pan-y;outline-offset:-6px}
-.journey-atlas .globe-overline{top:30px;left:34px;color:#d4e3d5;font-size:10px;letter-spacing:.17em}
-.journey-atlas .globe-overline span{font:italic 18px Georgia,serif;letter-spacing:0;color:#95b8ae;margin-top:8px}
-.journey-picker{position:absolute;top:28px;right:30px;z-index:2}
-.journey-picker select{max-width:230px;background:#102b33c7;border:1px solid #9dbfb029;border-radius:5px;padding:9px 28px 9px 11px;color:#cbdfd3;font-size:11px;cursor:pointer}
-.journey-picker select:focus-visible{outline:2px solid #e8cb8d;outline-offset:4px}
-.journey-picker option{background:#15343d;color:#e1ece5}
-.journey-info{position:absolute;bottom:95px;left:34px;pointer-events:none;z-index:1;max-width:260px}
-.journey-info>span:first-child{font:9px monospace;letter-spacing:.2em;color:#98b7ac}
-.journey-info h2{color:#eff2df;font:italic 27px/1.15 Georgia,serif;letter-spacing:-.03em;margin-top:8px;max-width:245px}
-.journey-transport{display:inline-block;color:#d9c69b;font-size:8px;letter-spacing:.19em;margin-top:13px}
-.journey-progress{width:80px;height:2px;background:#b8d5c425;margin-top:13px;overflow:hidden}
-.journey-progress i{display:block;width:0;height:100%;background:#e5cf9c}
-.journey-atlas .globe-controls{position:absolute;bottom:25px;left:32px;right:32px;margin:0;gap:14px;justify-content:flex-start;flex-wrap:nowrap}
-.journey-atlas .globe-controls button{border-radius:5px;background:#172f35bf;border-color:#aec8b234;min-height:37px;min-width:37px;font-size:12px;transition:background .15s}
-.journey-atlas .globe-controls button:hover{background:#325346}
-.journey-atlas .globe-controls button[aria-pressed=true]{background:#a8bf8f29;border-color:#c1d3ae71;color:#e7efd5}
-.journey-atlas #globe-pause{min-width:114px;text-align:center;font-size:10px}
-.journey-buttons{display:flex;align-items:center;gap:7px}
-.journey-buttons button{padding:7px!important;font-size:17px!important;line-height:1}
-.control-divider{height:17px;width:1px;background:#b7cdba26;margin:0 5px}
-.journey-drag{position:absolute;bottom:39px;right:34px;font-size:8px;letter-spacing:.18em;color:#8caba1;pointer-events:none}
-.journey-section .atlas-caption{font-size:10px}
-.journey-section .atlas-caption>a{white-space:nowrap;align-self:start;color:var(--green)}
-.journey-section .atlas-error{position:absolute;top:100px;left:0;z-index:2;background:#102b33ed;border-radius:6px;margin:30px}
-.research-example-heading{display:flex;justify-content:space-between;align-items:start;gap:30px;margin:0 0 18px}
-.research-example-heading .eyebrow{font-size:10px;color:var(--green);padding-top:4px}
-.research-example-heading>p:last-child{font-size:13px;color:var(--muted);line-height:1.6;max-width:420px}
-.research-route-choices{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
-.research-route-choices button{border:1px solid #d7dfd4;border-radius:5px;background:transparent;font-size:11px;color:var(--green);padding:9px 13px}
+.research-example-heading{display:flex;justify-content:space-between;align-items:end;gap:34px;margin:0 0 26px}
+.research-example-heading .eyebrow{font-size:10px;color:var(--green)}
+.research-example-heading h2{font:normal 36px/1.12 Georgia,serif;letter-spacing:-.035em;margin-top:10px;color:#173e33}
+.research-example-heading h2 em{font-weight:normal;color:#63846a}
+.research-example-heading>p{font-size:13px;color:var(--muted);line-height:1.7;max-width:405px}
+.expedition-toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:13px}
+.research-route-choices{display:flex;flex-wrap:wrap;gap:7px}
+.research-route-choices button{border:1px solid #cbd8cb;border-radius:5px;background:transparent;font-size:11px;color:var(--green);padding:9px 13px;cursor:pointer}
 .research-route-choices button[aria-pressed=true]{background:#244e43;border-color:#244e43;color:#f2f3e7}
 .research-route-choices button:hover{border-color:#47795a}
-.research-route-trail{position:relative;display:flex;gap:7px;overflow-x:auto;padding:19px 1px 13px;scrollbar-width:thin;scrollbar-color:#becaba transparent}
-.research-route-trail button{flex:0 0 auto;display:flex;align-items:center;gap:7px;background:transparent;border:1px solid #dde3d8;border-radius:4px;padding:7px 9px;color:var(--muted);font-size:10px}
-.research-route-trail button span{font:9px monospace;color:#738374}
-.research-route-trail button[aria-current=step]{background:#e8eedd;border-color:#a4b795;color:#234d40}
-.research-route-trail button[data-human=true]{border-style:dashed}
-.research-step-card{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(240px,1fr);gap:40px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:23px 0 24px;margin-top:9px}
-.research-step-module{font:10px monospace;letter-spacing:.04em;color:#738374}
-.research-step-card h3{font-size:22px;margin-top:7px;line-height:1.3}
-.research-step-card>div>p:not(.research-step-module){font-size:12px;color:var(--muted);line-height:1.8;margin-top:9px;max-width:670px}
-.research-step-nodes{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
-.research-step-nodes a{font:9px monospace;border-radius:3px;padding:4px 7px;border:1px solid #d8e0d1;color:var(--green)}
-.research-next{padding-left:25px;border-left:1px solid var(--line)}
-.research-next>span{font-size:8px;letter-spacing:.16em;color:#65775f;font-weight:600}
-.research-next>a{font-size:10px;color:var(--green);display:inline-block;margin-top:14px}
-.research-example-note{font-size:9px;line-height:1.7;color:#7e887b;margin-top:13px;max-width:760px}
-.journey-picker select{max-width:258px}
-.journey-info h2{font-size:25px}
-@media(max-width:1050px){.journey-atlas .globe-stage{height:620px}.journey-info{max-width:210px}.journey-info h2{font-size:24px;max-width:200px}}
+.expedition-speed{font-size:10px;color:#6c7f71;white-space:nowrap;letter-spacing:.03em}
+.expedition-speed b{display:inline-block;font:10px monospace;color:#294f44;border-left:1px solid #cbd8cb;margin-left:10px;padding-left:12px}
+.expedition-controls{display:flex;align-items:center;gap:7px;margin-bottom:19px;flex-wrap:wrap}
+.expedition-controls button,.expedition-controls select{min-height:35px;border:1px solid #ccd9cc;border-radius:4px;color:#345c4a;background:#f6f7ef;cursor:pointer;font-size:11px;padding:7px 11px}
+.expedition-controls #globe-pause{min-width:117px;background:#edf0e2}
+.expedition-controls #globe-left,.expedition-controls #globe-right{font-size:16px;min-width:34px;padding:5px}
+.expedition-controls select{max-width:340px;min-width:240px}
+.expedition-controls .journey-progress{flex:1;min-width:50px;height:2px;background:#d8e1d0;margin-left:10px}
+.journey-progress i{display:block;height:100%;width:0;background:#769576}
+.expedition-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}
+.expedition-atlas[data-view=mesh] .expedition-grid,.expedition-atlas[data-view=gaussian] .expedition-grid{grid-template-columns:minmax(0,1fr)}
+.expedition-panel{min-width:0;background:#fbfbf5;border:1px solid #dbe2d5;border-radius:7px;overflow:hidden;box-shadow:0 18px 40px #173e3310}
+.expedition-panel[hidden]{display:none!important}
+.expedition-panel .globe-stage{position:relative;height:510px;min-height:0;display:block;background:radial-gradient(ellipse at 50% 46%,#254a4e 0,#173840 43%,#0d2934 75%,#09232e 100%);overflow:hidden}
+.expedition-panel .globe-stage:before{display:none}
+.expedition-panel canvas{height:100%;width:100%;position:absolute;inset:0;touch-action:pan-y;outline-offset:-5px}
+.expedition-globe-heading{position:absolute;inset:22px 19px auto;z-index:2;display:flex;align-items:start;gap:11px;pointer-events:none}
+.case-letter{display:grid;place-items:center;flex:0 0 27px;width:27px;height:27px;border:1px solid var(--route-color);border-radius:50%;color:var(--route-color);font:13px Georgia,serif}
+.expedition-globe-heading h3{font:normal 18px/1.2 Georgia,serif;color:#ecf0dc;letter-spacing:-.01em;margin:0}
+.expedition-globe-heading p{font-size:9px;line-height:1.5;color:#b4cbc1;margin-top:6px;max-width:230px}
+.expedition-camera{display:flex;gap:4px;margin-left:auto;pointer-events:auto}
+.expedition-camera button{background:#12313aaa;border:1px solid #95b5ab50;color:#caddce;border-radius:4px;padding:4px;width:28px;height:28px;font:15px/1 system-ui;cursor:pointer}
+.expedition-camera button[aria-pressed=true]{background:#98bd8c26}
+.expedition-camera button:hover{background:#385957}
+.expedition-panel .journey-info{position:absolute;bottom:21px;left:22px;right:22px;pointer-events:none;z-index:1;background:linear-gradient(90deg,#0b2630bf,#0b263000);padding:9px 0 0}
+.journey-number{font:9px monospace;letter-spacing:.17em;color:#99b9ae}
+.journey-place{color:#eff0db;font:italic 22px/1.16 Georgia,serif;letter-spacing:-.025em;margin:6px 0 0;max-width:94%}
+.journey-transport{display:inline-block;color:var(--route-color);font-size:8px;letter-spacing:.14em;margin-top:8px}
+.fleet-wave{position:absolute;left:22px;top:78px;z-index:1;color:var(--route-color);font-size:9px;letter-spacing:.07em;pointer-events:none}
+.fleet-board{padding:18px 20px 17px;border-bottom:1px solid #dce4d5;background:#f1f4e9}
+.fleet-heading{display:flex;justify-content:space-between;gap:12px;align-items:start;margin-bottom:12px}
+.fleet-heading>p{font:9px monospace;letter-spacing:.10em;color:#53705b}
+.fleet-summary{display:block;letter-spacing:0;font:11px/1.4 system-ui,sans-serif;color:#264e40;margin-top:5px}
+.fleet-heading>span{font-size:9px;color:#758273;padding-top:2px}
+.fleet-roster{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+.fleet-branch{display:grid;grid-template-columns:21px minmax(0,1fr);column-gap:5px;row-gap:2px;text-align:left;border:1px solid #d4dfcd;border-radius:4px;background:#fcfcf5;padding:7px 8px;min-width:0;cursor:pointer}
+.branch-number{grid-row:span 2;font:9px monospace;color:#738772;margin-top:2px}
+.branch-name{font-size:10px;color:#355844;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.branch-state{font-size:8px;color:#7f8f7b;line-height:1.25}
+.fleet-branch[data-state=arrived],.fleet-branch[data-state=verified],.fleet-branch[data-state=repaired]{border-color:#a6b990;background:#e9f0db}
+.fleet-branch[data-state=stopped]{background:#f0ece6;border-color:#dfcfc2}
+.fleet-branch[data-state=stopped] .branch-state{color:#a17c67}
+.fleet-branch[data-state=carryover],.fleet-branch[data-state=waiting]{background:#e9f1f1;border-color:#b7d4d7}
+.fleet-branch[data-state=pending]{background:#f6efdd;border-color:#dcc992}
+.fleet-branch[aria-pressed=true]{outline:2px solid #557d5c;outline-offset:1px}
+.branch-detail{margin-top:13px;padding:13px;background:#e5ecd9;border-left:2px solid #7b9c70;border-radius:3px}
+.branch-detail h4{font:normal 16px/1.3 Georgia,serif;color:#234638}
+.branch-detail p{font-size:10px;line-height:1.7;color:#617460;margin-top:7px}
+.destination-ledger{border-top:1px solid #d5dfce;margin-top:16px;padding-top:14px}
+.destination-heading{font:8px monospace;letter-spacing:.11em;color:#577557}
+.destination-ledger>span{display:block;margin-top:7px;color:#2e5c44;font-size:11px}
+.destination-carry{font-size:9px;line-height:1.6;color:#728373;margin-top:9px}
+.expedition-trail{display:grid;grid-template-columns:repeat(15,minmax(0,1fr));gap:4px;padding:16px 20px 8px}
+.expedition-trail button{padding:6px 1px;font:9px monospace;color:#829078;background:#f6f7ed;border:1px solid #dce4d3;border-radius:3px;cursor:pointer;min-width:0}
+.expedition-trail button[data-passed=true]{color:#547d54;background:#ebefdf}
+.expedition-trail button[aria-current=step]{color:#f7f6e8;background:#2e5b48;border-color:#2e5b48}
+.expedition-trail button[data-human=true]{border-style:dashed}
+.expedition-detail{padding:18px 22px 24px}
+.expedition-module{font:9px monospace;color:#70836d;letter-spacing:.025em}
+.expedition-step-title{font:normal 23px/1.2 Georgia,serif;color:#214937;letter-spacing:-.025em;margin-top:8px}
+.expedition-body{font-size:12px;color:#66765f;line-height:1.8;margin-top:12px}
+.expedition-facts{display:grid;grid-template-columns:1fr 1fr;gap:20px;border-top:1px solid #dce3d4;padding-top:15px;margin-top:18px}
+.expedition-facts span,.expedition-decision>span{font-size:8px;letter-spacing:.11em;color:#6b8061;font-weight:600}
+.expedition-facts ul{list-style:none;padding:0;margin:8px 0 0}
+.expedition-facts li{font-size:10px;line-height:1.7;color:#385d43;margin-top:4px}
+.expedition-decision{border-left:2px solid #b6cba2;background:#f1f4e8;padding:13px 15px;margin-top:17px}
+.expedition-decision p{font-size:11px;line-height:1.7;color:#657b5d;margin-top:6px}
+.expedition-decision .expedition-next-label{display:block;margin-top:12px}
+.expedition-nodes{display:flex;flex-wrap:wrap;gap:5px;margin-top:15px}
+.expedition-nodes a{font:9px monospace;padding:4px 6px;border:1px solid #d6dfce;border-radius:3px;color:#3d694d}
+.expedition-sources{display:flex;flex-wrap:wrap;gap:7px 12px;margin-top:14px;border-top:1px solid #dce3d4;padding-top:12px}
+.expedition-sources a{font-size:9px;line-height:1.5;color:#577951;text-decoration:underline;text-decoration-color:#c6d2ba;text-underline-offset:3px}
+.hazard-legend{display:flex;flex-wrap:wrap;gap:12px 22px;padding:18px 1px 8px}
+.hazard-legend-item{display:flex;align-items:center;gap:6px;color:#6a7c68;font-size:9px}
+.hazard-legend-item b{display:inline-grid;place-items:center;background:#133140;color:var(--hazard-color);border-radius:50%;font:16px/1 Georgia,serif;width:25px;height:25px}
+.expedition-section .atlas-caption{font-size:10px;line-height:1.7;align-items:start;margin-top:10px}
+.expedition-section .atlas-caption p{max-width:760px}
+.expedition-section .atlas-caption>a{white-space:nowrap;color:var(--green)}
+.research-example-note{font-size:9px;line-height:1.8;color:#7d8c76;margin-top:12px;max-width:870px}
+.expedition-atlas .atlas-error{background:#f3ecdb;color:#765f44;padding:15px;margin-bottom:14px;border:1px solid #dbc89f}
+.expedition-section button:focus-visible,.expedition-section select:focus-visible,.expedition-section a:focus-visible{outline:2px solid #739664;outline-offset:3px}
+@media(min-width:1300px){.expedition-panel .globe-stage{height:535px}}
+@media(max-width:1050px){.expedition-grid{gap:12px}.expedition-panel .globe-stage{height:465px}.expedition-globe-heading{inset:19px 15px auto;gap:8px}.expedition-globe-heading h3{font-size:16px}.expedition-globe-heading p{font-size:8px;max-width:165px}.expedition-camera{gap:3px}.expedition-camera button{width:25px;height:25px}.fleet-board{padding:15px}.branch-name{font-size:9px}.fleet-heading>span{display:none}.expedition-trail{padding-left:15px;padding-right:15px}.expedition-detail{padding:16px 18px 22px}.journey-place{font-size:21px}}
 @media(max-width:760px){
- .journey-atlas .globe-stage{height:490px}
- .journey-atlas .globe-overline{top:21px;left:20px;font-size:8px}
- .journey-atlas .globe-overline span{font-size:14px;margin-top:6px}
- .journey-picker{top:19px;right:16px}
- .journey-picker select{max-width:137px;padding:7px 7px;font-size:9px}
- .journey-info{bottom:76px;left:20px;max-width:calc(100% - 40px)}
- .journey-info h2{font-size:20px;max-width:none;margin-top:5px}
- .journey-info>span:first-child{font-size:8px}
- .journey-transport{margin-top:9px;font-size:7px}
- .journey-progress{margin-top:8px;width:57px}
- .journey-atlas .globe-controls{bottom:21px;left:17px;right:17px;gap:9px;justify-content:space-between}
- .journey-atlas #globe-pause{min-width:94px;font-size:9px;padding:6px 8px}
- .journey-atlas .globe-controls button{min-width:29px;min-height:33px}
- .journey-buttons{gap:4px}.journey-buttons button{font-size:15px!important;padding:5px!important}
- .control-divider{margin:0 1px}
- .journey-drag{display:none}
- .journey-section .atlas-caption{display:block;font-size:9px}
- .journey-section .atlas-caption>a{display:inline-block;margin-top:9px}
- .research-example-heading{display:block;margin-bottom:15px}.research-example-heading>p:last-child{margin-top:10px;font-size:12px}
- .research-route-choices{gap:6px;margin-bottom:16px}.research-route-choices button{font-size:10px;padding:8px 10px}
- .journey-atlas .globe-overline span{font-size:11px;max-width:145px}
- .journey-picker select{max-width:137px}
- .research-step-card{display:block;padding:20px 0}.research-step-card h3{font-size:20px}
- .research-step-card>div>p:not(.research-step-module){font-size:12px}
- .research-next{border-left:0;border-top:1px solid var(--line);padding:16px 0 0;margin-top:18px}
- .research-example-note{font-size:9px}
+ .research-example-heading{display:block;margin-bottom:20px}.research-example-heading h2{font-size:30px}.research-example-heading>p{margin-top:13px;font-size:12px;max-width:100%}
+ .expedition-toolbar{align-items:start;flex-direction:column;gap:10px}.research-route-choices{gap:5px}.research-route-choices button{font-size:10px;padding:8px 10px}
+ .expedition-controls{gap:5px}.expedition-controls select{min-width:0;max-width:none;flex:1;width:200px;font-size:10px}.expedition-controls #globe-pause{min-width:101px;font-size:10px}.expedition-controls .journey-progress{display:none}.expedition-controls #globe-replay{font-size:10px}
+ .expedition-grid{grid-template-columns:minmax(0,1fr);gap:22px}.expedition-panel .globe-stage{height:465px}.expedition-globe-heading h3{font-size:18px}.expedition-globe-heading p{font-size:9px;max-width:220px}
+ .expedition-panel .journey-info{left:20px;right:20px;bottom:22px}.journey-place{font-size:21px}.fleet-wave{left:20px;font-size:9px}
+ .fleet-board{padding:17px}.fleet-heading>span{display:block}.branch-name{font-size:10px}.expedition-trail{padding:16px 17px 8px}.expedition-detail{padding:18px 20px 24px}.expedition-step-title{font-size:22px}
+ .expedition-section .atlas-caption{display:block}.expedition-section .atlas-caption>a{display:inline-block;margin-top:8px}.hazard-legend{gap:9px 13px}
 }
-@media(max-width:360px){.journey-atlas .globe-controls{left:12px;right:12px;gap:6px}.journey-atlas #globe-pause{min-width:83px}.journey-picker select{max-width:119px}}
-@media(prefers-reduced-motion:reduce){.journey-atlas .globe-controls button{transition:none}}
+@media(max-width:420px){.expedition-panel .globe-stage{height:435px}.expedition-globe-heading h3{font-size:16px}.expedition-globe-heading p{max-width:175px;font-size:8px}.expedition-camera button{width:22px;height:24px}.case-letter{width:24px;height:24px;flex-basis:24px}.expedition-controls select{flex-basis:60%;order:2}.expedition-controls #globe-replay{order:3}.fleet-branch{padding:7px 5px;column-gap:3px}.branch-name{font-size:9px}.expedition-facts{gap:13px}.expedition-trail{gap:3px}.expedition-trail button{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.expedition-section *{scroll-behavior:auto!important}}
