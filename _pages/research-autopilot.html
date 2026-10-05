@@ -12,28 +12,25 @@ social_card: research-atlas-card.svg
     <div><p class="eyebrow">RESEARCH AUTOPILOT <span aria-hidden="true">/</span> PRIVATE BETA</p><h1 id="atlas-title">Your research.<br><em>A whole world.</em></h1></div>
     <div class="atlas-intro-copy"><p>A connected map of the work behind a paper: reading, ideas, methods, experiments, debugging, writing, review and release.</p><div class="atlas-counts" aria-label="Map size"><div><strong>16</strong><span>modules</span></div><div><strong>84</strong><span>research tasks</span></div><div><strong>221</strong><span>connections</span></div></div></div>
   </section>
-  <section id="map" aria-label="Interactive research module globe">
-    <div class="atlas-shell" id="research-atlas" data-ready="false">
+  <link rel="stylesheet" href="/assets/lab/research-journey.css?v={{ site.time | date: '%s' }}">
+  <section id="map" class="journey-section" aria-label="Interactive three-dimensional travel globe">
+    <div class="atlas-shell journey-atlas" id="research-atlas" data-ready="false">
       <div class="globe-stage">
-        <p class="globe-overline">THE RESEARCH ATLAS<span>Each continent is a module. Each point is a task.</span></p>
-        <span class="globe-help" aria-hidden="true">Drag to turn · click to explore</span>
-        <canvas id="research-globe" width="800" height="550" tabindex="0" role="img" aria-label="Research globe with 16 module continents and 84 research tasks" aria-describedby="globe-instructions">Explore all 16 modules and 84 tasks in the directory below.</canvas>
-        <p id="atlas-error" class="atlas-error" hidden>The interactive globe could not load. <a href="#modules">Browse all 84 tasks in the module directory ↓</a></p>
-        <noscript><p class="atlas-error">The rotating globe needs JavaScript. <a href="#modules">Read the complete module directory ↓</a></p></noscript>
-        <div class="globe-controls"><button id="globe-pause" type="button" disabled>Pause rotation</button><button id="globe-left" type="button" aria-label="Rotate globe left" disabled>←</button><button id="globe-right" type="button" aria-label="Rotate globe right" disabled>→</button><label><input id="globe-connections" type="checkbox" checked>Task connections</label></div>
+        <p class="globe-overline">THE RESEARCH JOURNEY<span>A whole world to explore.</span></p>
+        <div class="journey-picker"><label class="visually-hidden" for="journey-select">Choose a landscape</label><select id="journey-select" disabled aria-label="Choose a landscape"></select></div>
+        <canvas id="research-globe" width="1200" height="660" tabindex="0" role="img" aria-label="A three-dimensional travel globe with snow mountains, forests, deserts, rivers, sailing boats, cars and trains" aria-describedby="globe-instructions">Explore all 16 modules and 84 tasks in the directory below.</canvas>
+        <p id="atlas-error" class="atlas-error" hidden>The globe could not load. <a href="#modules">Explore the module directory ↓</a></p>
+        <noscript><p class="atlas-error">The travel animation needs JavaScript. <a href="#modules">Explore all 84 research tasks below ↓</a></p></noscript>
+        <div class="journey-info" aria-hidden="true"><span id="journey-number">01 / 16</span><h2 id="journey-place">The Alpine railway</h2><span class="journey-transport" id="journey-transport">BY TRAIN</span><div class="journey-progress"><i id="journey-progress"></i></div></div>
+        <div class="globe-controls">
+          <button id="globe-pause" type="button" disabled>Pause journey</button>
+          <div class="journey-buttons"><button id="globe-left" type="button" aria-label="Previous landscape" title="Previous landscape" disabled>←</button><button id="globe-right" type="button" aria-label="Next landscape" title="Next landscape" disabled>→</button><span class="control-divider" aria-hidden="true"></span><button id="globe-zoom-out" type="button" aria-label="Zoom out" title="Zoom out" disabled>−</button><button id="globe-zoom-in" type="button" aria-label="Zoom in" title="Zoom in" disabled>+</button><button id="globe-follow" type="button" aria-label="Follow the traveler" aria-pressed="true" title="Follow the traveler" disabled>⊙</button></div>
+        </div>
+        <span class="journey-drag" aria-hidden="true">DRAG TO EXPLORE</span>
       </div>
-      <aside class="atlas-detail" aria-label="Selected module and tasks">
-        <label for="module-select">Explore a continent</label>
-        <select id="module-select" disabled>
-          <option value="P">P · Projects &amp; resources</option><option value="I">I · Research entry &amp; direction</option><option value="L" selected>L · Literature &amp; implementation</option><option value="B">B · Tasks, benchmarks &amp; failures</option><option value="H">H · Ideas &amp; critical review</option><option value="M">M · Methods &amp; mathematics</option><option value="S">S · Models, data &amp; setup</option><option value="G">G · Decisive experiment design</option><option value="E">E · Engineering &amp; debugging</option><option value="V">V · Validation &amp; boundaries</option><option value="W">W · Writing &amp; result-driven revision</option><option value="F">F · Figures &amp; manuscript checks</option><option value="R">R · Submission, review &amp; rebuttal</option><option value="A">A · Reproducibility &amp; release</option><option value="C">C · Websites &amp; communication</option><option value="X">X · Exploration &amp; map maintenance</option>
-        </select>
-        <div class="module-context"><span class="module-code"><i id="module-swatch" style="background:#91bfa7" aria-hidden="true"></i><span id="module-code">L / 5 TASKS</span></span><h2 id="module-name">Literature &amp;<br>implementation</h2><p id="module-description">Keep reading papers alongside actual code, supplementary material and benchmark protocols. Update the literature map when new results change the question.</p></div>
-        <div class="task-picker" id="task-picker" aria-label="Tasks in the selected module"><button type="button" data-node="L01" aria-pressed="true"><code>L01</code><span>Problem &amp; mechanism search</span></button><button type="button" data-node="L02" aria-pressed="false"><code>L02</code><span>Topic map &amp; citation expansion</span></button><button type="button" data-node="L03" aria-pressed="false"><code>L03</code><span>Critical paper reading</span></button><button type="button" data-node="L04" aria-pressed="false"><code>L04</code><span>Code, supplements &amp; reproduction</span></button><button type="button" data-node="L05" aria-pressed="false"><code>L05</code><span>Coverage &amp; new evidence</span></button></div>
-        <div class="task-connections"><p class="eyebrow">Connected research tasks</p><h3 id="connection-title">Choose a task to see its links</h3><ul class="connection-list" id="connection-list" aria-label="Connections for the selected task"></ul></div>
-      </aside>
     </div>
-    <div class="atlas-caption"><p id="globe-instructions">Drag or use the arrow keys to rotate; use Space to pause. Choose a module or point to inspect its tasks. The complete directory is available below.</p><p>The continents are an illustrated module map. The next task depends on your question, evidence and resources.</p></div>
-    <p id="atlas-status" role="status" class="visually-hidden">Loading the interactive research atlas.</p>
+    <div class="atlas-caption"><p id="globe-instructions">Drag or use arrow keys to turn the globe. Use + / − to zoom and Space to pause. Choose a landscape to travel there.</p><a href="#modules">Explore the research modules ↓</a></div>
+    <p id="atlas-status" role="status" class="visually-hidden">Loading the travel globe.</p>
   </section>
   <section id="modules" class="catalog-section" aria-labelledby="modules-title">
     <div class="catalog-heading"><div><p class="eyebrow">INSIDE THE MAP</p><h2 id="modules-title">16 modules.<br>From question to contribution.</h2></div><p>Open any module to see the research tasks it contains. Literature, implementation, benchmarks and experiment design stay connected as results arrive.</p></div>
