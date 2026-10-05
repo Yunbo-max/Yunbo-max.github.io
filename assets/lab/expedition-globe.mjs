@@ -1,8 +1,8 @@
 import {project,clipFront} from './globe-geometry.mjs?v=20261005';
 import {normalize,cross,dot,pointOnPath} from './journey-world.mjs?v=20261005-routes';
 import {drawVehicleIcon} from './journey-vehicles.mjs?v=20261005-routes';
-import {drawHazard,drawHarbor} from './expedition-symbols.mjs?v=20261005-fleet';
-import {expeditionAt,fleetAt,stepPath,transportFor,iconWidth,HAZARDS} from './research-expeditions.mjs?v=20261005-fleet';
+import {drawHazard,drawHarbor} from './expedition-symbols.mjs?v=20261005-fleet2';
+import {expeditionAt,fleetAt,transportFor,onRail,iconWidth,HAZARDS} from './research-expeditions.mjs?v=20261005-fleet2';
 
 export function prepareWorld(world){
  const prepare=face=>{
@@ -20,7 +20,7 @@ export function createGlobe(canvas,caseId,world,prepared,sample,{onToggle,onPick
  const light=normalize([-.65,.85,1]);
  const surfaceCache=new Map();
  const classify=(p,index)=>{
-  const key=p.map(v=>v.toFixed(4)).join(',')+'/'+index;
+  const key=p.join(',')+'/'+onRail(index);
   if(!surfaceCache.has(key)){if(surfaceCache.size>10000)surfaceCache.clear();surfaceCache.set(key,transportFor(p,index,sample));}
   return surfaceCache.get(key);
  };

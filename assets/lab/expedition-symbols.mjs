@@ -1,4 +1,4 @@
-import {HAZARDS} from './research-expeditions.mjs?v=20261005-fleet';
+import {HAZARDS} from './research-expeditions.mjs?v=20261005-fleet2';
 
 // Vector symbols stay crisp at large sizes, including on platforms without emoji fonts.
 export function drawHazard(ctx,type,x,y,size=30,time=0){

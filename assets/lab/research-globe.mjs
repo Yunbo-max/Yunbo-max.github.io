@@ -1,7 +1,7 @@
 import {makeWorld} from './journey-world.mjs?v=20261005-routes';
-import {CASES,SOURCES} from './4d-expedition-cases.mjs?v=20261005-fleet';
-import {TOTAL_SECONDS,STEP_SECONDS,expeditionAt,fleetAt,makeTerrainSampler,candidateState,destinationTotals,transportText,HAZARDS} from './research-expeditions.mjs?v=20261005-fleet';
-import {createGlobe,prepareWorld} from './expedition-globe.mjs?v=20261005-fleet';
+import {CASES,SOURCES} from './4d-expedition-cases.mjs?v=20261005-fleet2';
+import {TOTAL_SECONDS,STEP_SECONDS,expeditionAt,fleetAt,makeTerrainSampler,candidateState,destinationTotals,transportText,HAZARDS} from './research-expeditions.mjs?v=20261005-fleet2';
+import {createGlobe,prepareWorld} from './expedition-globe.mjs?v=20261005-fleet2';
 
 const $=s=>document.querySelector(s),shell=$('#research-atlas');
 if(shell)start().catch(error=>{shell.dataset.ready='false';$('#atlas-error').hidden=false;$('#atlas-status').textContent='The animation could not load. All 84 tasks remain in the module directory.';console.error('Research fleets:',error.message);});
@@ -30,6 +30,7 @@ async function start(){
   panel.querySelector('.journey-number').textContent=`${String(index+1).padStart(2,'0')} / 30`;
   panel.querySelector('.journey-place').textContent=s.title;
   panel.querySelector('.fleet-wave').textContent=fleet.label;
+  panel.querySelector('.fleet-unit-label').textContent=fleet.wave===2?'VALIDATION RUN UNITS':'CANDIDATE ROUTES';
   panel.querySelector('.expedition-module').textContent=`${s.module} · ${atlas.modules.find(m=>m.id===s.module).label}`;
   panel.querySelector('.expedition-step-title').textContent=prefix+s.title;
   panel.querySelector('.expedition-body').textContent=s.body;
@@ -88,5 +89,5 @@ async function start(){
  revealHash();window.addEventListener('hashchange',revealHash);
  preference.addEventListener('change',()=>{if(preference.matches){running=false;sync();draw();}});document.addEventListener('visibilitychange',sync);
  new IntersectionObserver(entries=>{inView=entries[0].isIntersecting;sync();},{threshold:.025}).observe($('#expedition-canvas-pair'));
- shell.querySelectorAll('button:disabled').forEach(n=>n.disabled=false);select.disabled=false;shell.dataset.ready='true';draw(true);sync();
+ $('#map').querySelectorAll('button:disabled').forEach(n=>n.disabled=false);select.disabled=false;shell.dataset.ready='true';draw(true);sync();
 }

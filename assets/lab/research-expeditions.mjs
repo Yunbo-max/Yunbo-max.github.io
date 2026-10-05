@@ -1,4 +1,4 @@
-import {CASES,getCase,STEP_SECONDS} from './4d-expedition-cases.mjs?v=20261005-fleet';
+import {CASES,getCase,STEP_SECONDS} from './4d-expedition-cases.mjs?v=20261005-fleet2';
 import {earthPoint,pointOnPath,normalize,cross,dot} from './journey-world.mjs?v=20261005-routes';
 
 export {CASES,getCase,STEP_SECONDS};
