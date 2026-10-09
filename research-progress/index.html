@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src data:; connect-src 'none'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+  <meta name="description" content="A private, browser-local view of Research Autopilot progress. Import a local snapshot to review tasks, stages, and recorded task-hours.">
+  <title>Research Progress · Yunbo</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23132033'/%3E%3Cpath d='M8 23V9h5l3 7 3-7h5v14h-4V15l-4 8-4-8v8z' fill='%239be0d6'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./progress.css">
+  <script type="module" src="./progress.mjs"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to progress</a>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="/" aria-label="Yunbo homepage"><span class="brand-mark" aria-hidden="true">Y</span><span>Yunbo <span class="brand-separator">/</span> <span data-i18n="research">Research</span></span></a>
+      <div class="nav-actions"><a class="home-link" href="/" data-i18n="home">Homepage</a><button id="language-button" class="language-button" type="button" lang="zh" aria-label="Switch to Chinese">中文</button></div>
+    </div>
+  </header>
+  <main id="main" class="page-wrap">
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span><span data-i18n="eyebrow">RESEARCH AUTOPILOT · LOCAL OBSERVATORY</span></p>
+        <h1 id="page-title" data-i18n="title">Research, at a glance.</h1>
+        <p class="hero-description" data-i18n="intro">Review the day’s work, see what is running, and know what needs attention.</p>
+      </div>
+      <div class="hero-actions">
+        <span class="privacy-badge"><span aria-hidden="true">◈</span><span data-i18n="localOnly">Browser-local · private by default</span></span>
+        <div class="button-row"><label class="button primary" for="snapshot-file"><span aria-hidden="true">↑</span><span data-i18n="import">Import local snapshot</span></label><button id="watch-button" class="button secondary" type="button" hidden data-i18n="watch">Watch local file</button><button id="clear-button" class="button secondary" type="button" disabled data-i18n="clear">Clear</button></div>
+      </div>
+    </section>
+    <input id="snapshot-file" type="file" accept=".json,application/json" class="file-input" aria-label="Import local JSON snapshot">
+    <div id="message" class="message" role="status" aria-live="polite" hidden></div>
+    <section id="empty-state" class="empty-state" aria-labelledby="empty-title">
+      <div id="drop-zone" class="drop-zone">
+        <div class="import-glyph" aria-hidden="true">↥</div>
+        <p class="eyebrow" data-i18n="startLocal">START WITH A LOCAL SNAPSHOT</p>
+        <h2 id="empty-title" data-i18n="emptyTitle">Your research stays on your device.</h2>
+        <p class="empty-description" data-i18n="emptyDescription">Drop a Research Autopilot JSON snapshot here, or choose a file. Nothing is uploaded. Data stays in this tab’s memory and disappears when you clear it or close the page.</p>
+        <label class="button primary" for="snapshot-file" data-i18n="chooseFile">Choose JSON file</label>
+        <p class="file-note" data-i18n="fileNote">Schema v1 · Up to 5 MiB · Manual re-import for updates</p>
+      </div>
+      <div class="empty-footer"><div><strong data-i18n="demoHeading">Explore the layout first</strong><p data-i18n="demoDescription">A clearly labeled synthetic example covers all four editions.</p></div><button id="demo-button" class="button secondary" type="button" data-i18n="demo">Load synthetic demo</button></div>
+    </section>
+    <section id="dashboard" hidden aria-label="Research progress dashboard">
+      <div id="demo-banner" class="demo-banner" hidden><strong data-i18n="synthetic">SYNTHETIC DEMO</strong><span data-i18n="syntheticDescription">Illustrative tasks only. No real project data.</span><button id="dismiss-demo" class="text-button" type="button" data-i18n="clearDemo">Clear demo</button></div>
+      <div class="snapshot-strip"><div class="snapshot-identity"><span id="snapshot-dot" class="state-dot" aria-hidden="true"></span><strong id="snapshot-state"></strong><span id="filename"></span></div><div class="snapshot-meta"><span id="watch-state"></span><span><span data-i18n="captured">Captured</span> <strong id="snapshot-time"></strong></span><span>Europe/London</span></div></div>
+      <div id="snapshot-warning" class="notice" hidden></div>
+      <section class="filters" aria-label="Progress filters">
+        <div class="date-filter"><label for="selected-date" data-i18n="reviewDate">Review date</label><div class="date-control"><button id="previous-day" type="button" aria-label="Previous date">‹</button><input id="selected-date" type="date"><button id="next-day" type="button" aria-label="Next date">›</button></div><button id="today-button" class="text-button" type="button" data-i18n="today">Today</button></div>
+        <div class="filter-item"><label for="edition-filter" data-i18n="edition">Edition</label><select id="edition-filter"><option value="all">All four editions</option><option value="main">main</option><option value="autonomous-rsi">autonomous-rsi</option><option value="chat">chat</option><option value="autonomous-rsi-chat">autonomous-rsi-chat</option><option value="unknown">unknown</option></select></div>
+        <div class="filter-item"><label for="project-filter" data-i18n="project">Project</label><select id="project-filter"><option value="all">All projects</option></select></div>
+        <div class="filter-item freshness-filter"><label for="freshness-minutes" data-i18n="threshold">Observation threshold</label><div class="number-control"><input id="freshness-minutes" type="number" min="0.0167" max="10080" step="any" value="5"><span data-i18n="minutes">min</span></div></div>
+      </section>
+      <p class="filter-explanation" data-i18n="freshnessNote">Freshness is an observation rule, not proof of success or failure. Live status is evaluated now; task-hours below refer to the selected date.</p>
+      <section class="metrics-grid" aria-label="Current task status">
+        <div class="metric metric-running"><span class="metric-label"><span class="state-dot" aria-hidden="true"></span><span data-i18n="runningNow">Running now</span></span><strong id="count-running">0</strong><p data-i18n="freshObserved">Fresh state · lease valid when provided</p></div>
+        <div class="metric"><span class="metric-label" data-i18n="uncertain">Uncertain / stale</span><strong id="count-uncertain">0</strong><p data-i18n="needsObservation">Needs a fresh observation</p></div>
+        <div class="metric"><span class="metric-label" data-i18n="waitingBlocked">Waiting / blocked</span><strong><span id="count-waiting">0</span><span class="metric-slash">/</span><span id="count-blocked">0</span></strong><p data-i18n="recordedNonterminal">Fresh recorded states</p></div>
+        <div class="metric"><span class="metric-label" data-i18n="completeFailed">Completed / failed</span><strong><span id="count-complete">0</span><span class="metric-slash">/</span><span id="count-failed">0</span></strong><p data-i18n="recordedOutcomes">Recorded outcomes</p></div>
+      </section>
+      <section class="day-summary" aria-labelledby="day-heading">
+        <div class="section-heading"><div><p class="eyebrow" data-i18n="dayEyebrow">THE SELECTED DAY</p><h2 id="day-heading"><span data-i18n="recordedTaskTime">Recorded task time</span> <span id="day-label" class="subtle"></span></h2></div><span id="day-length" class="chip"></span></div>
+        <div class="time-summary"><div class="time-total"><strong id="time-active">0.00</strong><span data-i18n="activeTaskHours">active task-hours</span></div><div class="time-secondary"><span class="legend-dot waiting" aria-hidden="true"></span><strong id="time-waiting">0.00</strong><span data-i18n="waitingTaskHours">waiting task-hours</span></div><div class="time-secondary"><span class="legend-dot blocked" aria-hidden="true"></span><strong id="time-blocked">0.00</strong><span data-i18n="blockedTaskHours">blocked task-hours</span></div><div class="time-secondary"><span class="legend-dot other" aria-hidden="true"></span><strong id="time-other">0.00</strong><span data-i18n="otherTaskHours">other recorded task-hours</span></div></div>
+        <div class="daily-counts"><div><strong id="daily-activity">0</strong><span data-i18n="dailyActivity">tasks with recorded activity</span></div><div><strong id="daily-completed">0</strong><span data-i18n="dailyCompleted">tasks completed this date</span></div><div><strong id="daily-new-blockers">0</strong><span data-i18n="dailyBlockers">tasks newly blocked this date</span></div></div>
+        <p class="small-note" data-i18n="timeNote">Parallel tasks add together as task-hours, not elapsed calendar time. Only explicit timing intervals contribute; open intervals stop at capture, observation coverage, or an earlier lease expiry.</p>
+      </section>
+      <section class="stage-section" aria-labelledby="stages-heading"><div class="section-heading"><div><p class="eyebrow" data-i18n="workflowEyebrow">WORKFLOW OBSERVATIONS</p><h2 id="stages-heading" data-i18n="stagesTitle">Across the eight stages</h2></div><span class="small-note" data-i18n="stageNote">Stages can be revisited. Counts are not a completion percentage.</span></div><div id="stage-grid" class="stage-grid"></div></section>
+      <div class="work-layout">
+        <section class="tasks-section" aria-labelledby="tasks-heading"><div class="section-heading"><div><p class="eyebrow" data-i18n="tasksEyebrow">PROJECT WORK</p><h2 id="tasks-heading"><span data-i18n="tasks">Tasks</span> <span id="task-count" class="count-chip">0</span></h2></div></div><div class="task-filters"><label class="search-field"><span class="sr-only" data-i18n="searchTasks">Search tasks</span><input id="task-search" type="search" placeholder="Search tasks, descriptions, owners…" autocomplete="off"></label><select id="status-filter" aria-label="Filter task status"><option value="all">All states</option><option value="running">Running now</option><option value="uncertain">Uncertain / stale</option><option value="waiting">Waiting</option><option value="blocked">Blocked</option><option value="pending">Pending</option><option value="paused">Paused</option><option value="complete">Completed</option><option value="failed">Failed</option><option value="cancelled">Cancelled</option></select><label class="activity-filter"><input id="day-only" type="checkbox"><span data-i18n="dayOnly">Activity on this date only</span></label></div><div id="task-list" class="task-list"></div><div id="no-tasks" class="no-tasks" hidden data-i18n="noTasks">No tasks match these filters.</div><div id="task-pagination" class="task-pagination" hidden><span id="task-pagination-label"></span><button id="load-more" class="button secondary" type="button" data-i18n="loadMore">Show 100 more</button></div></section>
+        <aside class="attention-section" aria-labelledby="attention-heading"><div class="section-heading"><div><p class="eyebrow" data-i18n="attentionEyebrow">NEXT ACTIONS</p><h2 id="attention-heading" data-i18n="attentionTitle">Needs attention</h2></div><span id="attention-count" class="count-chip">0</span></div><p class="small-note" data-i18n="attentionNote">Recorded blockers and reconciliation requests, including stale observations.</p><div id="attention-list"></div><div id="no-attention" class="no-attention" hidden data-i18n="noAttention">No recorded blockers in the selected projects.</div><div id="project-warnings"></div></aside>
+      </div>
+      <details class="reading-guide"><summary data-i18n="guideTitle">How to read this view</summary><div><p data-i18n="guideStatus">A running task counts as live only when the snapshot and task update are fresh, and any recorded lease is still valid. Stale nonterminal states appear as uncertain, with their last recorded status preserved. Completed, failed, and cancelled states are recorded outcomes.</p><p data-i18n="guideDuration">Durations come from explicit timing records. Overlapping records within a task use the latest-started record once; distinct parallel tasks add together. Missing timing means unknown duration. Long duration alone does not establish failure.</p><p data-i18n="guidePrivacy">Import is local to your browser. This page has no uploads, telemetry, automatic network requests, or persistent data storage. Re-import a snapshot manually to refresh it. Exported evidence paths appear as text and are never opened automatically.</p><p data-i18n="guideClock">Daily boundaries use Europe/London, including daylight saving changes. A date may contain 23, 24, or 25 calendar hours. Snapshot source timezone is shown in import metadata; this view always uses London dates.</p></div></details>
+    </section>
+    <footer class="page-footer"><span>Research Autopilot <span class="footer-separator">/</span> <span data-i18n="footer">Observe · verify · decide</span></span><span data-i18n="footerPrivacy">Local files. No upload. No persistence.</span></footer>
+  </main>
+  <noscript><p class="noscript">JavaScript is required to read a local snapshot. No data is loaded or uploaded.</p></noscript>
+</body>
+</html>
