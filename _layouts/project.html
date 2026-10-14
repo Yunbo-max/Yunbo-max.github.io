@@ -1,26 +1,49 @@
+{% assign editorial = false %}
+{% if page.permalink == '/research-autopilot/' or page.permalink == '/openjudge/' %}{% assign editorial = true %}{% endif %}
 <!doctype html>
-<html lang="en">
+<html lang="en"{% if editorial %} class="project-editorial-document"{% endif %}>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>{{ page.title }} · Yunbo Long</title>
-  <meta name="description" content="{{ page.description }}">
+  <meta name="description" content="{{ page.description | escape }}">
   <meta name="theme-color" content="#f8f7f2">
   <meta property="og:title" content="{{ page.title }}">
-  <meta property="og:description" content="{{ page.description }}">
+  <meta property="og:description" content="{{ page.description | escape }}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://yunbo-max.github.io{{ page.permalink }}">
   <meta property="og:image" content="https://yunbo-max.github.io/assets/lab/{{ page.social_card }}">
+  <link rel="canonical" href="https://yunbo-max.github.io{{ page.permalink }}">
   <link rel="icon" href="/assets/lab/mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/projects.css?v={{ site.time | date: '%s' }}">
+  {% if editorial %}
+  <link rel="stylesheet" href="/assets/project-editorial.css?v={{ site.time | date: '%s' }}">
+  <script defer src="/assets/project-editorial.js?v={{ site.time | date: '%s' }}"></script>
+  {% endif %}
 </head>
-<body class="project-page {{ page.project_class }}">
+<body class="project-page {{ page.project_class }}{% if editorial %} project-editorial{% endif %}">
   <a class="skip-link" href="#main">Skip to content</a>
+  {% if editorial %}<div class="reading-line" aria-hidden="true"><span></span></div>{% endif %}
   <header class="project-header">
     <a class="project-wordmark" href="{{ page.permalink }}"><span class="wordmark-symbol" aria-hidden="true">{{ page.symbol }}</span>{{ page.title }}</a>
-    <nav aria-label="Project navigation"><a href="/research-autopilot/">Research Autopilot</a><a href="/openjudge/">OpenJudge</a><a class="homepage-link" href="/">Yunbo Long ↗</a></nav>
+    <nav aria-label="Project navigation">
+      <a href="/research-autopilot/"{% if page.permalink == '/research-autopilot/' %} aria-current="page"{% endif %}>Research Autopilot</a>
+      <a href="/openjudge/"{% if page.permalink == '/openjudge/' %} aria-current="page"{% endif %}>OpenJudge</a>
+      <a class="homepage-link" href="/">Yunbo Long ↗</a>
+    </nav>
   </header>
-  <main id="main">{{ content }}</main>
-  <footer class="project-footer"><span>© 2026 Yunbo Long</span><a href="mailto:longyunbo218@gmail.com">longyunbo218@gmail.com ↗</a><a href="/">Research homepage ↗</a></footer>
+  {% if editorial %}
+  <div class="project-context">
+    {% if page.permalink == '/research-autopilot/' %}
+    <span class="context-label"><span class="context-index">01</span> A research atlas</span>
+    <nav aria-label="On this page"><a href="#map">Explore the routes ↓</a><a href="#modules">The modules</a><a href="#beta">Get in touch ↗</a></nav>
+    {% else %}
+    <span class="context-label"><span class="context-index">02</span> An independent perspective</span>
+    <nav aria-label="On this page"><a href="#stories">The case files ↓</a><a href="#approach">Our approach</a><a href="#contact-title">Share a case ↗</a></nav>
+    {% endif %}
+  </div>
+  {% endif %}
+  <main id="main" tabindex="-1">{{ content }}</main>
+  <footer class="project-footer"><span>© 2026 Yunbo Long</span><a href="mailto:longyunbo218@gmail.com">longyunbo218@gmail.com ↗</a><a href="/">Research homepage ↗</a>{% if editorial %}<a class="back-to-top" href="#main" aria-label="Back to the top of this project">Back to top ↑</a>{% endif %}</footer>
 </body>
 </html>
