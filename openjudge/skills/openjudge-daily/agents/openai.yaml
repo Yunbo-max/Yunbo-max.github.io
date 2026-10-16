@@ -1,0 +1,14 @@
+interface:
+  display_name: OpenJudge Daily
+  short_description: Evidence-backed peer-review stories for X and Xiaohongshu
+  default_prompt: Use $openjudge-daily to turn a public peer-review case into Chinese
+    Xiaohongshu cards, an English X thread, and an evidence page.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
